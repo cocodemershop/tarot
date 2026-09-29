@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<title>21 Tage Transformation – Karten legen Mindshift</title>
+<style>
+:root{--bg:#0e0817;--card:#1a1127;--ink:#ece3f2;--mute:#a998b8;--g:#e8b45a;--ok:#7ee0b5;--bad:#ff7a8a;--line:#3a2b4d;--dk:#1a1024;
+padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4ecdf;--card:#fbf6ec;--ink:#251532;--mute:#66587a;--g:#94640f;--ok:#1d7a55;--bad:#b03047;--line:#d5c6ae;--dk:#fbf6ec}}
+:root[data-theme="light"]{--bg:#f4ecdf;--card:#fbf6ec;--ink:#251532;--mute:#66587a;--g:#94640f;--ok:#1d7a55;--bad:#b03047;--line:#d5c6ae;--dk:#fbf6ec}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--ink);font:400 1rem/1.7 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden;background-image:radial-gradient(circle at 15% 10%,color-mix(in srgb,var(--g) 14%,transparent),transparent 45%)}
+:focus-visible{outline:2px solid var(--g);outline-offset:3px}
+.wrap{max-width:860px;margin:0 auto;padding:20px 16px 60px}
+h1,h2,h3,.serif{font-family:"Bodoni Moda",Georgia,serif;font-weight:500;line-height:1.15}
+.bar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:12px 18px;border:1px solid var(--line);border-radius:12px;margin-bottom:28px;color:var(--mute);font-size:.9rem}
+.bar b{color:var(--g)}
+.hd{text-align:center;margin-bottom:34px}
+.hd h1{font-size:clamp(2rem,6vw,3.4rem);font-weight:700;margin-bottom:12px}.hd h1 span{color:var(--g)}
+.hd p{color:var(--mute);max-width:56ch;margin:0 auto}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin-bottom:18px;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--g)}
+.card.completed{border-color:color-mix(in srgb,var(--ok) 50%,transparent)}.card.completed::before{background:var(--ok)}
+.card.locked{opacity:.55}.card.locked::before{background:var(--mute)}
+.card h2,.card h3{font-size:1.5rem;margin-bottom:12px;color:var(--g)}
+.p{color:var(--mute);margin-bottom:14px}
+.hl,.ac,.nf,.bn{border-left:3px solid var(--g);padding:14px 18px;margin-top:14px;border-radius:0 8px 8px 0;background:color-mix(in srgb,var(--g) 8%,transparent)}
+.ac{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 9%,transparent)}
+.nf{border-color:var(--line);background:color-mix(in srgb,var(--ink) 5%,transparent)}
+.bn{border-color:#b98ae0}
+.hl h5,.ac h5,.nf h5,.bn h5{font-family:"Bodoni Moda",serif;font-size:1.05rem;font-weight:500;margin-bottom:4px}
+.ac h5{color:var(--ok)}.hl h5{color:var(--g)}
+.quote{font:italic 500 1.15rem/1.5 "Bodoni Moda",serif;border-left:3px solid var(--g);padding:10px 18px;margin:18px 0}
+.quote small{display:block;font:600 .85rem "Instrument Sans";color:var(--g);margin-top:6px;font-style:normal}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.it{border:1px solid var(--line);border-radius:10px;padding:14px 16px;background:color-mix(in srgb,var(--ink) 4%,transparent)}
+.it b{display:block;color:var(--g);font-family:"Bodoni Moda",serif;font-weight:500;font-size:1.05rem;margin-bottom:3px}
+.steps{list-style:none;counter-reset:s}.steps li{counter-increment:s;position:relative;padding-left:44px;margin-bottom:16px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border:1px solid var(--g);color:var(--g);border-radius:50%;display:grid;place-items:center;font-weight:700}
+.steps h4{margin-bottom:2px}
+.inp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.inp label{display:block;font-size:.85rem;color:var(--g);font-weight:600;margin-bottom:4px}
+.inp input{width:100%;background:transparent;border:1px solid var(--line);border-radius:8px;padding:11px 12px;color:var(--ink);font:inherit}
+.met{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.met div{border:1px solid var(--line);border-radius:10px;padding:12px;text-align:center}
+.met small{display:block;color:var(--mute);font-size:.8rem}.met b{font:700 1.5rem "Bodoni Moda",serif;color:var(--g)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:99px;border:1px solid var(--g);background:var(--g);color:var(--dk);font:700 1rem "Instrument Sans",sans-serif;padding:11px 26px;cursor:pointer;margin-top:16px}
+.btn.o{background:transparent;color:var(--g)}.btn.done{background:var(--ok);border-color:var(--ok);color:var(--dk)}
+.cta{text-align:center;padding:36px 24px}.cta .btn{font-size:1.1rem;padding:15px 34px}
+.msg{margin-top:12px;color:var(--g);font-weight:600;min-height:1.6em}
+.prog{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border:1px solid var(--g);border-radius:14px;padding:14px 20px;margin:26px 0}
+.prog div.r{display:flex;justify-content:space-between;font-weight:600;margin-bottom:8px;font-size:.95rem}
+.tr{height:10px;background:var(--line);border-radius:9px;overflow:hidden}.tr i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--g),var(--ok));transition:width .5s}
+.dh{display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer;min-height:44px;flex-wrap:wrap}
+.dh .l{display:flex;gap:14px;align-items:baseline}
+.dn{font:700 1.1rem "Bodoni Moda",serif;color:var(--g);white-space:nowrap}.dt{font-weight:600}
+.ph{color:var(--mute);font-size:.85rem}
+.dc{display:none;margin-top:16px;padding-top:6px;border-top:1px solid var(--line)}.card.open .dc{display:block}
+.qz{margin-top:16px;border:1px solid var(--line);border-radius:10px;padding:16px}
+.qz p{margin-bottom:10px}.qo{display:flex;flex-direction:column;gap:8px}
+.qb{background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:11px 14px;min-height:44px;text-align:left;font:inherit;cursor:pointer}
+.qb:hover:not(:disabled){border-color:var(--g)}.qb.c{border-color:var(--ok);color:var(--ok)}.qb.w{border-color:var(--bad);color:var(--bad)}
+.qe{display:none;margin-top:10px;color:var(--mute)}.qe.show{display:block}
+.foot{margin-top:50px;padding-top:30px;border-top:1px solid var(--line);text-align:center;color:var(--mute);font-size:.88rem}
+.foot .q{font:italic 500 1.3rem "Bodoni Moda",serif;color:var(--g);margin-bottom:14px}
+.foot a{color:var(--g);text-decoration:none;font-weight:600;margin:0 8px}
+.fin{display:none;position:fixed;inset:0;z-index:99;background:rgba(10,5,16,.96);flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;overflow:auto;color:#ece3f2}
+.fin.show{display:flex}.fin canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.fin .in{position:relative;max-width:720px}
+.fin h2{font-size:clamp(2.2rem,6vw,3.6rem);color:#e8b45a;margin-bottom:8px}
+.fin .met b{color:#7ee0b5}.fin .met div{border-color:#e8b45a}.fin .met small{color:#b9a8c8}
+@media (max-width:700px){.grid,.inp,.met{grid-template-columns:1fr}.card{padding:20px}}
+@media (prefers-reduced-motion:reduce){.tr i{transition:none}}
+
+.lnk{background:none;border:0;color:var(--g);font:600 .88rem "Instrument Sans",sans-serif;cursor:pointer;padding:6px 8px;text-decoration:underline;text-underline-offset:3px}
+.legal{margin:0 0 16px;display:flex;flex-wrap:wrap;justify-content:center;gap:2px 6px}
+mark.pl{background:color-mix(in srgb,var(--g) 25%,transparent);color:inherit;padding:0 3px;border-radius:3px}
+dialog.lg{background:var(--card);color:var(--ink);border:1px solid var(--g);border-radius:14px;padding:0;width:min(760px,94vw);max-height:88vh}
+dialog.lg::backdrop{background:rgba(10,5,16,.75)}
+.lgh{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 22px;background:var(--card);border-bottom:1px solid var(--line)}
+.lgh h2{font-size:1.4rem;color:var(--g)}
+.lgb{padding:8px 22px 26px;overflow:auto;max-height:calc(88vh - 70px);font-size:.95rem}
+.lgb h3{font-size:1.1rem;color:var(--ink);margin:20px 0 6px}
+.lgb p,.lgb li{color:var(--mute);margin-bottom:8px}.lgb ul,.lgb ol{padding-left:22px}
+.lgb .warn{border-left:3px solid var(--bad);padding:10px 14px;background:color-mix(in srgb,var(--bad) 8%,transparent);border-radius:0 8px 8px 0;margin:14px 0;color:var(--ink)}
+.lgb input,.lgb textarea{width:100%;background:transparent;border:1px solid var(--line);border-radius:8px;padding:10px;color:var(--ink);font:inherit;margin-bottom:10px}
+.lgb label{display:block;color:var(--g);font-weight:600;font-size:.85rem;margin-bottom:3px}
+.ck{position:fixed;left:0;right:0;bottom:0;z-index:150;background:var(--card);border-top:2px solid var(--g);padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));box-shadow:0 -10px 40px rgba(0,0,0,.4)}
+.ck[hidden]{display:none}
+.cki{max-width:860px;margin:0 auto}
+.ck h2{font-size:1.3rem;margin-bottom:6px;color:var(--g)}
+.ck p{color:var(--mute);font-size:.92rem;margin-bottom:12px}
+.ck .row{display:flex;flex-wrap:wrap;gap:10px}
+.ck .btn{margin:0;flex:1;min-width:150px;padding:10px 18px;font-size:.95rem}
+.ckc{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.ckc label{display:flex;gap:10px;align-items:flex-start;font-weight:600;color:var(--ink);cursor:pointer}
+.ckc input{width:20px;height:20px;accent-color:var(--g);margin-top:3px;flex-shrink:0}
+.ckc small{display:block;color:var(--mute);font-weight:400;margin:4px 0 0 30px}
+
+.tabs{display:flex;gap:8px;margin:-8px 0 26px;border-bottom:1px solid var(--line)}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;color:var(--mute);font:600 1rem "Instrument Sans",sans-serif;padding:12px 18px;min-height:44px;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--g);border-color:var(--g)}
+#lex h2{font-size:clamp(1.8rem,5vw,2.6rem);margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 20px}
+.chips button{background:none;color:var(--mute);border:1px solid var(--line);border-radius:99px;padding:8px 16px;min-height:40px;font:inherit;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.trk{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;border-radius:14px}
+.trk::-webkit-scrollbar{display:none}
+.sl{flex:0 0 100%;scroll-snap-align:center;display:grid;grid-template-columns:210px 1fr;gap:28px;padding:26px;background:var(--card);border:1px solid var(--line);border-radius:14px}
+.cf{aspect-ratio:2/3;border-radius:10px;border:1px solid var(--sc);background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:18px 10px;text-align:center;box-shadow:inset 0 0 0 6px var(--bg),inset 0 0 0 7px var(--sc);align-self:start}
+.cf small{font:500 .9rem "Bodoni Moda",serif;letter-spacing:.2em;color:var(--sc)}
+.cf svg{width:56%;color:var(--sc)}
+.cf b{font:700 1.05rem/1.2 "Bodoni Moda",serif}
+.ct h3{font-size:1.9rem;margin-bottom:4px;color:var(--ink)}
+.ct .kw{color:var(--sc);font-weight:600;margin-bottom:14px}
+.ct h4{font:500 1.05rem "Bodoni Moda",serif;color:var(--g);margin:14px 0 2px}
+.ct p{color:var(--ink);max-width:60ch}
+.cn{display:flex;justify-content:center;align-items:center;gap:12px;margin:16px 0;flex-wrap:wrap}
+.cn button.nv{width:48px;height:48px;border-radius:50%;border:1px solid var(--g);background:none;color:var(--g);font-size:1.5rem;cursor:pointer}
+.cn button.nv:hover{background:var(--g);color:var(--dk)}
+.cn select{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:10px;font:inherit;max-width:220px}
+#ci{font-weight:600;min-width:70px;text-align:center}
+.nts{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--card)}
+.nts label{display:block;font:500 1.15rem "Bodoni Moda",serif;color:var(--g);margin-bottom:8px}
+.nts textarea{width:100%;min-height:150px;background:transparent;border:1px solid var(--line);border-radius:8px;padding:12px;color:var(--ink);font:inherit;resize:vertical}
+.nts div{color:var(--mute);font-size:.85rem;margin-top:6px}
+@media (max-width:700px){.sl{grid-template-columns:1fr;padding:18px}.cf{max-width:180px;margin:0 auto;width:100%}}
+
+/* ===== MYSTISCHE KARTEN ===== */
+.trk{gap:0;border-radius:20px}
+.sl{position:relative;overflow:hidden;grid-template-columns:230px 1fr;gap:34px;padding:34px 30px;border-color:color-mix(in srgb,var(--sc) 45%,var(--line));background:radial-gradient(ellipse at 18% 25%,color-mix(in srgb,var(--sc) 22%,transparent),transparent 55%),radial-gradient(ellipse at 90% 90%,color-mix(in srgb,#b98ae0 14%,transparent),transparent 50%),var(--card)}
+.sl::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;background-image:radial-gradient(1px 1px at 12% 20%,var(--ink),transparent),radial-gradient(1px 1px at 68% 12%,var(--ink),transparent),radial-gradient(1.5px 1.5px at 85% 40%,var(--g),transparent),radial-gradient(1px 1px at 40% 88%,var(--ink),transparent),radial-gradient(1.5px 1.5px at 92% 82%,var(--ink),transparent),radial-gradient(1px 1px at 55% 60%,var(--g),transparent)}
+.sl>*{position:relative}
+.cf{position:relative;aspect-ratio:2/3;border:0;border-radius:14px;padding:16px 12px 14px;justify-content:space-between;color:var(--sc);animation:fl 6s ease-in-out infinite;
+background:radial-gradient(ellipse at 50% 42%,color-mix(in srgb,var(--sc) 28%,transparent),transparent 62%),linear-gradient(165deg,#241338,#0e0817 70%);
+box-shadow:0 0 0 1px var(--sc),0 0 38px color-mix(in srgb,var(--sc) 38%,transparent),0 18px 40px rgba(0,0,0,.45)}
+.cf::before{content:"";position:absolute;inset:7px;border:1px solid color-mix(in srgb,var(--sc) 75%,transparent);border-radius:9px;pointer-events:none}
+.cf::after{content:"✦ ✦";position:absolute;left:0;right:0;top:11px;text-align:center;font-size:.55rem;letter-spacing:.9em;color:var(--sc);opacity:.8;text-indent:.9em}
+.cf small{margin-top:14px;font:500 .95rem "Bodoni Moda",serif;letter-spacing:.3em;text-indent:.3em;color:var(--sc)}
+.cf .ar{width:88%;filter:drop-shadow(0 0 7px var(--sc))}.cf .ar svg{width:100%;display:block;color:var(--sc)}
+.cf .ar g.spin{transform-origin:0 0;animation:sp 60s linear infinite}
+.cf b{font:700 1.02rem/1.2 "Bodoni Moda",serif;color:#f3e6c8;letter-spacing:.04em}
+.cf em{display:block;font:italic 400 .72rem/1.3 "Bodoni Moda",serif;color:var(--sc);margin-top:3px;opacity:.9}
+@keyframes fl{50%{transform:translateY(-7px)}}@keyframes sp{to{transform:rotate(360deg)}}
+.ct h3{font-size:2.1rem;letter-spacing:.01em;background:linear-gradient(90deg,var(--ink),var(--sc));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ct .kw{font:italic 500 1.1rem "Bodoni Moda",serif;padding-bottom:12px;margin-bottom:6px;position:relative}
+.ct .kw::after{content:"✦ ─────── ✦";position:absolute;left:0;bottom:-6px;font-size:.7rem;letter-spacing:.2em;color:var(--sc);opacity:.7;font-style:normal}
+.ct h4{display:flex;align-items:center;gap:8px;margin:20px 0 4px;font-size:1.08rem}
+.ct h4::before{content:"✦";font-size:.7rem;color:var(--sc)}
+.ct p{line-height:1.75}
+.ct .qs{margin-top:18px;padding:14px 18px;border-radius:12px;border:1px solid color-mix(in srgb,var(--sc) 50%,transparent);background:color-mix(in srgb,var(--sc) 10%,transparent);font-style:italic}
+.chips button[aria-pressed="true"]{background:linear-gradient(135deg,var(--g),#b98ae0);color:#1a1024;border-color:transparent}
+@media (max-width:700px){.sl{grid-template-columns:1fr;gap:22px;padding:24px 18px}.cf{max-width:210px}}
+@media (prefers-reduced-motion:reduce){.cf,.cf .ar g.spin{animation:none}}
+
+/* ===== FAMILIENKREIS ===== */
+#fam h2{font-size:clamp(1.8rem,5vw,2.6rem);margin-bottom:8px}
+.frm{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:12px;margin:18px 0 6px;padding:20px;border:1px solid var(--g);border-radius:16px;background:radial-gradient(ellipse at 0 0,color-mix(in srgb,var(--g) 14%,transparent),transparent 60%),var(--card)}
+.frm label{display:block;font-size:.85rem;color:var(--g);font-weight:600;margin-bottom:4px}
+.frm input,.frm select{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:11px 12px;color:var(--ink);font:inherit}
+.frm .btn{grid-column:1/-1;margin-top:4px}
+.fh{margin:22px 0;padding:22px;border-radius:16px;text-align:center;border:1px solid var(--line);background:color-mix(in srgb,#b98ae0 10%,var(--card))}
+.fh h3{color:var(--g);font-size:1.5rem;margin-bottom:8px}
+.pf{position:relative;border:1px solid color-mix(in srgb,var(--zc) 50%,var(--line));border-radius:18px;padding:24px;margin-bottom:22px;overflow:hidden;background:radial-gradient(ellipse at 12% 0,color-mix(in srgb,var(--zc) 22%,transparent),transparent 60%),var(--card)}
+.pf h3{font-size:1.7rem;color:var(--g)}.pf .meta{color:var(--mute);font-size:.9rem}
+.pf .row{display:flex;gap:20px;flex-wrap:wrap;margin:18px 0 8px;align-items:flex-start}
+.zb{width:120px;text-align:center;font:500 1rem "Bodoni Moda",serif}
+.zb i{display:grid;place-items:center;width:104px;height:104px;margin:0 auto 8px;border-radius:50%;font-style:normal;font-size:3.2rem;color:var(--zc);border:1px solid var(--zc);background:radial-gradient(circle,color-mix(in srgb,var(--zc) 18%,transparent),transparent 70%);box-shadow:0 0 28px color-mix(in srgb,var(--zc) 45%,transparent)}
+.zb small{display:block;color:var(--mute);font:400 .8rem "Instrument Sans",sans-serif}
+.mc{width:132px;text-align:center}.mc .cf{width:100%}.mc span{display:block;margin-top:10px;font:500 .9rem "Bodoni Moda",serif;color:var(--g)}
+.pf .tx{flex:1;min-width:230px}.pf .tx p{margin-bottom:10px}.pf .tx b{color:var(--g);font-family:"Bodoni Moda",serif;font-weight:500}
+.cd{display:inline-block;padding:4px 14px;border-radius:99px;border:1px solid var(--g);color:var(--g);font-size:.85rem;font-weight:600;margin-top:6px}
+.pf .acts{display:flex;gap:8px;flex-wrap:wrap}.pf .btn{margin-top:6px;min-height:40px;padding:8px 18px;font-size:.9rem}
+@media (max-width:700px){.frm{grid-template-columns:1fr}}
+
+/* ===== LEGEMETHODEN-RONDELL ===== */
+#lgm h2{font-size:clamp(1.8rem,5vw,2.6rem);margin-bottom:8px}
+#lci{font-weight:600;min-width:70px;text-align:center}
+.ls{flex:0 0 100%;scroll-snap-align:center;position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:30px;padding:30px;border:1px solid color-mix(in srgb,var(--sc) 45%,var(--line));border-radius:20px;background:radial-gradient(ellipse at 15% 15%,color-mix(in srgb,var(--sc) 20%,transparent),transparent 55%),var(--card)}
+.lay{position:relative;aspect-ratio:3/2;border-radius:16px;border:1px solid color-mix(in srgb,var(--sc) 55%,transparent);background:radial-gradient(ellipse at center,color-mix(in srgb,var(--sc) 26%,#150c22),#0e0817 78%);box-shadow:inset 0 0 40px rgba(0,0,0,.5),0 0 34px color-mix(in srgb,var(--sc) 28%,transparent)}
+.pc{position:absolute;width:var(--cw,11%);aspect-ratio:2/3;transform:translate(-50%,-50%) rotate(var(--r,0deg));display:grid;place-items:center;border:1px solid var(--sc);border-radius:5px;background:linear-gradient(160deg,#2f1a4d,#120a1e);color:#f3e6c8;font:700 clamp(.7rem,2.2vw,1.05rem) "Bodoni Moda",serif;box-shadow:0 0 12px color-mix(in srgb,var(--sc) 45%,transparent);cursor:pointer;transition:.25s}
+.pc::before{content:"";position:absolute;inset:3px;border:1px solid color-mix(in srgb,var(--sc) 55%,transparent);border-radius:3px}
+.pc b{position:relative;transform:translateY(var(--o,0)) rotate(calc(var(--r,0deg)*-1))}
+.pc.on{background:var(--sc);color:#1a1024;box-shadow:0 0 24px var(--sc);z-index:5}
+.lm{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 0}.lm span{padding:4px 14px;border:1px solid var(--sc);border-radius:99px;color:var(--sc);font-size:.85rem;font-weight:600}
+.ls .qs{margin-top:16px;padding:14px 18px;border-radius:12px;border:1px solid color-mix(in srgb,var(--sc) 50%,transparent);background:color-mix(in srgb,var(--sc) 10%,transparent);font-style:italic}
+.stp{list-style:none;counter-reset:q;margin-top:6px}.stp li{counter-increment:q;position:relative;padding-left:38px;margin-bottom:10px}
+.stp li::before{content:counter(q);position:absolute;left:0;top:0;width:26px;height:26px;border:1px solid var(--sc);color:var(--sc);border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.pi{display:flex;gap:12px;padding:9px 12px;margin:0 -12px 2px;border-radius:10px;border:1px solid transparent;cursor:pointer}
+.pi i{flex:0 0 28px;height:28px;border:1px solid var(--sc);border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:700;font-size:.85rem;color:var(--sc)}
+.pi b{color:var(--g);font:500 1rem "Bodoni Moda",serif}.pi.on{border-color:var(--sc);background:color-mix(in srgb,var(--sc) 12%,transparent)}
+@media (max-width:760px){.ls{grid-template-columns:1fr;padding:20px 16px;gap:22px}}
+
+/* ===== KLANGRAUM ===== */
+.snd{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:120;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.sb{width:54px;height:54px;border-radius:50%;border:1px solid var(--g);background:radial-gradient(circle,color-mix(in srgb,var(--g) 30%,#241338),#160d24);color:var(--g);font-size:1.5rem;cursor:pointer;box-shadow:0 0 22px color-mix(in srgb,var(--g) 40%,transparent)}
+.sb.on{animation:pu 3.2s ease-in-out infinite}@keyframes pu{50%{box-shadow:0 0 0 10px color-mix(in srgb,var(--g) 12%,transparent),0 0 34px color-mix(in srgb,var(--g) 55%,transparent)}}
+.sndp{width:min(310px,calc(100vw - 32px));padding:18px;border:1px solid var(--g);border-radius:16px;background:var(--card);box-shadow:0 12px 40px rgba(0,0,0,.45)}
+.sndp[hidden]{display:none}
+.sndp h4{font:500 1.25rem "Bodoni Moda",serif;color:var(--g)}.sndp p{font-size:.85rem;color:var(--mute);margin:4px 0 12px}
+.mo{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.mo button{text-align:left;background:none;border:1px solid var(--line);border-radius:10px;padding:8px 12px;color:var(--ink);font:inherit;font-size:.92rem;cursor:pointer;min-height:44px}
+.mo button[aria-pressed="true"]{border-color:var(--g);background:color-mix(in srgb,var(--g) 14%,transparent)}
+.mo small{display:block;color:var(--mute);font-size:.76rem}
+.sndp label{display:block;font-size:.85rem;color:var(--g);font-weight:600}.sndp input[type=range]{width:100%;accent-color:var(--g)}
+.sndp .btn{width:100%;margin-top:10px}
+@media (prefers-reduced-motion:reduce){.sb.on{animation:none}}
+
+/* ===== EINE WEBSEITE + TOR ===== */
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.wrap{position:relative;z-index:1}
+.tabs{position:sticky;top:0;z-index:30;margin:-8px -16px 30px;padding:env(safe-area-inset-top,0px) 16px 0;overflow-x:auto;white-space:nowrap;scrollbar-width:none;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.tabs::-webkit-scrollbar{display:none}.tabs .gd{margin-left:auto;color:var(--g);border-bottom-color:transparent}
+.prog{top:calc(52px + env(safe-area-inset-top,0px))}
+.chap{margin-top:90px;scroll-margin-top:64px}
+.chap>h2{text-align:center}.chap>h2::after{content:"✦ ────── ✦";display:block;margin-top:8px;font:.75rem/1 sans-serif;letter-spacing:.3em;color:var(--g);opacity:.8}
+.chap>.p{text-align:center;max-width:62ch;margin:0 auto 18px}
+.hd{scroll-margin-top:64px;padding-top:10px}
+.hd .ey{font:italic 500 1.05rem "Bodoni Moda",serif;color:var(--g);letter-spacing:.12em;margin-bottom:10px}
+.hd h1 span{background:linear-gradient(90deg,var(--g),#e6b6ff,var(--g));background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shn 9s linear infinite}
+@keyframes shn{to{background-position:220% 0}}
+.cta2{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+.tg{display:flex;gap:26px;align-items:flex-start;text-align:left;flex-wrap:wrap;margin:28px auto 0;max-width:680px;padding:24px;border:1px solid var(--g);border-radius:20px;background:radial-gradient(ellipse at 10% 0,color-mix(in srgb,var(--sc) 22%,transparent),transparent 60%),var(--card);box-shadow:0 0 40px color-mix(in srgb,var(--sc) 22%,transparent)}
+.tg .ct{flex:1;min-width:220px}.tg .ct h3{font-size:1.7rem}
+.gate{--g:#e8b45a;--ink:#ece3f2;--mute:#b9a8c8;--line:#3a2b4d;--dk:#1a1024;--card:#140b21;display:none;position:fixed;inset:0;z-index:300;overflow:auto;padding:24px 14px;color:var(--ink);background:radial-gradient(ellipse at 18% 8%,#3d1f5f,transparent 55%),radial-gradient(ellipse at 88% 92%,#1c3a5e,transparent 55%),#0a0511}
+.gate.show{display:grid;place-items:center}
+.gb{position:relative;width:min(700px,100%);padding:36px 32px;border:1px solid var(--g);border-radius:24px;background:rgba(20,11,33,.85);box-shadow:0 0 70px rgba(232,180,90,.18)}
+.gb .ey{text-align:center;font:italic 500 1rem "Bodoni Moda",serif;color:var(--g);letter-spacing:.14em}
+.gb h2{text-align:center;font-size:clamp(1.8rem,5vw,2.5rem);color:var(--g);margin:6px 0 14px}
+.gb p{color:#d8cbe6;margin-bottom:12px}.gb .ctr{text-align:center}
+.rl{list-style:none;margin:14px 0}.rl li{padding:11px 14px;margin-bottom:8px;border-left:3px solid var(--g);border-radius:0 10px 10px 0;background:rgba(232,180,90,.07);color:#d8cbe6;font-size:.95rem}.rl b{color:var(--g);font-family:"Bodoni Moda",serif;font-weight:500}
+.chk{display:flex;gap:10px;align-items:flex-start;margin:16px 0 4px;cursor:pointer;font-weight:600}.chk input{width:22px;height:22px;accent-color:var(--g);flex-shrink:0}
+.gb .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px}.gb .btn:disabled{opacity:.4;cursor:not-allowed}
+.gb .lk{text-align:center}.gdots{display:flex;justify-content:center;gap:8px;margin:0 0 18px}.gdots i{width:9px;height:9px;border-radius:50%;background:var(--line)}.gdots i.on{background:var(--g);box-shadow:0 0 10px var(--g)}
+.gx{position:absolute;top:12px;right:14px;background:none;border:1px solid var(--line);color:var(--ink);width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1.1rem}
+@media (max-width:700px){.gb{padding:28px 18px}}
+@media (prefers-reduced-motion:reduce){.hd h1 span{animation:none}}
+
+/* ===== ORAKEL + SENDEN ===== */
+.shr{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin:20px 0 6px}
+.shr .btn,.pf .acts .btn{margin-top:0}.shr .btn{min-height:44px;padding:9px 20px;font-size:.95rem}
+.btn.wa{background:#25d366;border-color:#25d366;color:#06301a}.btn.tgm{background:#2aabee;border-color:#2aabee;color:#06263a}
+#orc .tg{margin-top:20px}#orc .ol{text-align:center;color:var(--g);font:italic 500 1.15rem "Bodoni Moda",serif;margin-top:18px}
+.bn{border-color:#c9a0f0;background:linear-gradient(135deg,color-mix(in srgb,#b98ae0 14%,transparent),color-mix(in srgb,var(--g) 8%,transparent));padding:18px 20px}
+.bn h5{color:#c9a0f0;font-size:1.1rem;margin-bottom:6px}.bn .wq{font:italic 500 1.2rem/1.5 "Bodoni Moda",serif;color:var(--g);margin:6px 0 10px}.bn p:last-child{margin-bottom:0;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="bar"><span><b>●</b> Dein Kartenraum ist offen</span><span>21 Tage Transformation – Karten legen Mindshift</span></div>
+<nav class="tabs" role="tablist" aria-label="Bereiche"><button role="tab" id="tp" aria-selected="true">21-Tage-Programm</button><button role="tab" id="tk" aria-selected="false">Kartenlexikon</button><button role="tab" id="tf" aria-selected="false">Familienkreis</button><button role="tab" id="tl" aria-selected="false">Legemethoden</button></nav>
+<header class="hd">
+  <h1>21 Tage Transformation<br><span>Karten legen Mindshift</span></h1>
+  <p>Dein Fahrplan in drei Wochen: von der ersten Karte bis zur eigenen Transformationslegung, mit Zeitstrahl, Wissens-Checks und persönlicher Auswertung.</p>
+</header>
+
+<div class="card"><h2>Willkommen in deinem Mindshift</h2>
+<p class="p">Diese Seite begleitet dich 21 Tage lang. Jeden Tag bekommst du einen Aha-Moment, einen Mindshift-Fokus und eine kleine Aufgabe mit deinen Karten. Tarot ist dabei dein Spiegel: Die Karten sagen nicht die Zukunft voraus, sie zeigen dir Gedankenmuster und geben dir bessere Fragen. Du übernimmst die Regie, die Karten liefern die Bilder.</p>
+<p class="p">Ehrlich gesagt: Die „magische“ 21-Tage-Grenze gibt es in der Forschung nicht. Wie lange eine neue Gewohnheit braucht, ist individuell. 21 Tage sind ein starker, überschaubarer Rahmen, in dem du Routine und Selbstvertrauen aufbaust.</p>
+<div class="hl"><h5>Dein Versprechen an dich selbst</h5>Ich nehme mir jeden Tag Zeit für meine Karten. Ich schaue hin, ich deute mit eigenen Worten, und ich treffe meine Entscheidungen selbst.</div></div>
+
+<div class="card"><h2>Zeitstrahl deiner Transformation</h2>
+<p class="p">Das erwartet dich, wenn du dranbleibst. Es sind Erfahrungswerte aus dem Lernen und Üben, keine Garantien.</p>
+<div class="grid" id="tl"></div>
+<div class="quote">„Die Karte gibt dir kein Urteil. Sie hält dir einen Spiegel hin und wartet, was du siehst.“<small>Esha's Tarot · Mindshift</small></div></div>
+
+<div class="card"><h2>Dein Mindset</h2>
+<p class="p">Vier Grundsätze tragen dich durch alle 21 Tage.</p>
+<div class="grid" id="ms"></div></div>
+
+<div class="card"><h2>Dein Start-Ritual</h2>
+<p class="p">Vier Schritte, bevor du Tag 1 beginnst. Sie kosten nur wenige Minuten.</p>
+<ol class="steps">
+<li><h4>Wähle dein Deck</h4><p class="p">Nimm ein Deck, dessen Bilder dich ansprechen. Ein Rider-Waite-Deck eignet sich besonders gut zum Lernen.</p></li>
+<li><h4>Schaffe deinen Platz</h4><p class="p">Ein Tisch, ein Tuch, eine Kerze, ein Notizbuch. Immer derselbe Ort, immer dieselbe Zeit.</p></li>
+<li><h4>Suche Verbündete</h4><p class="p">Erzähle mindestens einer Person von deinem Plan. Oder tritt der WhatsApp-Gruppe unten bei.</p></li>
+<li><h4>Aktiviere den Schalter</h4><p class="p">Klicke unten auf „Schalter umlegen“. Ab dann öffnet sich täglich eine neue Mission.</p></li></ol></div>
+
+<div class="card"><h2>Dein persönliches Profil</h2>
+<p class="p">Deine Angaben bleiben lokal in deinem Browser. Sie dienen nur deiner Auswertung.</p>
+<div class="inp">
+<div><label for="un">Dein Vorname</label><input id="un" placeholder="z. B. Anna"></div>
+<div><label for="ud">Tag deines Starts</label><input type="date" id="ud"></div>
+<div><label for="uc">Karten pro Tag (Stück)</label><input type="number" id="uc" min="1" max="30" placeholder="z. B. 3"></div>
+<div><label for="um">Übungszeit pro Tag (Minuten)</label><input type="number" id="um" min="1" max="240" placeholder="z. B. 20"></div></div>
+<button class="btn" id="sv">Profil speichern</button><div class="msg" id="pm"></div>
+<div class="met"><div><small>Gelegte Karten</small><b id="m1">0</b></div><div><small>Übungsminuten</small><b id="m2">0</b></div><div><small>Mindshift-Tage</small><b id="m3">0</b></div></div></div>
+
+<div class="card" id="orc"><h2>Dein Orakel</h2><p class="p">Speichere dein Profil, dann spricht das Orakel zu dir: drei Karten, die aus deinem Namen, deinem Starttag und dem heutigen Tag entstehen. Du kannst sie an deine Liebsten senden.</p><button class="btn" id="ob">✦ Mein Orakel befragen</button><div class="msg" id="om"></div><div id="oo"></div></div>
+
+<div class="card cta"><h3>Schalter umlegen &amp; starten</h3>
+<p class="p">Mit einem Klick aktivierst du dein Programm. Deine Fortschrittsanzeige springt an, und Tag 1 öffnet sich.</p>
+<button class="btn" id="sw"><span id="bt">Klick mich und dein Blick verändert sich</span><span id="bi">✦</span></button>
+<div class="msg" id="sm"></div></div>
+
+<div class="prog"><div class="r"><span>Deine 21-Tage-Missionen</span><span id="pt">0 / 21 Tagen abgeschlossen</span></div><div class="tr" role="progressbar" aria-label="Fortschritt" aria-valuemin="0" aria-valuemax="21"><i id="pf"></i></div></div>
+
+<div id="days"></div>
+
+<section id="lex" hidden>
+<h2>Kartenlexikon</h2>
+<p class="p">Tritt ein in dein Kartenreich: 78 Bilder, die dich sanft an dich selbst erinnern. Wische oder blättere mit den Pfeilen, lass jede Karte zu dir sprechen und halte darunter fest, was sie in dir berührt.</p>
+<div class="chips" id="chips" role="group" aria-label="Kartengruppe"></div>
+<div class="trk" id="trk" tabindex="0" aria-label="Karten, mit Pfeiltasten blättern"></div>
+<div class="cn"><button class="nv" id="pv" aria-label="Vorherige Karte">‹</button><span id="ci">1 / 78</span><select id="jp" aria-label="Zu Karte springen"></select><button class="nv" id="nx" aria-label="Nächste Karte">›</button></div>
+<div class="nts"><label for="nt">Deine Notizen: <span id="nn"></span></label><textarea id="nt" placeholder="Was siehst du? Was fühlst du? Was bedeutet die Karte für dich heute?"></textarea><div id="ns"></div></div>
+</section>
+<section id="fam" hidden>
+<h2>Familienkreis</h2>
+<p class="p">Jeder Mensch trägt ein Sternzeichen, eine Seelenkarte und ein Jahresthema in sich. Trage dich und die Menschen ein, die du liebst: Partner, Kinder, Eltern, Geschwister, Freunde. Für jede und jeden entsteht eine eigene Geburtskarte zum Staunen, Schenken und Teilen.</p>
+<div class="frm"><div><label for="fn1">Name</label><input id="fn1" maxlength="40" autocomplete="off" placeholder="z. B. Lena"></div><div><label for="fd1">Geburtstag</label><input id="fd1" type="date"></div><div><label for="fr1">Wer ist das?</label><select id="fr1"><option>Ich</option><option>Partner:in</option><option>Kind</option><option>Mutter / Vater</option><option>Geschwister</option><option>Großeltern</option><option>Freund:in</option></select></div><button class="btn" id="fadd">✦ Geburtskarte enthüllen</button></div>
+<div class="msg" id="fmsg" role="status"></div>
+<div id="fhm"></div><div id="flist"></div>
+<div class="shr"><span class="p" style="margin:0">Ganzen Familienkreis senden:</span><button class="btn wa" data-s="wa" data-k="fall">WhatsApp</button><button class="btn tgm" data-s="tg" data-k="fall">Telegram</button></div>
+<p class="p" style="text-align:center;font-size:.85rem">Die Daten bleiben nur in deinem Browser gespeichert. Sternzeichen und Kartendeutung dienen der Freude und Reflexion, nicht der Vorhersage.</p>
+</section>
+<section id="lgm" hidden>
+<h2>Legemethoden</h2>
+<p class="p">Jede Legung ist ein anderer Weg, mit den Karten zu sprechen. Blättere durch das Rondell, entdecke, welche Methode zu deiner Frage passt, und tippe auf eine Karte oder Position, um zu sehen, was sie bedeutet.</p>
+<div class="hl"><h5>Bevor du beginnst: dein kleines Ritual</h5>Suche dir einen ruhigen Platz, vielleicht mit Kerze oder Tee. Atme dreimal tief ein und aus. Formuliere deine Frage offen und freundlich („Was darf ich sehen?“ statt „Wird es klappen?“). Mische in deinem Tempo, bis dein Gefühl „jetzt“ sagt, und lege die Karten in der Reihenfolge der Zahlen. Schau zuerst nur die Bilder an, dann deute. Danke am Ende den Karten und dir selbst.</div>
+<div class="trk" id="ltrk" tabindex="0" aria-label="Legemethoden, mit Pfeiltasten blättern" style="margin-top:20px"></div>
+<div class="cn"><button class="nv" id="lpv" aria-label="Vorherige Legung">‹</button><span id="lci">1 / 9</span><select id="ljp" aria-label="Zu Legung springen"></select><button class="nv" id="lnx" aria-label="Nächste Legung">›</button></div>
+</section>
+<footer class="foot">
+<div class="q">„Du gibst nichts auf. Du gewinnst deinen Blick zurück.“</div>
+<p style="margin-bottom:8px;color:var(--ink);font-weight:600">© 2027 Frank Zimmermann – 21 Tage Transformation. Alle Rechte vorbehalten.</p>
+<p style="max-width:640px;margin:0 auto 18px">Diese Seite dient der persönlichen Reflexion und Motivation. Tarot ist kein Ersatz für ärztliche, psychologische, rechtliche oder finanzielle Beratung. Bei ernsten Belastungen wende dich bitte an Fachleute oder eine offizielle Beratungsstelle.</p>
+<div class="legal" id="legal"></div>
+<p><a href="mailto:in60tagenrauchfrei@gmail.com">E-Mail: in60tagenrauchfrei@gmail.com</a> | <a href="https://chat.whatsapp.com/Kisnv5LGuvj4WrKadqo98B?mode=gi_t" target="_blank" rel="noopener">WhatsApp-Gruppe beitreten</a> | <a href="#days">Zu den 21 Tagen</a></p>
+</footer>
+</div>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gt"><div class="gb" id="gs"></div></div>
+<div class="fin" id="fin"><canvas id="cv"></canvas><div class="in">
+<h2>Du hast es geschafft!</h2>
+<p class="serif" style="font-size:1.2rem;color:#e8b45a;margin-bottom:6px">Deine 21-Tage-Transformation ist komplett</p>
+<p id="fn" style="font-size:1.1rem;margin-bottom:6px">Deine Karten haben dich begleitet, und du hast dir selbst zugehört.</p>
+<div class="met"><div><small>Gelegte Karten</small><b id="f1">0</b></div><div><small>Übungsminuten</small><b id="f2">0</b></div><div><small>Mindshift-Tage</small><b id="f3">21</b></div></div>
+<div class="quote" style="text-align:left">„Du hast 21 Tage lang hingeschaut, gedeutet und entschieden. Du bist nicht mehr die Person, die diese Seite am ersten Tag geöffnet hat. Du legst Karten, und du legst dein Leben mit eigenen Händen.“<small style="color:#7ee0b5">Dein Mindshift</small></div>
+<button class="btn" id="rs">Neu starten</button> <button class="btn o" id="cl">Schließen</button></div></div>
+
+
+<dialog class="lg" id="lg" aria-labelledby="lgt"><div class="lgh"><h2 id="lgt"></h2><button class="btn o" id="lgx" style="margin:0;padding:8px 18px">Schließen</button></div><div class="lgb" id="lgb"></div></dialog>
+<div class="ck" id="ck" role="region" aria-label="Cookie-Einstellungen" hidden><div class="cki" id="cki"></div></div>
+<div class="snd"><div class="sndp" id="sndp" hidden><h4>✦ Klangraum</h4><p>Sanfte Musik, die nur für dich entsteht. Sie wird in jedem Moment neu komponiert und wiederholt sich nie.</p><div class="mo" id="mo"></div><label for="vol">Lautstärke</label><input type="range" id="vol" min="0" max="100"><button class="btn" id="pl">▶ Musik beginnen</button></div><button class="sb" id="sb" aria-label="Klangraum öffnen" aria-expanded="false">♪</button></div>
+<script>
+const TL=[["Tag 1","Du ziehst deine erste Karte und formulierst dein Ziel. Ein Anfang macht Mut."],["Tag 3","Du erkennst Bildsprache und liest Karten ohne Buch. Erste Sicherheit entsteht."],["Tag 7","Die Tageskarte wird Routine. Du merkst, welche Themen wiederkehren."],["Tag 14","Du verbindest Karten zu Geschichten und legst Dreikarten-Legungen sicher."],["Tag 21","Du legst das Keltische Kreuz und deine eigene Transformationslegung."],["Danach","Ein Ritual, das bleibt. Wie schnell Gewohnheiten fest werden, ist bei jedem anders."]];
+const MS=[["1. Es gibt keine falsche Karte","Jede Karte ist eine Einladung, genauer hinzusehen. Wenn du eine Karte „schlecht“ nennst, frag dich, was sie dir zeigen will."],["2. Du bist nicht ausgeliefert","Tarot sagt keine Zukunft an. Du entscheidest, was du mit dem Bild machst. Damit bleibst du in deiner Kraft."],["3. Kleine Schritte gewinnen","Zehn Minuten am Tag schlagen einen Marathon im Monat. Dranbleiben ist wichtiger als Perfektion."],["4. Lebe im Jetzt","Du musst nur diese eine Karte heute verstehen. Morgen kommt die nächste."]];
+document.getElementById("tl").innerHTML=TL.map(t=>`<div class="it"><b>${t[0]}</b>${t[1]}</div>`).join("");
+document.getElementById("ms").innerHTML=MS.map(t=>`<div class="it"><b>${t[0]}</b>${t[1]}</div>`).join("");
+
+const W=[
+["Der Weg wird unter deinen Füßen geboren, nicht vor ihnen.","Setz dich heute ans Fenster, als wäre es ein Lagerfeuer. Lege die Hand aufs Herz und sprich leise: Ich gehe los, auch wenn ich nicht alles weiß. Spüre, wie mutig sich das anfühlt. Du musst heute nichts können, nur beginnen."],
+["Wer viele Bilder kennt, hat viele Fenster zur Seele.","Lass jede Gruppe deines Decks einmal behutsam durch die Hände gleiten, wie man Perlen zählt. Sag den Karten: Ich lerne euch kennen. Spüre, welche warm wird. Vertraue dieser Wärme, sie ist dein erstes Orakel."],
+["Das Auge sieht, das Herz erkennt.","Halte eine Karte ins Kerzenlicht und schau, bis dir ein kleines Detail auffällt: eine Hand, ein Schatten, ein Stück Himmel. Frage: Was will mir gerade dieses Detail sagen? Schreibe die ersten Worte auf, ohne sie zu verbessern."],
+["Feuer wärmt, Wasser trägt, Luft ruft, Erde hält. Du brauchst alle vier.","Stell dich barfuß auf den Boden und spüre die Erde. Atme tief, trinke ein Glas Wasser ganz langsam und entzünde eine Kerze. Frage jedes Element: Was fehlt mir heute? Was am leisesten antwortet, braucht dich am meisten."],
+["Wer atmet, ist zu Hause, wohin er auch geht.","Lege beide Hände auf den Bauch. Atme vier Züge ein, halte sieben, atme acht aus, und stell dir vor, wie der Rauch eines Feuers deine Sorgen in den Nachthimmel trägt. Erst wenn dein Herz still ist, ziehe die Karte."],
+["Eine gute Frage ist eine offene Tür, kein Verhör.","Schreibe deine Frage als Liebesbrief an dich selbst: warm, ehrlich, neugierig. Streiche jedes Wort, das nach Urteil klingt. Lies sie laut. Wenn deine Stimme dabei weich wird, ist sie bereit für die Karten."],
+["Nach sieben Nächten am Feuer weiß man, wer man geworden ist.","Setze dich mit Tee und Papier hin und erzähle dir die Woche wie eine Geschichte am Lagerfeuer. Wo warst du mutig, wo zärtlich mit dir? Schließe mit dem Satz: Ich bin ein Mensch, der hinschaut. Danke dir laut dafür."],
+["Jeder Morgen ist eine Melodie, die nur du spielen kannst.","Ziehe deine Tageskarte wie einen Gruß des Tages und summe dazu eine kleine Melodie, egal welche. Trage ein Wort der Karte wie einen Schal durch den Tag, und suche es am Abend in dem, was geschah."],
+["Kein Weg ist zu lang, wenn du ihn erzählen darfst.","Lege drei Karten der Großen Arkana nebeneinander und erzähle dir ihre Reise wie ein Märchen für ein Kind, mit warmer Stimme. Wo stehst du gerade? Nicke deinem Weg zu, so wie man einem alten Freund zunickt."],
+["Jede Zahl ist ein Herzschlag der Welt.","Klopfe die Zahl deiner Karte langsam auf dein Herz, wie ein Trommeln am Feuer. Spüre, was sie in dir weckt: Anfang, Balance, Fülle? Schreibe auf, wo diese Zahl in deinem Leben gerade tanzt."],
+["Gestern ist Asche, heute ist Glut, morgen ist Funke.","Lege drei Karten und gönne jeder einen tiefen Atemzug. Sprich zur ersten: Ich danke dir. Zur zweiten: Ich sehe dich. Zur dritten: Ich vertraue dir. Lass die Geschichte zwischen den Karten leise für sich sprechen."],
+["Auch der Mond braucht seine dunkle Seite, um zu leuchten.","Ziehe eine Karte, die dich unruhig macht, und setze dich mit ihr wie mit einem müden Gast an den Tisch. Frage sanft: Was beschützt du für mich? Lege dann die Hand aufs Herz und sage: Ich lasse dich nicht allein."],
+["Der Körper ist das erste Tagebuch, das du je geführt hast.","Betrachte eine Karte und schließe die Augen. Wo regt sich etwas: Brust, Bauch, Kehle? Lege deine Hand genau dorthin und atme in diese Stelle, bis sie weich wird. Dein Körper wusste es schon lange."],
+["Wer am Scheideweg tanzt, kommt sicher an.","Halbzeit: Verneige dich vor dir. Ziehe nur eine einzige Karte und nimm sie an, auch wenn sie nicht gefällt. Wer weiter zieht, sucht Beruhigung statt Wahrheit. Sag stattdessen: Ich halte die erste Antwort aus."],
+["Fäden, die sich finden, weben ein Tuch.","Lege zwei Karten nebeneinander und zeichne in Gedanken einen goldenen Faden dazwischen. Was verbindet sie: ein Gefühl, ein Wort, eine Farbe? Erzähle es laut, als würdest du zwei Freunde miteinander bekannt machen."],
+["Kein Sturm bleibt, aber jedes Lied danach klingt tiefer.","Nimm eine Karte, die du bisher als schwer empfindest, und schenke ihr drei neue, freundliche Namen. Sprich sie laut. Spüre, wie sich der Blick auf dein Leben wärmer färbt, ohne dass du etwas beschönigst."],
+["Die Raupe spinnt im Dunkeln, damit der Flügel im Licht tanzt.","Frage dich: In welcher Phase bin ich gerade, Abschied, Leere, Aufbruch oder Ankommen? Ziehe eine Karte dazu und schenke deiner Phase einen Satz wie eine Umarmung. Jede Phase ist heilig."],
+["Wer das große Feuer legt, sitzt lange still davor.","Bereite die Legung wie ein kleines Fest vor: Kerze, Tee, eine Decke. Lege langsam und lies jede Karte, als bekäme sie ein Wort von dir. Danach schweige zehn Minuten. Die Antwort setzt sich wie Asche, sanft und in Ruhe."],
+["Die Zeit ist ein Fluss, kein Käfig. Du darfst dich hineinlegen.","Lege Karten in einer langen Linie, von deiner Vergangenheit bis zu deinem Wunsch für das nächste Jahr. Gehe sie mit dem Finger entlang und flüstere jeder Karte ein Danke zu. Was möchte in Zukunft geliebt werden?"],
+["Ein alter Satz ist nur ein Lied, das du zu oft gehört hast.","Schreibe einen Satz auf, der dich klein hält, und lies ihn der Karte vor, die du dazu ziehst. Dann schreibe ihn neu, weich und wahr, zum Beispiel: Ich darf. Zerreiße den alten Zettel in kleine Stücke, mit Dank."],
+["Am Ende des Weges wartet das Feuer, das du selbst entzündet hast.","Lege deine Transformationslegung wie ein Gelübde an dich selbst. Sprich zum Schluss laut deinen Namen und sage: Ich habe mir treu zugehört. Tanze, singe, weine oder lache, alles ist erlaubt. Verneige dich vor dir."]];
+const D=[
+["Der Narr: dein erster Schritt","Jeder Anfang fühlt sich unsicher an. Der Narr steht am Rand der Klippe und geht trotzdem los. Genau das machst du heute.","Dein Gehirn liebt Routinen. Ein kleines, wiederholtes Ritual zur selben Zeit hilft ihm, Neues als „normal“ abzuspeichern.","Ziehe eine einzige Karte. Schau eine Minute lang nur hin und schreibe drei Sätze auf: Was siehst du, was fühlst du, was wünschst du dir von diesen 21 Tagen? Sprich dabei den Satz „Stopp. Schau hin. Wähle neu.“"],
+["Das Deck: 78 Bilder","Ein Tarotdeck ist kein Zufall. Die 22 Großen Arkana zeigen Lebensthemen, die 56 Kleinen Arkana zeigen den Alltag.","Struktur entlastet. Wer weiß, wie ein Deck aufgebaut ist, verliert die Angst vor der Fülle.","Sortiere dein Deck in Große Arkana und die vier Farben. Lege von jeder Gruppe die Karte nach oben, die dich am meisten anspricht.",["Wie viele Karten hat ein vollständiges Tarotdeck?",["A. 52","B. 78","C. 40","D. 100"],1,"Ein Tarotdeck hat 78 Karten: 22 Große und 56 Kleine Arkana."]],
+["Werde Detektiv deiner Bilder","Du brauchst kein Buch, um eine Karte zu lesen. Deine Wahrnehmung ist der wichtigste Schlüssel.","Wer Details bewusst beschreibt, trainiert Aufmerksamkeit. Aus einem flüchtigen Blick wird ein echtes Verstehen.","Ziehe eine Karte und beschreibe sie ohne Deutung: Figuren, Blickrichtung, Farben, Gegenstände, Hintergrund. Erst danach fragst du dich: Was bedeutet das für mich heute?"],
+["Die vier Elemente","Stäbe stehen für Feuer und Antrieb, Kelche für Wasser und Gefühle, Schwerter für Luft und Gedanken, Münzen für Erde und Alltag.","Ordnung nach Elementen gibt deiner Deutung sofort eine Richtung: Geht es um Herz, Kopf, Tat oder Körper?","Ziehe vier Karten, je eine pro Farbe. Schreibe zu jedem Element einen Satz: Wo bin ich gerade voll Feuer, wo emotional, wo gedanklich, wo praktisch?",["Welches Element gehört zu den Kelchen?",["A. Feuer","B. Luft","C. Wasser","D. Erde"],2,"Kelche stehen für Wasser: Gefühle, Beziehungen, Intuition."]],
+["Atem: die Ruhe vor der Karte","Nicht die Karte beruhigt dich zuerst, sondern dein Atem. Wer ruhig ist, sieht klarer.","Langsames Ausatmen kann den Körper in einen ruhigeren Zustand bringen. Die 4-7-8-Atmung ist dafür eine einfache Technik.","Atme vor jeder Legung: vier Sekunden ein, sieben Sekunden halten, acht Sekunden aus. Vier Durchgänge, dann ziehst du deine Tageskarte."],
+["Gute Fragen stellen","Die Frage formt die Antwort. Aus „Liebt er mich?“ wird „Was sollte ich über diese Beziehung sehen?“","Offene Fragen aktivieren dein Nachdenken. Ja-Nein-Fragen schließen es meistens ab.","Schreibe fünf offene Fragen zu einem Thema auf, das dich beschäftigt. Kreise die mit dem meisten Gefühl ein und lege dazu eine Karte."],
+["Wochen-Reflexion & Identität","Nach sieben Tagen hast du etwas Neues: Du bist jemand, der sich täglich Zeit für sich nimmt.","Identität wächst aus Handlungen. Jedes Mal, wenn du dranbleibst, stimmst du mit deinem neuen Selbstbild ab.","Blättere in deinem Notizbuch zurück. Lies alles laut vor und vervollständige den Satz: „Ich bin jemand, der …“ Ziehe dazu eine Karte, die deine Identität zeigt."],
+["Die Tageskarte als Ritual","Fünf Minuten am Morgen ändern, wie du in den Tag gehst. Die Karte ist dein Kompass, kein Befehl.","Ein klares Zeitfenster macht Gewohnheiten leichter, weil du nicht jeden Tag neu entscheiden musst.","Ziehe morgens eine Karte, schreibe ein Stichwort auf und lege sie sichtbar hin. Prüfe abends: Wo hat das Bild zum Tag gepasst?"],
+["Die Große Arkana: Reise des Narren","22 Karten erzählen einen Weg vom Narren bis zur Welt. Es ist der Weg von Neugier zu Ganzheit.","Geschichten bleiben besser im Kopf als Listen. Wer die Reise kennt, versteht jede Karte im Zusammenhang.","Lege drei Große Arkana nebeneinander und erzähle eine kleine Geschichte: Wie kommt die Figur von der ersten zur letzten Karte?",["Wie viele Karten hat die Große Arkana?",["A. 12","B. 22","C. 56","D. 78"],1,"Die Große Arkana hat 22 Karten, von 0 (Der Narr) bis XXI (Die Welt)."]],
+["Zahlen sprechen mit","Ass steht für Beginn, Fünf oft für Krise, Zehn für Vollendung. Zahlen geben jeder Karte einen Rhythmus.","Muster erkennen entlastet. Wer Zahlen liest, erkennt in der Legung schneller, wo Bewegung ist.","Ziehe fünf Karten aus den Kleinen Arkana und ordne sie nach Zahl. Schreibe auf, welche Phase (Beginn, Krise, Ernte) deine Legung zeigt."],
+["Die Dreikarten-Legung","Die einfachste Legung ist zugleich die vielseitigste. Drei Karten erzählen einen ganzen Satz.","Eine feste Struktur senkt die Hürde. Du musst nicht jedes Mal neu entscheiden, wie du legst.","Lege heute: Vergangenheit, Gegenwart, Weg. Erzähle die drei Karten als kurze Geschichte und schreibe einen nächsten Schritt auf.",["Welche Positionen hat die klassische Dreikarten-Legung?",["A. Ja, Nein, Vielleicht","B. Vergangenheit, Gegenwart, Weg","C. Liebe, Geld, Glück","D. Kopf, Herz, Bauch"],1,"Die klassische Variante lautet Vergangenheit, Gegenwart, Weg. Es gibt auch andere Varianten wie Kopf, Herz, Körper."]],
+["Schattenkarten als Lehrer","Der Turm, der Tod, der Teufel: Sie wirken hart, aber sie zeigen oft genau, was Veränderung braucht.","Wer unangenehme Bilder aushält, lernt, mit unangenehmen Gefühlen umzugehen, ohne wegzuschauen.","Ziehe eine Karte, die dich zuerst abschreckt. Frage dich: Was will sie mir zeigen, das ich gerade nicht sehen will? Schreibe fünf Minuten frei."],
+["Körper lesen","Deine Karte wirkt nicht nur im Kopf. Oft merkst du zuerst im Körper, ob ein Bild stimmt.","Körperwahrnehmung ergänzt Denken. Wer spürt, bevor er urteilt, deutet ehrlicher.","Ziehe eine Karte und schließe die Augen. Spüre nach: Wo im Körper reagiert etwas? Enge, Wärme, Ruhe? Schreibe es zur Karte in dein Notizbuch."],
+["Halbzeit & die Ziehen-bis-es-passt-Falle","Wenn dir eine Karte nicht gefällt, ziehst du gern noch einmal. Das ist die Falle: Du suchst Bestätigung statt Erkenntnis.","Bestätigungsdenken ist bequem. Die erste Karte enthält meist schon, was du sehen sollst.","Ziehe eine Karte zu einer Frage und bleibe bei ihr, auch wenn sie dir nicht gefällt. Schreibe auf, was sie dir zeigt, bevor du irgendetwas änderst.",["Warum solltest du nicht so lange ziehen, bis dir die Karte gefällt?",["A. Es kostet zu viel Zeit","B. Du suchst dann Bestätigung statt Erkenntnis","C. Das Deck nutzt sich ab","D. Es ist verboten"],1,"Wer zieht, bis es passt, überhört die erste Antwort. Bleib bei der ersten Karte."]],
+["Karten verbinden","Einzelne Karten sind Wörter, eine Legung ist ein Satz. Wiederholungen von Farben und Zahlen betonen ein Thema.","Verbindungen herstellen ist Kernarbeit des Gehirns. Du trainierst damit Sinnfindung und Überblick.","Ziehe vier Karten und suche Verbindungen: gleiche Farbe, gleiche Zahl, gleicher Blick. Lies alle vier in drei Sätzen als eine Geschichte."],
+["Umdeuten statt bewerten","Ein Gedanke ist keine Tatsache. Die Karte hilft dir, den Gedanken von der Wirklichkeit zu trennen.","Kognitive Umdeutung heißt, denselben Umstand in ein anderes Licht zu stellen. Sie ist Grundlage vieler bewährter Methoden.","Schreibe einen belastenden Gedanken auf. Ziehe eine Karte und frage: Welche andere Sicht zeigt mir dieses Bild? Formuliere den Gedanken neu."],
+["Die vier Phasen der Veränderung","Veränderung läuft in Phasen: Bewusstwerden, Abwägen, Handeln, Halten. Du bist selten am Anfang oder Ende, meist mittendrin.","Wer weiß, in welcher Phase er steckt, geht freundlicher mit sich um und wählt passendere Schritte.","Ziehe vier Karten und lege sie als Phasen aus. Beantworte für jede Karte: Was ist hier mein nächster kleiner Schritt?",["Welche Phase gehört typischerweise zu den vier Phasen der Veränderung?",["A. Vergessen","B. Halten","C. Aufgeben","D. Zögern"],1,"Bewusstwerden, Abwägen, Handeln, Halten: Halten heißt, das Neue im Alltag zu verankern."]],
+["Das Keltische Kreuz","Zehn Karten für vielschichtige Fragen. Du legst zuerst das Kreuz, dann den Stab. Das Gesamtbild zeigt dir Zusammenhänge, die du einzeln nie sehen würdest.","Komplexe Aufgaben werden lösbar, wenn du sie in feste Schritte teilst. Position für Position wird aus Chaos ein Bild.","Lege das Keltische Kreuz zu einem Thema, das dich länger beschäftigt. Schreibe zu jeder Position nur einen Satz, erst danach das Gesamtfazit."],
+["Deine Zeitachse","Zeit ist in Legungen kein Schicksal, sondern eine Möglichkeit. Du siehst, wohin dich ein Weg führen kann.","Wer sich das Ziel konkret vorstellt, plant klarer. Kleine Zwischenschritte machen es greifbar.","Lege eine Legung mit drei Karten für die nächsten drei Monate. Schreibe pro Karte eine Handlung auf, die du in diesem Monat tust."],
+["Glaubenssätze auflösen","Viele Sätze, die du für wahr hältst, hast du übernommen. Die Schwerter-Karten zeigen dir, wo Gedanken dich einengen.","Was du oft denkst, wird vertraut. Vertraut heißt nicht wahr. Bewusstes Prüfen lockert alte Muster.","Ziehe zwei Schwerter-Karten. Schreibe pro Karte einen einschränkenden Satz auf, danach den Satz, der dir besser dient. Lies ihn laut."],
+["Finale: deine Transformationslegung","Du bist an dem Punkt, an dem du deine eigene Legung entwirfst. Nicht mehr die Karten führen dich, sondern du führst die Karten.","Wer selbst gestaltet, übernimmt Verantwortung. Damit festigst du ein neues Selbstbild: Ich bin jemand, der hinsieht und wählt.","Entwirf eine eigene Legung mit vier bis sieben Positionen für dein nächstes Kapitel. Lege sie, schreibe dein Fazit auf und gib dir ein Versprechen für die nächsten 30 Tage.",["Was ist das wichtigste Ziel dieses Programms?",["A. Die Zukunft sicher vorhersagen","B. Ein Ritual, das dich selbst führt","C. Alle 78 Karten auswendig lernen","D. Nie wieder Zweifel haben"],1,"Tarot ist dein Spiegel. Das Ziel ist Klarheit und Selbstführung, keine Vorhersage."]]];
+
+const SK="et21_done",SP="et21_prof",ST="et21_start";
+const ls={g:(k,d)=>{try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},s:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let done=ls.g(SK,[]),prof=ls.g(SP,null),start=ls.g(ST,null),armed=false;
+const $=id=>document.getElementById(id),DAY=864e5;
+function elapsed(){return start?Math.min(21,Math.max(0,Math.floor((Date.now()-start)/DAY))+1):0}
+function unlocked(){return Math.max(1,elapsed())}
+function fmt(n){return n.toLocaleString("de-DE")}
+function metrics(){const e=elapsed(),c=prof?prof.cards:0,m=prof?prof.min:0;$("m1").textContent=fmt(e*c);$("m2").textContent=fmt(e*m);$("m3").textContent=done.length}
+function saveProfile(){const n=$("un").value.trim(),d=$("ud").value,c=parseInt($("uc").value),m=parseInt($("um").value);
+ if(!n||!d||isNaN(c)||isNaN(m)){$("pm").textContent="Bitte fülle alle vier Felder aus.";return}
+ prof={name:n,date:d,cards:c,min:m};ls.s(SP,prof);start=new Date(d).getTime();ls.s(ST,start);$("pm").textContent="Gespeichert. Schön, dass du dabei bist, "+n+".";metrics();render()}
+function activate(){if(!start){start=Date.now();ls.s(ST,start)}
+ $("sw").classList.add("done");$("bt").textContent="Schalter umgelegt";$("bi").textContent="✓";$("sm").textContent="Aktiviert. Deine 21-Tage-Mission läuft.";metrics();render();
+ setTimeout(()=>$("days").scrollIntoView({behavior:"smooth",block:"start"}),400)}
+function phase(d){return d<=7?"Woche 1: Sehen":d<=14?"Woche 2: Deuten":"Woche 3: Verwandeln"}
+function render(){const u=unlocked();
+ $("days").innerHTML=D.map((x,i)=>{const n=i+1,lock=n>u,ok=done.includes(n),q=x[4];
+ const qh=q?`<div class="qz"><b class="serif" style="color:var(--g)">Wissens-Check</b><p style="margin-top:6px">${q[0]}</p><div class="qo">${q[1].map((o,k)=>`<button class="qb" data-n="${n}" data-k="${k}">${o}</button>`).join("")}</div><div class="qe" id="qe${n}">${q[3]}</div></div>`:"";
+ return`<div class="card${lock?" locked":""}${ok?" completed":""}" id="c${n}"><div class="dh" data-n="${n}" tabindex="0" role="button" aria-expanded="false"><div class="l"><span class="dn">TAG ${n}</span><span class="dt">${x[0]}</span></div><span class="ph">${lock?"🔒 Gesperrt bis zum Folgetag":phase(n)}</span></div>
+ <div class="dc"><div class="hl"><h5>Aha-Moment</h5>${x[1]}</div><div class="nf"><h5>Mindshift-Fokus</h5>${x[2]}</div><div class="ac"><h5>Deine heutige Aufgabe</h5>${x[3]}</div>${W[i]?`<div class="bn"><h5>🔥 Weisheit vom Lagerfeuer</h5><p class="wq">„${W[i][0]}“</p><p>${W[i][1]}</p></div>`:""}${qh}
+ <button class="btn${ok?" done":" o"}" data-t="${n}">${ok?"✓ Tag erledigt":"Tag als erledigt markieren"}</button></div></div>`}).join("");
+ progress()}
+function progress(){const c=done.length;$("pf").style.width=c/21*100+"%";$("pt").textContent=c+" / 21 Tagen abgeschlossen";$("pf").parentElement.setAttribute("aria-valuenow",c);metrics()}
+$("days").addEventListener("click",e=>{
+ const h=e.target.closest(".dh"),t=e.target.closest("[data-t]"),q=e.target.closest(".qb");
+ if(q){const n=+q.dataset.n,k=+q.dataset.k,c=D[n-1][4][2];q.parentElement.querySelectorAll(".qb").forEach((b,i)=>{b.disabled=true;if(i===c)b.classList.add("c");else if(i===k)b.classList.add("w")});$("qe"+n).classList.add("show");return}
+ if(t){const n=+t.dataset.t;done=done.includes(n)?done.filter(x=>x!==n):[...done,n].sort((a,b)=>a-b);ls.s(SK,done);
+  const c=$("c"+n),ok=done.includes(n);c.classList.toggle("completed",ok);t.className="btn"+(ok?" done":" o");t.textContent=ok?"✓ Tag erledigt":"Tag als erledigt markieren";progress();if(done.length>=21)setTimeout(finale,600);return}
+ if(h){const n=+h.dataset.n;if(n>unlocked())return;const c=$("c"+n);c.classList.toggle("open");h.setAttribute("aria-expanded",c.classList.contains("open"))}});
+$("days").addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("dh")){e.preventDefault();e.target.click()}});
+$("sv").onclick=saveProfile;$("sw").onclick=activate;
+
+let raf=null,P=[];
+function finale(){const s=$("fin");s.classList.add("show");document.body.style.overflow="hidden";
+ const c=prof?prof.cards:3,m=prof?prof.min:20;$("f1").textContent=fmt(21*c);$("f2").textContent=fmt(21*m);
+ if(prof)$("fn").textContent=prof.name+", deine Transformation ist komplett!";
+ if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+ const cv=$("cv"),x=cv.getContext("2d");cv.width=innerWidth;cv.height=innerHeight;const col=["#e8b45a","#7ee0b5","#c25b6e","#b98ae0","#fff"];
+ const mk=()=>({x:Math.random()*cv.width,y:-10,vx:(Math.random()-.5)*2,vy:1+Math.random()*2,s:3+Math.random()*5,c:col[Math.floor(Math.random()*5)],l:260});
+ P=Array.from({length:150},mk);
+ (function loop(){x.clearRect(0,0,cv.width,cv.height);P.forEach((p,i)=>{p.x+=p.vx;p.y+=p.vy;p.l--;x.globalAlpha=Math.max(p.l/260,0);x.fillStyle=p.c;x.fillRect(p.x,p.y,p.s,p.s*.5);if(p.l<=0||p.y>cv.height)P[i]=mk()});raf=requestAnimationFrame(loop)})()}
+function closeFin(){$("fin").classList.remove("show");document.body.style.overflow="";if(raf)cancelAnimationFrame(raf);raf=null}
+$("cl").onclick=closeFin;
+$("rs").onclick=function(){if(!armed){armed=true;this.textContent="Wirklich neu starten? Nochmal klicken";return}
+ armed=false;this.textContent="Neu starten";done=[];start=null;ls.s(SK,[]);ls.s(ST,null);$("sw").classList.remove("done");$("bt").textContent="Klick mich und dein Blick verändert sich";$("bi").textContent="✦";$("sm").textContent="";closeFin();render();scrollTo({top:0,behavior:"smooth"})};
+if(prof){$("un").value=prof.name;$("ud").value=prof.date;$("uc").value=prof.cards;$("um").value=prof.min}
+render();
+
+/* ===== RECHTLICHES, COOKIES ===== */
+const F=t=>`<mark class="pl">[${t}]</mark>`;
+const MAIL="in60tagenrauchfrei@gmail.com";
+const HINT='<div class="warn"><b>Vorlage, keine Rechtsberatung.</b> Ersetze alle markierten Felder mit deinen Angaben und lass die Texte vor dem Livegang von einer Anwältin, einem Anwalt oder einem Rechtstexte-Dienst (z. B. IT-Recht Kanzlei, Händlerbund, eRecht24) prüfen.</div>';
+const OP=`${F("Vor- und Nachname bzw. Firma inkl. Rechtsform")}<br>${F("Straße und Hausnummer")}<br>${F("PLZ Ort")}<br>Deutschland`;
+const L={
+impressum:["Impressum",HINT+`<h3>Angaben gemäß § 5 DDG</h3><p>${OP}</p>
+<h3>Kontakt</h3><p>E-Mail: ${MAIL}<br>Telefon: ${F("Telefonnummer oder zweite schnelle Kontaktmöglichkeit, z. B. Kontaktformular")}</p>
+<h3>Umsatzsteuer-ID</h3><p>${F("USt-IdNr. nach § 27a UStG, falls vorhanden. Bei Kleinunternehmerregelung Hinweis auf § 19 UStG")}</p>
+<h3>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h3><p>${F("Name und Anschrift")}</p>
+<h3>Verbraucherschlichtung</h3><p>Wir sind ${F("nicht / bereit")} bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+<h3>Berufsrechtliche Angaben</h3><p>${F("Nur bei reglementierten Berufen. Sonst streichen")}</p>`],
+datenschutz:["Datenschutzerklärung",HINT+`<h3>1. Verantwortlicher</h3><p>${OP}<br>E-Mail: ${MAIL}</p>
+<h3>2. Überblick</h3><p>Wir verarbeiten personenbezogene Daten nur, soweit es für den Betrieb dieser Seite nötig ist oder du eingewilligt hast. Grundlage sind die DSGVO und das TDDDG.</p>
+<h3>3. Hosting und Server-Logfiles</h3><p>Beim Aufruf dieser Seite verarbeitet der Hosting-Anbieter technisch notwendige Daten (IP-Adresse, Datum und Uhrzeit, aufgerufene Datei, Browser). Zweck ist der sichere und stabile Betrieb. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. Hosting-Anbieter: ${F("Anbieter, Sitz, Auftragsverarbeitungsvertrag prüfen")}. Speicherdauer: ${F("z. B. 7 Tage")}.</p>
+<h3>4. Speicherung in deinem Browser (Fortschritt und Profil)</h3><p>Wenn du das Programm nutzt, speichert die Seite deinen Vornamen, dein Startdatum, Karten pro Tag, Übungsminuten, deinen Fortschritt und deine Cookie-Auswahl im lokalen Speicher deines Browsers (localStorage). Diese Daten werden nicht an uns oder Dritte übertragen. Die Speicherung ist für die von dir gewünschte Funktion erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Du kannst die Daten jederzeit in den Browser-Einstellungen löschen.</p>
+<h3>5. Externe Schriftarten (Google Fonts)</h3><p>Nur wenn du zustimmst, lädt die Seite Schriftarten von Google (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland). Dabei wird deine IP-Adresse an Google übertragen, eine Übermittlung in die USA ist möglich. Rechtsgrundlage: Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG. Ohne Zustimmung zeigt die Seite Systemschriften. Du kannst die Einwilligung jederzeit mit Wirkung für die Zukunft unter „Cookie-Einstellungen“ ändern.</p>
+<h3>6. Kontakt per E-Mail und WhatsApp</h3><p>Wenn du uns schreibst, verarbeiten wir deine Angaben zur Bearbeitung der Anfrage (Art. 6 Abs. 1 lit. b oder f DSGVO). Der Link zur WhatsApp-Gruppe führt zu einem Dienst von WhatsApp Ireland Limited. Mit dem Klick verlässt du diese Seite, es gilt die Datenschutzerklärung von WhatsApp.</p>
+<h3>7. Zahlungen und Vertragsdaten</h3><p>${F("Falls du Zahlungen abwickelst: Zahlungsdienstleister, Daten, Rechtsgrundlage Art. 6 Abs. 1 lit. b DSGVO, gesetzliche Aufbewahrungsfristen nennen. Sonst streichen")}</p>
+<h3>8. Deine Rechte</h3><p>Du hast das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21 DSGVO). Erteilte Einwilligungen kannst du jederzeit widerrufen. Schreibe dazu an ${MAIL}.</p>
+<h3>9. Beschwerderecht</h3><p>Du kannst dich bei einer Datenschutz-Aufsichtsbehörde beschweren, z. B. bei der für uns zuständigen Behörde: ${F("zuständige Landesdatenschutzbehörde eintragen")}.</p>
+<h3>10. Stand</h3><p>${F("Datum eintragen")}</p>`],
+agb:["Allgemeine Geschäftsbedingungen",HINT+`<h3>§ 1 Geltungsbereich</h3><p>Diese AGB gelten für alle Verträge zwischen ${F("Name / Firma")} (Anbieter) und Verbraucherinnen und Verbrauchern (Kunden) über das digitale Programm „21 Tage Transformation – Karten legen Mindshift“ und zugehörige Angebote.</p>
+<h3>§ 2 Vertragsgegenstand</h3><p>Gegenstand ist ein digitales Selbstlernprogramm mit täglichen Impulsen und Übungen zum Kartenlegen (Tarot) als Werkzeug zur Selbstreflexion. Der genaue Leistungsumfang ergibt sich aus der Angebotsbeschreibung bei Vertragsschluss.</p>
+<h3>§ 3 Kein Ersatz für Beratung</h3><p>Tarot dient der Reflexion und Unterhaltung. Es trifft keine Vorhersagen und ersetzt keine ärztliche, psychologische, rechtliche oder finanzielle Beratung. Entscheidungen triffst du selbst und in eigener Verantwortung.</p>
+<h3>§ 4 Vertragsschluss</h3><p>Die Darstellung des Angebots ist eine unverbindliche Einladung zur Bestellung. Mit Abschluss des Bestellvorgangs gibst du ein verbindliches Angebot ab. Der Vertrag kommt zustande, wenn wir die Bestellung per E-Mail bestätigen oder dir Zugang gewähren. ${F("An deinen Bestellprozess anpassen. Die Bestellung muss mit einer Schaltfläche „zahlungspflichtig bestellen“ oder gleichwertig beschriftet sein (§ 312j BGB)")}</p>
+<h3>§ 5 Preise und Zahlung</h3><p>Es gelten die zum Bestellzeitpunkt angezeigten Preise in Euro inklusive gesetzlicher Umsatzsteuer, soweit ausgewiesen. Zahlungsarten: ${F("PayPal, Kreditkarte, SEPA, Überweisung …")}. Der Preis ist ${F("sofort / innerhalb von x Tagen")} fällig.</p>
+<h3>§ 6 Bereitstellung</h3><p>Die Bereitstellung erfolgt digital. Einzelheiten stehen in den Lieferbedingungen.</p>
+<h3>§ 7 Nutzungsrechte</h3><p>Du erhältst ein einfaches, nicht übertragbares Recht, die Inhalte für dich privat zu nutzen. Weitergabe, Vervielfältigung, öffentliche Wiedergabe oder Weiterverkauf sind ohne schriftliche Zustimmung nicht erlaubt.</p>
+<h3>§ 8 Widerruf und Mängelrechte</h3><p>Es gelten die gesetzlichen Rechte. Siehe „Widerrufsbelehrung“ und „Gesetzliche Gewährleistung“.</p>
+<h3>§ 9 Haftung</h3><p>Wir haften unbeschränkt bei Vorsatz und grober Fahrlässigkeit, bei Verletzung von Leben, Körper oder Gesundheit sowie nach dem Produkthaftungsgesetz. Bei leichter Fahrlässigkeit haften wir nur bei Verletzung wesentlicher Vertragspflichten (Pflichten, deren Erfüllung den Vertrag erst ermöglicht und auf die du regelmäßig vertrauen darfst) und begrenzt auf den typischerweise vorhersehbaren Schaden. Im Übrigen ist die Haftung ausgeschlossen. Zwingende gesetzliche Rechte bleiben unberührt.</p>
+<h3>§ 10 Streitbeilegung</h3><p>Die EU-Plattform zur Online-Streitbeilegung wurde eingestellt. Zur Teilnahme an Verbraucherschlichtungsverfahren siehe Impressum.</p>
+<h3>§ 11 Schlussbestimmungen</h3><p>Es gilt deutsches Recht unter Ausschluss des UN-Kaufrechts. Bei Verbrauchern gilt diese Rechtswahl nur, soweit nicht zwingende Verbraucherschutzvorschriften des Staates deines gewöhnlichen Aufenthalts entgegenstehen. Sollten einzelne Bestimmungen unwirksam sein, bleibt der Rest wirksam.</p>
+<p>Stand: ${F("Datum")}</p>`],
+widerruf:["Widerrufsbelehrung",HINT+`<h3>Widerrufsrecht</h3><p>Du hast das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu widerrufen. Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag des Vertragsabschlusses.</p>
+<p>Um dein Widerrufsrecht auszuüben, musst du uns (${F("Name, Anschrift, E-Mail")}) mittels einer eindeutigen Erklärung (z. B. Brief oder E-Mail) über deinen Entschluss informieren, diesen Vertrag zu widerrufen. Du kannst dafür das Muster-Widerrufsformular unter „Vertrag widerrufen“ verwenden, das aber nicht vorgeschrieben ist. Zur Wahrung der Frist reicht es, dass du die Mitteilung vor Ablauf der Widerrufsfrist absendest.</p>
+<h3>Folgen des Widerrufs</h3><p>Wenn du den Vertrag widerrufst, zahlen wir dir alle Zahlungen, die wir von dir erhalten haben, unverzüglich und spätestens binnen vierzehn Tagen ab Eingang deines Widerrufs zurück. Dafür verwenden wir dasselbe Zahlungsmittel wie bei der ursprünglichen Zahlung, es sei denn, mit dir wurde ausdrücklich etwas anderes vereinbart. Entgelte berechnen wir dafür nicht.</p>
+<h3>Vorzeitiges Erlöschen des Widerrufsrechts (digitale Inhalte)</h3><p>Bei Verträgen über digitale Inhalte, die nicht auf einem körperlichen Datenträger geliefert werden, erlischt dein Widerrufsrecht, wenn wir mit der Ausführung begonnen haben, nachdem du ausdrücklich zugestimmt hast, dass wir vor Ablauf der Widerrufsfrist beginnen, und du bestätigt hast, dass du dadurch dein Widerrufsrecht verlierst (§ 356 Abs. 5 BGB). Diese Zustimmung und Bestätigung muss im Bestellprozess aktiv (z. B. per Kontrollkästchen) eingeholt und auf einem dauerhaften Datenträger bestätigt werden.</p>
+<p>${F("Bei Dienstleistungen mit laufender Betreuung: zusätzlicher Hinweis auf Wertersatz nach § 357a BGB. Die Belehrung genau an dein Produkt anpassen (Muster in Anlage 1 zu Art. 246a EGBGB).")}</p>`],
+formular:["Vertrag widerrufen",`<p>Mit diesem Formular kannst du eine Widerrufs-E-Mail vorbereiten. Sie öffnet sich in deinem E-Mail-Programm, du schickst sie selbst ab.</p>
+<label for="wn">Dein Name</label><input id="wn"><label for="wa">Deine Anschrift</label><input id="wa"><label for="wd">Bestellt am</label><input id="wd" type="date"><label for="wp">Bestellt (Produkt)</label><input id="wp" value="21 Tage Transformation – Karten legen Mindshift">
+<button class="btn" id="wsend" style="margin-top:6px">E-Mail vorbereiten</button>
+<h3>Muster-Widerrufsformular</h3><p>An ${F("Name, Anschrift, E-Mail des Anbieters")}: Hiermit widerrufe ich den von mir abgeschlossenen Vertrag über die Erbringung der folgenden Dienstleistung bzw. die Bereitstellung der folgenden digitalen Inhalte: [Produkt]. Bestellt am: [Datum]. Name und Anschrift des Verbrauchers: [Angaben]. Datum: [Datum]. Unterschrift nur bei Mitteilung auf Papier.</p>`],
+liefer:["Lieferbedingungen",HINT+`<h3>Digitale Bereitstellung</h3><p>Das Programm ist ein digitales Produkt. Es wird nichts per Post versendet, es fallen keine Versandkosten an.</p>
+<h3>Zeitpunkt und Art</h3><p>Nach ${F("Zahlungseingang / Bestellbestätigung")} erhältst du ${F("den Zugangslink per E-Mail / sofortigen Zugriff auf der Seite")}. Die Tage schalten sich ab deinem Startdatum täglich frei.</p>
+<h3>Zugang und Dauer</h3><p>Du erhältst Zugang für ${F("Dauer, z. B. unbefristet / 12 Monate")}.</p>
+<h3>Was du brauchst</h3><p>Siehe „Technische Anforderungen“. Ein Tarotdeck und ein Notizbuch sind nicht enthalten.</p>
+<h3>Störungen</h3><p>Wenn du keinen Zugang erhältst, prüfe deinen Spam-Ordner und schreibe an ${MAIL}.</p>`],
+gewaehr:["Gesetzliche Gewährleistung",`<p>Für dieses digitale Produkt gelten die gesetzlichen Mängelrechte, insbesondere nach den §§ 327 ff. BGB (Verträge über digitale Produkte). Sie hast du unabhängig von freiwilligen Garantien.</p>
+<h3>Deine Rechte bei Mängeln</h3><ul><li>Nacherfüllung, also Herstellung des vertragsgemäßen Zustands</li><li>Minderung des Preises</li><li>Rücktritt bzw. Beendigung des Vertrags, wenn die Nacherfüllung scheitert oder nicht möglich ist</li><li>Schadensersatz nach den gesetzlichen Voraussetzungen</li></ul>
+<h3>Fristen</h3><p>Die Fristen richten sich nach den gesetzlichen Vorschriften. Bei einer einmaligen Bereitstellung beträgt die Verjährung in der Regel zwei Jahre. Bei einer dauerhaften Bereitstellung gilt sie mindestens für den Bereitstellungszeitraum und darüber hinaus.</p>
+<h3>Meldung</h3><p>Schreibe uns bei Problemen an ${MAIL} mit kurzer Beschreibung, Datum und Browser.</p>
+<p>${F("Durch anwaltliche Prüfung bestätigen lassen")}</p>`],
+technik:["Technische Anforderungen",`<h3>Endgerät und Browser</h3><ul><li>Aktueller Browser: Chrome, Firefox, Safari oder Edge (jeweils die letzten zwei Hauptversionen)</li><li>JavaScript muss aktiviert sein</li><li>Lokaler Speicher (localStorage) muss erlaubt sein, damit dein Fortschritt und dein Profil erhalten bleiben</li></ul>
+<h3>Geräte</h3><p>Die Seite funktioniert auf Smartphone, Tablet und Computer. Empfohlen ist eine Bildschirmbreite ab 360 Pixeln.</p>
+<h3>Verbindung</h3><p>Du brauchst eine Internetverbindung, um die Seite zu laden. Externe Schriften werden nur nach deiner Zustimmung geladen, die Seite funktioniert auch ohne sie.</p>
+<h3>Was du sonst brauchst</h3><ul><li>Ein Tarotdeck mit 78 Karten (empfohlen: Rider-Waite-Bildsprache)</li><li>Ein Notizbuch und einen Stift</li><li>Täglich etwa 10 bis 20 Minuten Ruhe</li></ul>
+<h3>Hinweise</h3><p>Im privaten Modus oder nach dem Löschen der Browserdaten geht dein Fortschritt verloren. Nutze zum Fortsetzen denselben Browser und dasselbe Gerät.</p>`]
+};
+const LEG=[["impressum","Impressum"],["datenschutz","Datenschutz"],["ck","Cookie-Einstellungen"],["liefer","Lieferbedingungen"],["widerruf","Widerrufsbelehrung"],["agb","AGB"],["gewaehr","Gesetzliche Gewährleistung"],["formular","Vertrag widerrufen"],["technik","Technische Anforderungen"]];
+$("legal").innerHTML=LEG.map(x=>`<button class="lnk" data-l="${x[0]}">${x[1]}</button>`).join("");
+const dlg=$("lg");
+function openLegal(k){if(k==="ck"){showCk(true);return}const d=L[k];$("lgt").textContent=d[0];$("lgb").innerHTML=d[1];dlg.showModal();$("lgb").scrollTop=0;
+ if(k==="formular")$("wsend").onclick=()=>{const b=`An ${MAIL}:%0D%0A%0D%0AHiermit widerrufe ich den von mir abgeschlossenen Vertrag über: ${encodeURIComponent($("wp").value)}%0D%0ABestellt am: ${encodeURIComponent($("wd").value)}%0D%0AName: ${encodeURIComponent($("wn").value)}%0D%0AAnschrift: ${encodeURIComponent($("wa").value)}%0D%0ADatum: ${new Date().toLocaleDateString("de-DE")}`;location.href="mailto:"+MAIL+"?subject=Widerruf&body="+b}}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-l]");if(b)openLegal(b.dataset.l)});
+$("lgx").onclick=()=>dlg.close();dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
+
+const CK="et21_consent";
+function loadFonts(){if(document.getElementById("gf"))return;const l=document.createElement("link");l.id="gf";l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,700;1,500&family=Instrument+Sans:wght@400;500;600;700&display=swap";document.head.appendChild(l)}
+function applyConsent(c){if(c&&c.fonts)loadFonts()}
+function store(fonts){const c={v:1,fonts,t:Date.now()};ls.s(CK,c);$("ck").hidden=true;applyConsent(c)}
+function showCk(settings){const c=ls.g(CK,null);$("ck").hidden=false;
+ const link='<button class="lnk" data-l="datenschutz">Datenschutz</button><button class="lnk" data-l="impressum">Impressum</button>';
+ if(!settings){$("cki").innerHTML=`<h2>Deine Privatsphäre</h2><p>Wir speichern notwendige Daten in deinem Browser (Fortschritt und Profil). Mit deiner Zustimmung laden wir zusätzlich Schriftarten von Google. Dabei wird deine IP-Adresse an Google übertragen. Du kannst jederzeit ändern. ${link}</p><div class="row"><button class="btn o" id="ckn">Nur notwendige</button><button class="btn o" id="cks">Einstellungen</button><button class="btn" id="cka">Alle akzeptieren</button></div>`;
+  $("ckn").onclick=()=>store(false);$("cka").onclick=()=>store(true);$("cks").onclick=()=>showCk(true)}
+ else{$("cki").innerHTML=`<h2>Cookie-Einstellungen</h2><div class="ckc"><label><input type="checkbox" checked disabled> Notwendig<span></span></label><small>Speichert Fortschritt, Profil und deine Auswahl im lokalen Speicher. Immer aktiv.</small></div><div class="ckc"><label><input type="checkbox" id="ckf" ${c&&c.fonts?"checked":""}> Externe Schriften (Google Fonts)</label><small>Lädt Schriftarten von Servern von Google Ireland Limited. Deine IP-Adresse wird übertragen.</small></div><p>${link}</p><div class="row"><button class="btn o" id="ckn">Nur notwendige</button><button class="btn" id="ckv">Auswahl speichern</button><button class="btn" id="cka">Alle akzeptieren</button></div>`;
+  $("ckn").onclick=()=>store(false);$("cka").onclick=()=>store(true);$("ckv").onclick=()=>store($("ckf").checked)}}
+(function(){const c=ls.g(CK,null),old=c&&Date.now()-c.t>365*DAY;if(c&&!old)applyConsent(c);else showCk(false)})();
+
+/* ===== KARTENLEXIKON ===== */
+const MJ=[
+["0","Der Narr","Neubeginn, Vertrauen, Freiheit","Du stehst an der Schwelle eines neuen Kapitels, und etwas in dir lächelt schon. Dieser Sprung braucht keine Garantie, nur dein Vertrauen. Wer mutig anfängt, wird vom Leben aufgefangen.","Vielleicht zögerst du, weil der Boden unbekannt ist. Das ist zutiefst menschlich. Schau sanft hin, was dich bremst, und geh dann einen kleinen Schritt.","Geh los, mit offenen Augen und leichtem Herzen."],
+["I","Der Magier","Wille, Können, Handeln","Alles, was du brauchst, liegt bereits vor dir: Gedanken, Gefühl, Körper und Tat. Du bist die Brücke zwischen Idee und Wirklichkeit, und deine Absicht hat heute besondere Kraft.","Ein Talent wartet darauf, gesehen zu werden. Zweifle nicht an deiner Gabe, sondern an der Geschichte, die dich klein hält.","Setze eine klare Absicht und tu heute den ersten Schritt."],
+["II","Die Hohepriesterin","Intuition, Stille, Geheimnis","Im Schweigen reift ein Wissen, das keine Worte braucht. Deine innere Stimme spricht leise, aber sie irrt sich selten. Vertraue dem, was du längst spürst.","Der Alltag ist laut geworden, und deine Intuition wartet geduldig. Schenke ihr einen stillen Moment, sie hat nichts vergessen.","Werde still, bevor du entscheidest. Die Antwort kommt zu dir."],
+["III","Die Herrscherin","Fülle, Fürsorge, Kreativität","Du darfst nähren, wachsen lassen und genießen. Wie ein blühender Garten trägst du Schönheit und Fülle in dir, in deinem Körper, deiner Kreativität und deinen Herzensbeziehungen.","Du gibst so viel, dass für dich wenig bleibt. Auch die Gebende braucht Nahrung. Erlaube dir, empfangen zu dürfen.","Sorge für dich mit derselben Liebe, die du anderen schenkst."],
+["IV","Der Herrscher","Struktur, Autorität, Schutz","Klarheit und Verlässlichkeit tragen dich wie ein festes Haus. Du darfst Grenzen ziehen, Verantwortung übernehmen und dir selbst der sichere Ort sein, den du suchst.","Wo Kontrolle zur Enge wird, darf Weichheit einziehen. Wahre Stärke muss nichts beweisen, sie darf ruhen.","Schaffe Klarheit, und stehe liebevoll zu deinen Grenzen."],
+["V","Der Hierophant","Tradition, Lehre, Werte","Alte Weisheit, gute Lehrer und heilige Rituale halten dich in einem Kreis, der größer ist als du. Du darfst lernen, weitergeben und dich zugehörig fühlen.","Prüfe mit freiem Herzen, welche Regeln dich noch nähren. Du darfst deinen eigenen Weg zur Wahrheit gehen.","Frage dich: Welche Werte sind wirklich meine?"],
+["VI","Die Liebenden","Liebe, Wahl, Werte","Eine tiefe Verbindung berührt dein Herz, und eine Entscheidung ruft dich, ehrlich zu sein. Wähle, was zu dir passt, dann wird die Liebe leicht und wahr.","Ein inneres Ja und Nein streiten miteinander. Höre auf beide, sie beschützen etwas Wertvolles in dir.","Wähle mit dem Herzen, und stehe dann zu deiner Wahl."],
+["VII","Der Wagen","Wille, Sieg, Richtung","Zwei starke Kräfte laufen nun im Gleichklang, und du hältst die Zügel. Mit Disziplin, Mut und klarem Ziel ziehst du voran, dem Sieg entgegen.","Die Richtung ging verloren, doch du kannst neu ausrichten. Atme, sammle dich und wähle den Kurs, der dich wirklich trägt.","Bündle deine Kräfte, dann fahre mit Zuversicht los."],
+["VIII","Die Kraft","Mut, Sanftheit, Geduld","Wahre Stärke ist leise. Mit Geduld und Güte zähmst du das Wilde in dir, ohne es zu bekämpfen. Deine Sanftheit ist dein größter Mut.","Selbstzweifel flüstern dir Schwäche ein, doch sie irren. Lege eine Hand aufs Herz und sprich freundlich mit dir.","Begegne dem Wilden in dir mit Liebe und Geduld."],
+["IX","Der Eremit","Rückzug, Suche, Weisheit","Eine kleine Laterne genügt, um den nächsten Schritt zu sehen. In der Stille findest du Antworten, die kein Lärm der Welt dir geben kann. Du bist auf dem Weg zu dir.","Ruhe darf kein Versteck sein. Wenn der Rückzug einsam macht, öffne behutsam ein Fenster zu Menschen, die dir guttun.","Zieh dich zurück, um zu sehen, nicht um zu fliehen."],
+["X","Das Rad des Schicksals","Wandel, Zyklen, Zufall","Das Leben dreht sich, und mit ihm kommt eine Wendung, die dir Glück und Neues bringen kann. Nichts bleibt, wie es ist, und darin liegt deine Hoffnung.","Gerade fühlt es sich an, als drehe sich alles gegen dich. Halte durch, auch dieses Rad dreht weiter, und du darfst mitgehen.","Bewege dich mit dem Rad, in Vertrauen statt Widerstand."],
+["XI","Die Gerechtigkeit","Wahrheit, Ausgleich, Folgen","Was du gesät hast, zeigt sich nun in Klarheit. Sei aufrichtig zu dir, wäge ab und entscheide fair. Wahrheit macht dich frei und leicht.","Ausreden fühlen sich bequem an, kosten aber Kraft. Ein ehrlicher Blick, mit Milde, befreit dich schneller.","Sei ehrlich mit dir und übernimm liebevoll die Folgen."],
+["XII","Der Gehängte","Loslassen, neue Sicht, Pause","Ein freiwilliges Innehalten schenkt dir eine ganz neue Perspektive. Alles darf jetzt ruhen, und in dieser Pause zeigt sich, was du vorher nicht sehen konntest.","Die Pause zieht sich, und du fragst dich, wozu. Prüfe, ob du festhältst, und erlaube dir, den Blick zu wenden.","Halte inne, und schau die Welt von der anderen Seite an."],
+["XIII","Der Tod","Ende, Wandlung, Übergang","Etwas darf enden, damit Neues geboren wird. Diese Karte meint selten Tod, sie schenkt Wandlung. Nach dem Loslassen wartet ein weiter Raum für dein neues Ich.","Du klammerst dich an Vertrautes, weil Wandel Angst macht. Sei zart mit dir, und sieh, was schon längst gegangen ist.","Lass in Dankbarkeit gehen, was seine Zeit hatte."],
+["XIV","Die Mäßigkeit","Maß, Heilung, Mischung","Geduld, Harmonie und das richtige Maß heilen dich sanft. Gegensätze finden in dir zusammen, und aus Schritt für Schritt wird ein ruhiger Fluss.","Etwas gerät aus dem Gleichgewicht, du hetzt oder übertreibst. Verlangsame und atme, dein Maß findet zu dir zurück.","Finde dein Maß, Schritt für Schritt, im eigenen Takt."],
+["XV","Der Teufel","Bindung, Schatten, Versuchung","Du siehst nun, was dich bindet: Gewohnheiten, Wünsche, Schatten. Die Ketten sitzen locker, und schon dieser klare Blick ist ein großer Schritt in deine Freiheit.","Etwas lockert sich, und du bist im Begriff, dich zu befreien. Sei stolz auf jeden Mut, den du dafür aufbringst.","Erkenne mit Mitgefühl, was dich bindet, und entscheide neu."],
+["XVI","Der Turm","Umbruch, Erkenntnis, Befreiung","Falsche Sicherheiten stürzen ein, und es erschüttert. Doch aus den Trümmern leuchtet Wahrheit, und du wirst freier, echter und leichter, als du es je warst.","Du spürst den Umbruch nahen und möchtest ihn aufhalten. Wenn du selbst loslässt, wird er sanfter, als du fürchtest.","Lass fallen, was nicht trägt, und baue ehrlicher neu."],
+["XVII","Der Stern","Hoffnung, Heilung, Vertrauen","Nach dem Sturm kehrt Stille ein, und ein Stern erhellt die Nacht. Heilung, Hoffnung und Inspiration fließen zu dir. Du darfst dich wieder öffnen und vertrauen.","Die Hoffnung wirkt müde, doch der Stern ist nicht fort, er wartet hinter Wolken. Ruhe dich aus, er leuchtet bald wieder.","Gönne dir Hoffnung, Erholung und stilles Staunen."],
+["XVIII","Der Mond","Unklarheit, Traum, Angst","Im Mondlicht verschwimmen die Dinge, und Träume und Ahnungen melden sich. Nicht alles ist, wie es scheint, aber du darfst behutsam weitergehen.","Nebel lichtet sich, und Ängste verlieren ihre Macht. Was im Dunkeln bedrohlich wirkte, zeigt sich nun als vertraut.","Geh langsam, achte auf deine Gefühle und prüfe Fakten mit Ruhe."],
+["XIX","Die Sonne","Freude, Klarheit, Erfolg","Licht durchflutet dein Leben: Freude, Wärme, Klarheit. Du darfst dich zeigen und strahlen, und was du säst, wird gesehen und gefeiert.","Wolken schieben sich vor die Freude, doch die Sonne bleibt. Suche kleine Lichtmomente, sie wärmen dich zurück ins Leben.","Zeig dich, genieße und lass dich vom Licht tragen."],
+["XX","Das Gericht","Ruf, Bilanz, Neuanfang","Ein Ruf erreicht dich, und du wachst auf. Du blickst versöhnt zurück, vergibst dir und anderen und trittst in eine neue Berufung, die dir gehört.","Du hörst den Ruf, zweifelst aber. Sei nicht zu streng mit dir. Was in dir ruft, verdient dein Ohr und dein Ja.","Ziehe liebevoll Bilanz und folge dem Ruf deines Herzens."],
+["XXI","Die Welt","Vollendung, Ganzheit, Ziel","Ein Kreis schließt sich, und du bist angekommen: ganz, heil und erfüllt. Was du gelebt hast, ist nun ein Teil von dir. Feiere dich und dein Wachsen.","Kurz vor dem Ziel fehlt noch ein Schlussakkord. Nimm dir Zeit, den Abschluss zu würdigen, dann öffnet sich die nächste Tür.","Feiere, was du geschafft hast, und entscheide dann, was kommt."]];
+const RK=[["Ass","Ein Samenkorn voller Potenzial wird dir geschenkt. Etwas Neues will beginnen, und du darfst es zart und mutig pflanzen."],["Zwei","Zwei Kräfte suchen ihr Gleichgewicht. Du darfst wählen, verbinden und deine Mitte finden."],["Drei","Etwas wächst und nimmt Form an. Im Austausch mit anderen blüht auf, was allein nur Knospe war."],["Vier","Ein Fundament trägt dich, und eine Pause tut gut. Halte inne, aber bleib offen, damit Ruhe nicht zu Stillstand wird."],["Fünf","Reibung bringt Bewegung. Auch wenn es unbequem ist, wächst du an dieser Herausforderung, und du bist stärker, als du glaubst."],["Sechs","Harmonie kehrt ein, und ein sanfter Übergang trägt dich in ruhigeres Wasser. Nimm dankbar an, was dir zufließt."],["Sieben","Eine Prüfung lädt dich ein, deinen Weg zu wägen. Vertraue deinem Gespür, du weißt mehr, als du denkst."],["Acht","Du kommst in Fahrt: Übung, Handeln, Meisterschaft. Jeder Schritt macht dich sicherer und geschickter."],["Neun","Die Ernte ist fast eingefahren. Eine letzte Prüfung, ein letzter Atemzug, und du darfst stolz auf deinen Weg sein."],["Zehn","Ein Zyklus vollendet sich in Fülle, manchmal auch mit Last. Würdige, was war, und gib ab, was du nicht mehr tragen musst."],["Bube","Der lernende Geist in dir ist neugierig und offen. Eine Botschaft oder ein Anfang klopft leise an deine Tür."],["Ritter","Du gehst nach außen, mutig und in Bewegung. Reise, Tat und Tempo tragen dich, achte nur darauf, wohin."],["Königin","Reife nach innen: Fürsorge, Intuition, warme Ausstrahlung. Du darfst aus deiner Tiefe schenken und dich selbst mitnehmen."],["König","Reife nach außen: Verantwortung, Meisterschaft, ruhige Führung. Du trägst Weisheit, mit der du andere und dich schützt."]];
+const SW={0:"Feuer entzündet dich von innen. Diese Farbe erinnert dich daran, wofür dein Herz brennt, und schenkt dir Mut zur Tat.",1:"Wasser fließt durch dein Fühlen. Diese Farbe lädt dich ein, sanft mit dir zu sein und Nähe zuzulassen.",2:"Luft macht deinen Geist klar und weit. Diese Farbe hilft dir, Wahrheit zu erkennen und Gedanken zu ordnen.",3:"Erde gibt dir Halt und Wurzeln. Diese Farbe verbindet dich mit Körper, Alltag und dem, was trägt."};
+const SU=[
+["Stäbe","Feuer","Antrieb, Ideen, Tatkraft","w","#d9722e","Wofür brennst du, und was hält dich davon ab, zu handeln?",[
+["Funke einer neuen Idee, Mut und Schaffensdrang.","Aufschub, fehlende Richtung, verpuffte Energie."],["Plan und Weitblick: du wählst zwischen Ziel und Sicherheit.","Angst vor dem Schritt, unklare Pläne."],["Deine Pläne tragen Früchte, der Horizont weitet sich.","Verzögerung, Widerstand, fehlende Weitsicht."],["Feier, Zuhause und ein erreichter Meilenstein.","Unsicheres Fundament, Streit im Umfeld."],["Wettstreit und Reibung, viele Ansichten prallen aufeinander.","Konflikte lösen sich oder werden vermieden."],["Sieg, Anerkennung und Selbstvertrauen.","Fehlende Anerkennung, Stolz vor dem Fall."],["Du verteidigst deine Position und stehst zu dir.","Überforderung, Nachgeben, Erschöpfung."],["Tempo und Nachrichten, alles kommt in Bewegung.","Verzögerungen, Hektik, unklare Signale."],["Erschöpft, aber ausdauernd: noch ein Stück Weg.","Zu viel Misstrauen, Aufgeben kurz vor dem Ziel."],["Eine große Last aus Verantwortung, zu viel auf einmal.","Last abgeben, Überforderung erkennen."],["Neugier, frische Ideen, eine inspirierende Botschaft.","Unreife, Ungeduld, Strohfeuer."],["Tatendrang, mutig und impulsiv.","Ungeduld, Rücksichtslosigkeit, Energie ohne Ziel."],["Ausstrahlung, Selbstsicherheit, warmherzige Führung.","Eifersucht, Launenhaftigkeit, Dominanz."],["Visionär, führt mit Vorbild und Überzeugung.","Herrisch, hitzköpfig, unrealistisch."]]],
+["Kelche","Wasser","Gefühle, Beziehungen, Intuition","c","#4c8fc4","Was fühlst du wirklich, und was brauchst du?",[
+["Neue Liebe, Mitgefühl, offene Gefühle.","Verschlossenheit, unterdrückte Gefühle."],["Verbindung auf Augenhöhe, gegenseitiges Geben und Nehmen.","Ungleichgewicht, Missverständnisse, Trennung."],["Freundschaft, Feier, Gemeinschaft.","Übertreibung, Klatsch, Rückzug aus der Gruppe."],["Innehalten und Unzufriedenheit: du übersiehst ein Angebot.","Neuer Antrieb, Öffnung für Chancen."],["Trauer und Verlust, doch zwei Kelche stehen noch aufrecht.","Akzeptanz, Heilung, Blick nach vorn."],["Nostalgie, Kindheitserinnerungen, kleine Geschenke.","In der Vergangenheit stecken bleiben."],["Viele Möglichkeiten und Illusionen, Träume brauchen Auswahl.","Klarheit, Entscheidung, Realitätscheck."],["Abschied vom Vertrauten, du suchst nach mehr.","Zögern zu gehen, Flucht ohne Ziel."],["Wunscherfüllung, Zufriedenheit, Genuss.","Übersättigung, Selbstzufriedenheit, unerfüllter Wunsch."],["Emotionales Glück, Familie, Harmonie.","Unstimmigkeiten im Nahbereich, Fassade."],["Sensibel, kreative Einfälle, eine gefühlvolle Botschaft.","Emotionale Unreife, Tagträumerei."],["Romantik, Einladung und Angebot: folgt dem Herzen.","Stimmungsschwankungen, leere Versprechen."],["Einfühlsam, intuitiv, gibt emotionale Sicherheit.","Überempfindlich, abhängig, ohne Grenzen."],["Gefühlsreif, ruhig und diplomatisch.","Manipulation, Gefühlskälte, Launen."]]],
+["Schwerter","Luft","Gedanken, Konflikte, Klarheit","s","#8b8fd6","Welcher Gedanke stimmt, und welcher ist nur alt?",[
+["Klarheit, Wahrheit, ein Durchbruch im Denken.","Verwirrung, harte Worte, fehlende Klarheit."],["Pattsituation: du verschließt die Augen vor einer Entscheidung.","Blockade löst sich, die Entscheidung fällt."],["Herzschmerz, schmerzhafte Wahrheit, Trauer.","Heilung beginnt, Schmerz loslassen."],["Ruhe, Erholung, Rückzug.","Erschöpfung, Unruhe, Rückkehr ins Handeln."],["Konflikt mit bitterem Nachgeschmack, ein Sieg mit Preis.","Versöhnung, Reue, Altes ruhen lassen."],["Übergang, ruhigere Gewässer, Abschied von Sorgen.","Festhalten an Altlasten, verzögerte Reise."],["List, Alleingang, Strategie oder Selbsttäuschung.","Ertappt werden, Ehrlichkeit, Gewissen."],["Gefühl der Gefangenschaft durch selbst gemachte Grenzen.","Befreiung, neue Sicht, Selbstermächtigung."],["Sorgen in der Nacht, Grübeln und Ängste.","Hoffnung, Hilfe suchen, Ängste relativieren."],["Ein schmerzhaftes Ende, das den Neuanfang möglich macht.","Weiterleben nach dem Tiefpunkt, Erholung."],["Wissbegier, klare Fragen, wachsamer Geist.","Bissigkeit, Tratsch, unüberlegte Worte."],["Schnell, direkt, denkt und handelt scharf.","Rücksichtslos, überstürzt, zerstreut."],["Klar, unabhängig, ehrlich und gerecht.","Kalt, bitter, verletzend."],["Analytisch, gerecht, Autorität durch Verstand.","Strenge, Machtmissbrauch, Willkür."]]],
+["Münzen","Erde","Arbeit, Geld, Körper","m","#7fb069","Was ist konkret zu tun, und was gibt dir Halt?",[
+["Neue Chance bei Geld, Arbeit oder Gesundheit.","Verpasste Gelegenheit, unsichere Investition."],["Balance zwischen mehreren Aufgaben, Flexibilität.","Überlastung, Chaos bei Finanzen."],["Zusammenarbeit, dein Können wird gesehen.","Uneinigkeit im Team, Mittelmaß."],["Sicherheit und Besitz, aber auch Festhalten.","Loslassen, Verschwendung, der Geiz löst sich."],["Not, Sorge um Geld oder Gesundheit, Ausgrenzung.","Hilfe annehmen, Erholung nach der Krise."],["Geben und Nehmen, Großzügigkeit, Ausgleich.","Ungleichgewicht, Bedingungen an Hilfe."],["Geduld und Zwischenbilanz: die Ernte braucht Zeit.","Ungeduld, mangelnder Ertrag, Neubewertung."],["Handwerk, Fleiß, Übung macht die Meisterin.","Perfektionismus, Routine ohne Sinn."],["Wohlstand, Unabhängigkeit, Genuss der eigenen Früchte.","Übermäßige Sorge um Besitz, Abhängigkeit."],["Langfristige Sicherheit, Familie, Erbe.","Streit ums Erbe, instabile Verhältnisse."],["Lernbereit und praktisch: ein Angebot oder Plan.","Unkonzentriert, Aufschieben."],["Verlässlich, beharrlich, Schritt für Schritt.","Starrheit, Langeweile, Trägheit."],["Fürsorglich, praktisch, schafft Geborgenheit.","Selbstvernachlässigung, Materialismus."],["Erfolgreich, stabil, großzügig.","Gier, Starrsinn, Statusdenken."]]]];
+const GL={x:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M32 6l6 20 20 6-20 6-6 20-6-20-20-6 20-6z"/></svg>',
+w:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M32 6v52M32 14c-9-2-12-8-10-12M32 22c9-2 14-8 12-12M32 32c-9-2-14-8-12-12"/></svg>',
+c:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M14 14h36c0 16-8 26-18 26S14 30 14 14zM32 40v14M20 56h24"/></svg>',
+s:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M32 4l6 8v30H26V12zM20 42h24M32 42v16"/></svg>',
+m:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="32" cy="32" r="24"/><path d="M32 14l5 12 13 1-10 8 3 13-11-7-11 7 3-13-10-8 13-1z"/></svg>'};
+const CARDS=[];
+function art(c){const P=x=>x.toFixed(1);let s='<svg viewBox="-50 -50 100 100" fill="none" stroke="currentColor" stroke-width=".8"><circle r="46" opacity=".4"/><circle r="43" stroke-dasharray="1 3" opacity=".7"/><g class="spin">';const maj=c.grp==="g",n=maj?+c.k+6:12;for(let k=0;k<n;k++)s+=`<g transform="rotate(${k*360/n})"><ellipse cy="-27" rx="${maj?4.5:3.4}" ry="${maj?14:10}" opacity=".75"/>${maj?"":'<circle cy="-42" r="1" fill="currentColor"/>'}</g>`;s+='</g><circle r="17" fill="currentColor" fill-opacity=".14"/>';if(!maj&&c.ri<10)for(let k=0;k<=c.ri;k++){const a=k*2*Math.PI/(c.ri+1)-Math.PI/2;s+=`<circle cx="${P(36*Math.cos(a))}" cy="${P(36*Math.sin(a))}" r="1.9" fill="currentColor"/>`}if(!maj&&c.ri>=10)for(let k=0;k<4;k++)s+=`<path transform="rotate(${k*90}) translate(0,-37)" d="M0-4l3 4-3 4-3-4z" fill="currentColor"/>`;s+=`<g transform="scale(.42) translate(-32,-32)" stroke-width="2.2">${GL[maj?"x":c.gl].replace(/<svg[^>]*>|<\/svg>/g,"")}</g></svg>`;return s}
+MJ.forEach((m,i)=>CARDS.push({id:"g"+i,grp:"g",num:m[0],name:m[1],kw:m[2],up:m[3],rv:m[4],tip:m[5],gl:"x",col:"var(--g)",rank:"Eine der 22 Großen Arkana: ein Lebensthema, das größer ist als der Alltag und dich mit tiefer Bedeutung berührt."}));
+SU.forEach((u,si)=>u[6].forEach((t,i)=>{const r=RK[i],nm=(i<10?(i===0?"Ass":r[0]):r[0]);CARDS.push({id:"s"+si+"_"+i,grp:"s"+si,num:i<10?String(i+1):["B","R","Q","K"][i-10],name:(i===0?"Ass":r[0])+" der "+u[0],kw:u[1]+": "+u[2],up:t[0],rv:t[1],tip:u[5],gl:u[3],col:u[4],rank:r[1],sw:SW[si]})}));
+CARDS.forEach((c,k)=>{c.k=k<22?k:k;c.ri=k<22?null:(k-22)%14});
+let cur=0,list=CARDS,grp="all",nts=ls.g("et21_notes",{});
+const trk=$("trk"),nt=$("nt");
+function slide(c){const g=c.grp==="g",sub=g?"Große Arkana":c.name.split(" der ")[1]+" · "+c.kw.split(":")[0];return`<article class="sl" style="--sc:${c.col}" aria-label="${c.name}"><div class="cf"><small>${c.num}</small><div class="ar">${art(c)}</div><div><b>${c.name}</b><em>${sub}</em></div></div><div class="ct"><h3>${c.name}</h3><p class="kw">${c.kw}</p><h4>Wenn sie aufrecht liegt</h4><p>${c.up}</p><h4>Wenn sie umgekehrt liegt</h4><p>${c.rv}</p>${g?`<h4>Was die Karte dir schenkt</h4><p>${c.rank}</p><p class="qs">${c.tip}</p>`:`<h4>Die Kraft dieser Zahl</h4><p>${c.rank}</p><h4>Dein Element</h4><p>${c.sw}</p><p class="qs">${c.tip}</p>`}</div></article>`}
+function build(){trk.innerHTML=list.map(slide).join("");$("jp").innerHTML=list.map((c,i)=>`<option value="${i}">${c.name}</option>`).join("");go(0,true)}
+function go(i,instant){i=Math.max(0,Math.min(list.length-1,i));const rm=matchMedia("(prefers-reduced-motion: reduce)").matches;trk.scrollTo({left:i*trk.clientWidth,behavior:instant||rm?"auto":"smooth"});setCur(i)}
+function setCur(i){cur=i;const c=list[i];$("ci").textContent=(i+1)+" / "+list.length;$("jp").value=i;$("nn").textContent=c.name;nt.value=nts[c.id]||"";stat("")}
+function stat(m){const n=Object.values(nts).filter(v=>v&&v.trim()).length;$("ns").textContent=(m?m+" · ":"")+"Notizen zu "+n+" von 78 Karten. Gespeichert in deinem Browser."}
+let sto;nt.addEventListener("input",()=>{nts[list[cur].id]=nt.value;clearTimeout(sto);sto=setTimeout(()=>{ls.s("et21_notes",nts);stat("Gespeichert")},400)});
+let raf2;trk.addEventListener("scroll",()=>{cancelAnimationFrame(raf2);raf2=requestAnimationFrame(()=>{const i=Math.round(trk.scrollLeft/trk.clientWidth);if(i!==cur&&i>=0&&i<list.length)setCur(i)})});
+$("pv").onclick=()=>go(cur-1);$("nx").onclick=()=>go(cur+1);$("jp").onchange=e=>go(+e.target.value);
+trk.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){e.preventDefault();go(cur+1)}if(e.key==="ArrowLeft"){e.preventDefault();go(cur-1)}});
+const CH=[["all","Alle 78"],["g","Große Arkana"],["s0","Stäbe"],["s1","Kelche"],["s2","Schwerter"],["s3","Münzen"]];
+$("chips").innerHTML=CH.map(c=>`<button data-g="${c[0]}" aria-pressed="${c[0]==="all"}">${c[1]}</button>`).join("");
+$("chips").onclick=e=>{const b=e.target.closest("button");if(!b)return;grp=b.dataset.g;$("chips").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));list=grp==="all"?CARDS:CARDS.filter(c=>c.grp===grp);build()};
+
+/* ===== FAMILIENKREIS ===== */
+const FZ=[["Wassermann","♒","Luft",120,"Freiheitsliebend, erfinderisch und mit weitem Herzen. Du bringst frische Ideen in jede Runde und schenkst anderen den Mut, sie selbst zu sein."],["Fische","♓","Wasser",219,"Sanft, träumerisch und tief mitfühlend. Du spürst, was andere brauchen, bevor sie es sagen, und trägst Poesie und Trost in die Welt."],["Widder","♈","Feuer",321,"Mutig, herzlich und voller Tatendrang. Du gehst voran, entfachst Begeisterung und erinnerst alle an die Schönheit eines Anfangs."],["Stier","♉","Erde",420,"Verlässlich, sinnlich und warmherzig. Du schaffst Geborgenheit, genießt das Schöne und schenkst deinen Liebsten einen Ort zum Ankommen."],["Zwillinge","♊","Luft",521,"Neugierig, witzig und wandelbar. Du verbindest Menschen mit Worten und Leichtigkeit und bringst Lachen in jeden Raum."],["Krebs","♋","Wasser",621,"Fürsorglich, intuitiv und tief mit der Familie verbunden. Dein Herz ist ein warmes Zuhause, in dem sich andere sicher fühlen."],["Löwe","♌","Feuer",723,"Großzügig, strahlend und herzlich. Du wärmst wie die Sonne, und wer in deinem Licht steht, fühlt sich gesehen und mutig."],["Jungfrau","♍","Erde",823,"Aufmerksam, liebevoll und hilfsbereit. Du kümmerst dich um die kleinen Dinge, die Liebe spürbar machen, und schenkst Klarheit."],["Waage","♎","Luft",923,"Harmonisch, charmant und gerecht. Du suchst Ausgleich und Schönheit und führst Menschen mit deiner Sanftheit wieder zusammen."],["Skorpion","♏","Wasser",1023,"Tief, leidenschaftlich und treu. Du siehst hinter die Fassaden, wandelst dich mutig und liebst mit einer Kraft, die trägt."],["Schütze","♐","Feuer",1122,"Optimistisch, weitherzig und abenteuerlustig. Du suchst Sinn und Freiheit und steckst andere mit deiner Zuversicht an."],["Steinbock","♑","Erde",1222,"Beständig, weise und zielstrebig. Du baust mit Geduld an dem, was zählt, und bist für deine Liebsten ein ruhiger, starker Fels."]];
+const EC={Feuer:"#d9722e",Wasser:"#4c8fc4",Luft:"#8b8fd6",Erde:"#7fb069"};
+const FE={Feuer:"Feuer prägt euch: Begeisterung, Mut und Wärme. Bei euch wird viel gelacht, angepackt und gefeiert.",Wasser:"Wasser prägt euch: Gefühl, Nähe und Intuition. Ihr versteht euch oft ohne Worte.",Luft:"Luft prägt euch: Ideen, Gespräche und Leichtigkeit. Bei euch darf jeder eigenständig denken.",Erde:"Erde prägt euch: Verlässlichkeit, Genuss und Geborgenheit. Ihr seid ein sicherer Hafen füreinander."};
+let fam=ls.g("et21_fam",[]);
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const dsum=t=>String(t).replace(/\D/g,"").split("").reduce((a,b)=>a+ +b,0);
+function red(n){while(n>22)n=dsum(n);return n%22}
+function calc(f){const[y,m,d]=f.d.split("-").map(Number),now=new Date(),t0=new Date(now.getFullYear(),now.getMonth(),now.getDate()),cy=now.getFullYear();
+let nb=new Date(cy,m-1,d);if(nb<t0)nb=new Date(cy+1,m-1,d);const days=Math.round((nb-t0)/864e5);
+let z=FZ.findLast(x=>m*100+d>=x[3])||FZ[11];const pad=n=>String(n).padStart(2,"0");
+return{z,days,age:nb.getFullYear()-y-(days===0?0:1),cy,soul:CARDS[red(dsum(f.d))],year:CARDS[red(dsum(pad(d)+pad(m)+cy))]}}
+function mc(c,l){return`<div class="mc"><div class="cf" style="--sc:${c.col}"><small>${c.num}</small><div class="ar">${art(c)}</div><div><b>${c.name}</b></div></div><span>${l}</span></div>`}
+function renderFam(){const L=fam.map(f=>({f,c:calc(f)})).sort((a,b)=>a.c.days-b.c.days);
+$("flist").innerHTML=L.length?L.map(({f,c})=>{const zc=EC[c.z[2]];return`<article class="pf" style="--zc:${zc}"><h3>${esc(f.n)}</h3><div class="meta">${esc(f.r)} · ${f.d.split("-").reverse().join(".")} · ${c.age} Jahre</div><span class="cd">${c.days===0?"Heute ist Geburtstag! 🎉":"Noch "+c.days+" Tage bis zum Geburtstag"}</span>
+<div class="row"><div class="zb"><i>${c.z[1]}&#xFE0E;</i>${c.z[0]}<small>Element ${c.z[2]}</small></div>${mc(c.soul,"Seelenkarte")}${mc(c.year,"Jahreskarte "+c.cy)}
+<div class="tx"><p><b>Sternzeichen ${c.z[0]}:</b> ${c.z[4]}</p><p><b>Seelenkarte ${c.soul.name}:</b> ${c.soul.up}</p><p><b>Dein Jahresmotto ${c.cy}, ${c.year.name}:</b> ${c.year.tip}</p></div></div>
+<div class="acts"><button class="btn wa" data-s="wa" data-k="f${f.id}">WhatsApp</button><button class="btn tgm" data-s="tg" data-k="f${f.id}">Telegram</button><button class="btn o" data-a="cp" data-i="${f.id}">Kopieren</button><button class="btn o" data-a="del" data-i="${f.id}">Entfernen</button></div></article>`}).join(""):'<p class="p" style="text-align:center;margin:26px 0">Noch ist der Kreis leer. Beginne mit dir selbst, dann folgen die Menschen, die dir am Herzen liegen.</p>';
+if(L.length>1){const n={};L.forEach(({c})=>n[c.z[2]]=(n[c.z[2]]||0)+1);const top=Object.keys(n).sort((a,b)=>n[b]-n[a])[0],nx=L[0];
+$("fhm").innerHTML=`<div class="fh"><h3>Euer Familienelement: ${top}</h3><p>${FE[top]}</p><p style="margin-top:8px;color:var(--g)">Nächster Geburtstag im Kreis: ${esc(nx.f.n)}, ${nx.c.days===0?"heute":"in "+nx.c.days+" Tagen"} 🎂</p></div>`}else $("fhm").innerHTML=""}
+$("fadd").onclick=()=>{const n=$("fn1").value.trim(),d=$("fd1").value;if(!n||!d){$("fmsg").textContent="Bitte Name und Geburtstag eintragen.";return}
+fam.push({id:Date.now(),n,d,r:$("fr1").value});ls.s("et21_fam",fam);$("fn1").value="";$("fd1").value="";$("fmsg").textContent="✦ "+n+" ist jetzt Teil deines Familienkreises.";renderFam()};
+$("flist").onclick=e=>{const b=e.target.closest("button");if(!b)return;const f=fam.find(x=>x.id==b.dataset.i);if(!f)return;
+if(b.dataset.a==="del"){fam=fam.filter(x=>x!==f);ls.s("et21_fam",fam);renderFam()}
+else{const c=calc(f),t=`✦ ${f.n} · ${c.z[0]} ${c.z[1]}\nSeelenkarte: ${c.soul.name} – ${c.soul.tip}\nJahreskarte ${c.cy}: ${c.year.name} – ${c.year.tip}\nVon Herzen: Du bist ein Geschenk für uns alle.`;
+(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent="Kopiert ✓"},()=>{b.textContent="Kopieren nicht möglich"})}};
+function view(k){document.querySelectorAll(".wrap>*").forEach(el=>{if(el.classList.contains("bar")||el.classList.contains("tabs")||el.classList.contains("foot")||el.id==="lex"||el.id==="fam"||el.id==="lgm")return;el.hidden=k!=="p"});
+$("lex").hidden=k!=="k";$("fam").hidden=k!=="f";$("lgm").hidden=k!=="l";[["tp","p"],["tk","k"],["tf","f"],["tl","l"]].forEach(a=>$(a[0]).setAttribute("aria-selected",k===a[1]));if(k==="k")build();if(k==="f")renderFam();if(k==="l")lgBuild();scrollTo({top:0})}
+$("tp").onclick=()=>view("p");$("tk").onclick=()=>view("k");$("tf").onclick=()=>view("f");$("tl").onclick=()=>view("l");
+
+
+/* ===== LEGEMETHODEN ===== */
+const LG=[
+{n:"Die Tageskarte",k:"Ein Licht für deinen Tag",c:1,t:"3 Minuten",col:"#e8b45a",w:"Am Morgen als sanfter Kompass oder am Abend als Rückblick. Ideal für den Einstieg und als tägliches Ritual.",s:["Atme dreimal tief und frage: Was möchte ich heute wissen?","Mische in Ruhe, bis dein Gefühl „Stopp“ sagt, und ziehe eine Karte.","Betrachte zuerst das Bild: Was fällt dir auf? Danach lies die Bedeutung."],p:[[50,50,0,0,"Deine Tagesbotschaft","Die Energie, die dich heute begleitet. Sie zeigt, worauf du achten darfst und wo dir Gutes begegnet."]],e:"Schreibe abends einen Satz dazu: Wo ist mir die Karte begegnet?"},
+{n:"Die Drei-Karten-Legung",k:"Gestern, heute, morgen",c:3,t:"10 Minuten",col:"#b98ae0",w:"Wenn du eine Situation verstehen willst, etwa Arbeit, Familie oder eine Entscheidung. Klar, weich und leicht zu lernen.",s:["Benenne dein Thema in einem Satz, zum Beispiel „Meine Arbeit“.","Ziehe drei Karten und lege sie von links nach rechts.","Deute jede Karte einzeln, dann als kleine Geschichte: Wie führt eine zur nächsten?"],p:[[26,50,0,0,"Vergangenheit","Was dich geprägt hat und was du an Erfahrung mitbringst."],[50,50,0,0,"Gegenwart","Wo du jetzt stehst, ehrlich und liebevoll betrachtet."],[74,50,0,0,"Zukunft","Was sich entfalten kann, wenn du so weitergehst. Eine Möglichkeit, kein Urteil."]],e:"Die dritte Karte ist eine Einladung, kein Schicksal. Du hältst den Stift."},
+{n:"Die Entscheidungslegung",k:"Zwei Wege, ein Herz",c:5,t:"15 Minuten",col:"#4c8fc4",w:"Wenn du zwischen zwei Möglichkeiten stehst und Klarheit für dein Herz suchst.",s:["Benenne beide Wege klar: Weg A und Weg B.","Ziehe Karte 1, dann zwei Karten für Weg A und zwei für Weg B.","Spüre nach: Bei welchem Weg wird dein Körper weit, bei welchem eng?"],p:[[50,78,0,0,"Deine Ausgangslage","Was dich gerade bewegt und wo du innerlich stehst."],[25,60,0,0,"Weg A: das Geschenk","Was dir dieser Weg schenkt."],[25,24,0,0,"Weg A: das Ziel","Wohin dieser Weg dich führt."],[75,60,0,0,"Weg B: das Geschenk","Was dir dieser Weg schenkt."],[75,24,0,0,"Weg B: das Ziel","Wohin dieser Weg dich führt."]],e:"Die Karten entscheiden nicht für dich, sie zeigen, was du längst fühlst."},
+{n:"Die Beziehungslegung",k:"Du, ich und wir",c:5,t:"15 Minuten",col:"#e07a9b",w:"Für Partnerschaft, Freundschaft oder Familie. Sie öffnet den Blick für Nähe, Verständnis und Wachstum miteinander.",s:["Denke liebevoll an die Beziehung und frage: Was stärkt uns?","Ziehe der Reihe nach: du, die andere Person, dann Verbindung, Herausforderung und Rat.","Lies mit Wohlwollen. Jede Karte beschreibt Energie, niemals Schuld."],p:[[24,50,0,0,"Du","Was du in diese Beziehung einbringst und brauchst."],[76,50,0,0,"Die andere Person","Was sie einbringt und was sie sich wünscht."],[50,50,0,0,"Was euch verbindet","Das Band, das euch trägt."],[50,22,0,0,"Was euch fordert","Wo ihr gemeinsam wachsen dürft."],[50,80,0,0,"Der Rat der Liebe","Was eurer Verbindung jetzt guttut."]],e:"Teile die Legung, wenn du magst, mit dem Menschen und sprecht gemeinsam darüber."},
+{n:"Die Hufeisen-Legung",k:"Ein Bogen, der dich trägt",c:7,t:"20 Minuten",col:"#7fb069",w:"Für eine Frage mit mehreren Seiten. Sie zeigt Vergangenheit, Umfeld, Verborgenes und einen guten Rat.",s:["Formuliere eine Frage, die mit „Wie“ oder „Was“ beginnt.","Ziehe sieben Karten und lege sie im Bogen von links nach rechts.","Lies zuerst Karte 4 (du) und 6 (Rat), sie sind das Herz der Legung."],p:[[14,22,0,0,"Vergangenheit","Was hinter dir liegt und noch wirkt."],[24,50,0,0,"Gegenwart","Wo du gerade stehst."],[36,74,0,0,"Verborgenes","Was du noch nicht siehst."],[50,82,0,0,"Du selbst","Deine Haltung und Stärke."],[64,74,0,0,"Umfeld","Menschen und Umstände um dich."],[76,50,0,0,"Der Rat","Was dir jetzt hilft."],[86,22,0,0,"Der Ausgang","Wohin es sich entwickeln kann."]],e:"Der Bogen erinnert dich: Du bist gehalten, auf allen Seiten."},
+{n:"Das Elemente-Pentagramm",k:"Feuer, Wasser, Luft, Erde und Geist",c:5,t:"15 Minuten",col:"#d9722e",w:"Für Balance und Selbstfürsorge. Sie zeigt, welche Kraft in dir gerade stark ist und welche Zuwendung braucht.",s:["Atme und spüre, welches Element dir heute fehlt.","Ziehe fünf Karten: Geist oben, dann im Uhrzeigersinn Feuer, Wasser, Luft, Erde.","Frage dich: Was verbindet diese fünf Karten miteinander?"],p:[[50,18,0,0,"Geist","Deine Seele: worum es im Kern geht."],[78,40,0,0,"Feuer","Antrieb: wofür du brennst."],[66,78,0,0,"Wasser","Gefühl: was dein Herz bewegt."],[34,78,0,0,"Luft","Gedanken: was dir klar werden darf."],[22,40,0,0,"Erde","Alltag: was dich erdet und trägt."]],e:"Wenn ein Element fehlt, frage dich: Wie kann ich es heute nähren?"},
+{n:"Das Keltische Kreuz",k:"Das große Gespräch mit dir",c:10,t:"30 bis 40 Minuten",col:"#c9a24a",w:"Die klassische, tiefe Legung für die großen Fragen. Nimm dir Ruhe und Zeit dafür.",s:["Suche einen ruhigen Ort und formuliere deine Frage sorgfältig.","Lege 1 in die Mitte, quer darüber 2, dann 3 bis 6 rund ums Kreuz und zuletzt die Reihe 7 bis 10.","Lies zuerst das Kreuz (1 bis 6), dann die Reihe rechts. Erzähle die Geschichte am Stück."],p:[[38,50,0,"-.6em","Das Herz der Sache","Worum es wirklich geht."],[38,50,"90deg",".6em","Das Kreuzende","Was dich herausfordert oder quer liegt."],[38,82,0,0,"Die Wurzel","Der Grund, oft unbewusst."],[16,50,0,0,"Die Vergangenheit","Was gerade ausläuft."],[38,18,0,0,"Die Krone","Dein Ziel und Wunsch."],[60,50,0,0,"Die nahe Zukunft","Was bald kommt."],[86,86,0,0,"Du selbst","Deine Haltung."],[86,62,0,0,"Das Umfeld","Einflüsse von außen."],[86,38,0,0,"Hoffnungen und Ängste","Was du wünschst und fürchtest."],[86,14,0,0,"Der Ausgang","Wohin es sich entwickeln kann."]],e:"Gönne dir danach eine Tasse Tee und Stille. Die Antworten setzen sich sanft."},
+{n:"Das Jahresrad",k:"Zwölf Monate, ein Leitstern",c:13,t:"40 Minuten",col:"#8b8fd6",cw:"9%",w:"Zum Geburtstag oder Jahreswechsel. Sie begleitet dich durch die zwölf kommenden Monate.",s:["Wähle deinen Startmonat, meist den Geburtsmonat.","Lege zwölf Karten im Kreis im Uhrzeigersinn, beginnend links (9 Uhr), die 13. in die Mitte.","Deute zuerst die Mitte, das Leitmotiv, dann Monat für Monat."],p:[],e:"Lies im Sommer noch einmal nach: Was ist bereits erblüht?"},
+{n:"Die Mindshift-Legung",k:"Deine Transformation in vier Schritten",c:4,t:"15 Minuten",col:"#7ee0b5",w:"Zu deinem 21-Tage-Programm: wenn du loslassen und Neues wählen möchtest.",s:["Atme und benenne, was sich verändern darf.","Ziehe vier Karten und lege sie als aufsteigende Treppe.","Beende mit einem konkreten Satz: Mein erster Schritt ist ..."],p:[[16,72,0,0,"Was ich loslasse","Was seine Zeit hatte und gehen darf."],[38,56,0,0,"Was mich noch hält","Die leise Angst oder Gewohnheit dahinter."],[62,40,0,0,"Was ich neu wähle","Die Kraft, die du jetzt einlädst."],[84,24,0,0,"Mein erster Schritt","Klein, konkret, heute möglich."]],e:"Tu den ersten Schritt innerhalb von 24 Stunden. So wird Wandlung wirklich."}];
+LG[7].p=Array.from({length:12},(_,k)=>{const a=(180+k*30)*Math.PI/180;return[+(50+31*Math.cos(a)).toFixed(1),+(50+36*Math.sin(a)).toFixed(1),0,0,"Monat "+(k+1),"Dein "+(k+1)+". Monat: was dich trägt und was wachsen darf."]}).concat([[50,50,0,0,"Das Leitmotiv","Der Stern über deinem Jahr. Er zeigt, wozu alle zwölf Monate dich einladen."]]);
+let lgC=0;const ltrk=$("ltrk");
+function lgSlide(s){return`<article class="ls" style="--sc:${s.col}${s.cw?";--cw:"+s.cw:""}" aria-label="${s.n}"><div><div class="lay">${s.p.map((q,i)=>`<div class="pc" data-n="${i}" style="left:${q[0]}%;top:${q[1]}%;--r:${q[2]||"0deg"};--o:${q[3]||0}"><b>${i+1}</b></div>`).join("")}</div><div class="lm"><span>${s.c} ${s.c==1?"Karte":"Karten"}</span><span>${s.t}</span></div><p class="qs">${s.e}</p></div><div class="ct"><h3>${s.n}</h3><p class="kw">${s.k}</p><h4>Wann sie dir guttut</h4><p>${s.w}</p><h4>So legst du sie</h4><ol class="stp">${s.s.map(t=>`<li>${t}</li>`).join("")}</ol><h4>Die Positionen</h4>${s.p.map((q,i)=>`<div class="pi" data-n="${i}"><i>${i+1}</i><div><b>${q[4]}</b><br>${q[5]}</div></div>`).join("")}</div></article>`}
+function lgBuild(){ltrk.innerHTML=LG.map(lgSlide).join("");$("ljp").innerHTML=LG.map((s,i)=>`<option value="${i}">${s.n}</option>`).join("");lgGo(0,true)}
+function lgGo(i,inst){i=Math.max(0,Math.min(LG.length-1,i));ltrk.scrollTo({left:i*ltrk.clientWidth,behavior:inst||matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});lgSet(i)}
+function lgSet(i){lgC=i;$("lci").textContent=(i+1)+" / "+LG.length;$("ljp").value=i}
+let lraf;ltrk.addEventListener("scroll",()=>{cancelAnimationFrame(lraf);lraf=requestAnimationFrame(()=>{const i=Math.round(ltrk.scrollLeft/ltrk.clientWidth);if(i!==lgC&&i>=0&&i<LG.length)lgSet(i)})});
+$("lpv").onclick=()=>lgGo(lgC-1);$("lnx").onclick=()=>lgGo(lgC+1);$("ljp").onchange=e=>lgGo(+e.target.value);
+ltrk.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){e.preventDefault();lgGo(lgC+1)}if(e.key==="ArrowLeft"){e.preventDefault();lgGo(lgC-1)}});
+ltrk.addEventListener("click",e=>{const t=e.target.closest("[data-n]");if(!t)return;const sl=t.closest(".ls"),on=!t.classList.contains("on");sl.querySelectorAll(".on").forEach(x=>x.classList.remove("on"));if(on)sl.querySelectorAll(`[data-n="${t.dataset.n}"]`).forEach(x=>x.classList.add("on"))});
+
+/* ===== KLANGRAUM: generative Entspannungsmusik ===== */
+(function(){
+const MD=[{n:"Mondlicht",d:"Tiefe, warme Ruhe",r:110,ch:[[0,7,15,19],[-4,3,7,14],[-2,5,10,14],[-7,0,3,10]],sc:[0,3,5,7,10]},{n:"Sternenmeer",d:"Weit, klar und leicht",r:146.83,ch:[[0,7,14,18],[5,9,12,19],[7,11,14,21],[2,9,14,17]],sc:[0,2,4,7,9]},{n:"Sonnenaufgang",d:"Sanft, hell und hoffnungsvoll",r:130.81,ch:[[0,7,11,16],[5,9,12,16],[-3,4,9,12],[-5,2,7,11]],sc:[0,2,4,7,9]}];
+let S=Object.assign({v:50,m:0},ls.g("et21_snd",{})),ac,mg,bus,dr,on=false,tm={},ci=0;
+if(!MD[S.m])S.m=0;
+const M=()=>MD[S.m],F=x=>M().r*Math.pow(2,x/12),R=(a,b)=>a+Math.random()*(b-a),pk=a=>a[Math.floor(Math.random()*a.length)];
+function tone(f,type,t,a,peak,dec,dst,pan){const o=ac.createOscillator(),g=ac.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(peak,t+a);g.gain.exponentialRampToValueAtTime(.0001,t+a+dec);o.connect(g);let n=g;if(pan!=null&&ac.createStereoPanner){const p=ac.createStereoPanner();p.pan.value=pan;g.connect(p);n=p}n.connect(dst);o.start(t);o.stop(t+a+dec+.2)}
+function pad(){const t=ac.currentTime,c=M().ch[ci++%4],lp=ac.createBiquadFilter();lp.type="lowpass";lp.frequency.value=750;lp.connect(bus);c.forEach((x,i)=>[-5,5].forEach(d=>tone(F(x)*Math.pow(2,d/1200),i%2?"triangle":"sine",t,R(4,6),.05,R(7,9),lp,R(-.6,.6))))}
+function bell(){const t=ac.currentTime,sc=M().sc,f=F(pk(sc)+12*pk([1,2])),p=R(-.8,.8);tone(f,"sine",t,.02,.06,R(4,6),bus,p);tone(f*2.01,"sine",t,.02,.015,2.5,bus,p);if(Math.random()<.35)tone(F(pk(sc)+24),"sine",t+R(.4,.9),.02,.035,4,bus,-p)}
+function bowl(){const t=ac.currentTime,f=F(pk(M().sc.slice(0,3))+12);tone(f,"sine",t,1.5,.06,14,bus,-.3);tone(f+R(1,2),"sine",t,1.5,.05,14,bus,.3)}
+function loop(k,fn,a,b){const go=()=>{if(!on)return;fn();tm[k]=setTimeout(go,R(a,b)*1000)};go()}
+function init(){ac=new(window.AudioContext||window.webkitAudioContext)();mg=ac.createGain();mg.gain.value=0;mg.connect(ac.destination);bus=ac.createGain();bus.connect(mg);
+const cv=ac.createConvolver(),wg=ac.createGain(),l=ac.sampleRate*5,b=ac.createBuffer(2,l,ac.sampleRate);for(let c=0;c<2;c++){const d=b.getChannelData(c);for(let i=0;i<l;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/l,2.6)}
+cv.buffer=b;wg.gain.value=.7;bus.connect(cv);cv.connect(wg);wg.connect(mg);
+dr=ac.createOscillator();const dg=ac.createGain(),lf=ac.createOscillator(),lg=ac.createGain();dr.frequency.value=F(-12);dg.gain.value=.04;lf.frequency.value=.06;lg.gain.value=.015;lf.connect(lg);lg.connect(dg.gain);dr.connect(dg);dg.connect(bus);dr.start();lf.start();
+const nb=ac.createBuffer(1,ac.sampleRate*2,ac.sampleRate),nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;
+const ns=ac.createBufferSource();ns.buffer=nb;ns.loop=true;const bp=ac.createBiquadFilter();bp.type="bandpass";bp.frequency.value=600;bp.Q.value=.7;const ng=ac.createGain(),l2=ac.createOscillator(),l2g=ac.createGain();ng.gain.value=.012;l2.frequency.value=.05;l2g.gain.value=300;l2.connect(l2g);l2g.connect(bp.frequency);ns.connect(bp);bp.connect(ng);ng.connect(bus);ns.start();l2.start()}
+const vol=()=>S.v/100*.7;
+function ui(){$("pl").textContent=on?"❚❚ Pause":"▶ Musik beginnen";$("sb").classList.toggle("on",on)}
+function play(){if(!ac)init();ac.resume();on=true;mg.gain.cancelScheduledValues(ac.currentTime);mg.gain.setTargetAtTime(vol(),ac.currentTime,2);loop("p",pad,8,11);loop("b",bell,2.5,6);loop("w",bowl,20,34);ui()}
+function stop(){on=false;Object.values(tm).forEach(clearTimeout);tm={};mg.gain.setTargetAtTime(0,ac.currentTime,.8);setTimeout(()=>{if(!on)ac.suspend()},3500);ui()}
+function save(){ls.s("et21_snd",S)}
+$("mo").innerHTML=MD.map((m,i)=>`<button data-i="${i}" aria-pressed="${i===S.m}">${m.n}<small>${m.d}</small></button>`).join("");
+$("mo").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.m=+b.dataset.i;save();$("mo").querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));if(ac)dr.frequency.setTargetAtTime(F(-12),ac.currentTime,3)};
+$("vol").value=S.v;$("vol").oninput=e=>{S.v=+e.target.value;save();if(ac&&on)mg.gain.setTargetAtTime(vol(),ac.currentTime,.3)};
+$("pl").onclick=()=>on?stop():play();
+$("sb").onclick=()=>{const h=$("sndp").hidden=!$("sndp").hidden;$("sb").setAttribute("aria-expanded",!h)};
+document.addEventListener("visibilitychange",()=>{if(ac&&on)document.hidden?ac.suspend():ac.resume()});
+})();
+
+/* ===== EINE GROSSARTIGE WEBSEITE: Sternenhimmel, Tor, Anleitung ===== */
+(function(){
+const rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* Sternenhimmel */
+const cv=$("sky"),cx=cv.getContext("2d");let W,H,col="#e8b45a",sh=null;
+const ST=Array.from({length:130},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.3+.3,p:Math.random()*6.28,v:Math.random()*.0015+.0004}));
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight;col=getComputedStyle(document.documentElement).getPropertyValue("--g").trim()||col}
+function dr(t){cx.clearRect(0,0,W,H);cx.fillStyle=col;ST.forEach(a=>{cx.globalAlpha=.15+.5*Math.abs(Math.sin(t*a.v+a.p));cx.beginPath();cx.arc(a.x*W,a.y*H,a.r,0,6.283);cx.fill()});
+if(!sh&&Math.random()<.002)sh={x:Math.random()*W*.8,y:Math.random()*H*.4,l:0};if(sh){sh.l+=9;cx.globalAlpha=Math.max(0,1-sh.l/160);cx.strokeStyle=col;cx.lineWidth=1.4;cx.beginPath();cx.moveTo(sh.x+sh.l,sh.y+sh.l*.5);cx.lineTo(sh.x+sh.l+50,sh.y+sh.l*.5+25);cx.stroke();if(sh.l>160)sh=null}
+if(!rm)requestAnimationFrame(dr)}
+rs();addEventListener("resize",()=>{rs();if(rm)dr(0)});dr(0);
+/* alle Rondelle auf einer Seite */
+const hd=document.querySelector(".hd");hd.id="home";
+$("fam").before($("lgm"));["lex","lgm","fam"].forEach(i=>{$(i).hidden=false;$(i).classList.add("chap")});
+$("lex").querySelector("h2").textContent="Kartenlexikon";
+hd.insertAdjacentHTML("afterbegin",'<div class="ey">✦ Willkommen in deinem Kartenreich ✦</div>');
+hd.querySelector("p").textContent="Ein Programm für 21 Tage, ein Lexikon mit 78 Karten, neun Legemethoden und dein Familienkreis: alles liegt hier auf einer einzigen, ruhigen Seite für dich bereit.";
+hd.insertAdjacentHTML("beforeend",'<div class="cta2"><button class="btn" id="hg">✦ Ziehe deine Tageskarte</button><button class="btn o" id="hz">Zum Programm</button></div><div id="tgc"></div>');
+$("hg").onclick=()=>{const d=new Date(),c=CARDS[Math.abs((d.getFullYear()*400+(d.getMonth()+1)*31+d.getDate())*7919)%78];$("tgc").innerHTML=`<div class="tg" style="--sc:${c.col}">${mc(c,"Deine Tageskarte")}<div class="ct"><h3>${c.name}</h3><p class="kw">${c.kw}</p><p>${c.up}</p><p class="qs">${c.tip}</p></div></div>`;$("tgc").scrollIntoView({behavior:rm?"auto":"smooth",block:"center"})};
+$("hz").onclick=()=>document.querySelector(".prog").scrollIntoView({behavior:rm?"auto":"smooth",block:"start"});
+build();lgBuild();renderFam();
+/* Navigation */
+const T=[["home","Programm"],["lex","Kartenlexikon"],["lgm","Legemethoden"],["fam","Familienkreis"]],nav=document.querySelector(".tabs");
+nav.removeAttribute("role");nav.innerHTML=T.map((t,i)=>`<button data-t="${t[0]}" aria-current="${i===0}" aria-selected="${i===0}">${t[1]}</button>`).join("")+'<button class="gd" id="gg">✦ Anleitung</button>';
+nav.onclick=e=>{const b=e.target.closest("button[data-t]");if(!b)return;b.dataset.t==="home"?scrollTo({top:0,behavior:rm?"auto":"smooth"}):$(b.dataset.t).scrollIntoView({behavior:rm?"auto":"smooth",block:"start"})};
+let ra;addEventListener("scroll",()=>{cancelAnimationFrame(ra);ra=requestAnimationFrame(()=>{let a="home";T.forEach(t=>{if($(t[0]).getBoundingClientRect().top<innerHeight*.4)a=t[0]});nav.querySelectorAll("[data-t]").forEach(b=>{const on=b.dataset.t===a;b.setAttribute("aria-selected",on);on&&b.scrollIntoView({block:"nearest",inline:"center"})})})},{passive:true});
+/* Tor: Rechte, 18+, Anleitung */
+const K="et21_gate",gt=$("gate"),g=$("gs");let ok=ls.g(K,null),step=1,gi=0,only=false;
+const G=[["Willkommen in deinem Kartenreich","Diese Seite ist dein persönlicher Raum für 21 Tage Wandlung mit Tarotkarten. Alles liegt auf einer einzigen, ruhigen Seite. Oben im Menü tippst du auf einen Bereich und gleitest sanft dorthin. Du kannst nichts falsch machen. Nimm dir Zeit."],
+["Das 21-Tage-Programm","Jeder Tag ist eine kleine Einladung. Tippe auf einen Tag, um Aha-Moment, Übung und Wissens-Check zu öffnen, und schließe ihn ab. Dein Fortschrittsbalken füllt sich, und nach Tag 21 wartet eine kleine Feier. Dein Stand bleibt in deinem Browser gespeichert."],
+["Das Kartenlexikon","78 Karten in einem Rondell. Wische nach links und rechts oder nutze die Pfeile und das Auswahlfeld. Oben filterst du nach Großer Arkana oder einer der vier Farben. Zu jeder Karte findest du die Bedeutung aufrecht und umgekehrt und darunter ein Notizfeld nur für dich."],
+["Die Legemethoden","Neun Wege, Karten zu legen. Das Bild zeigt, wo jede Karte liegt. Tippe auf eine Karte oder eine Position, dann leuchten beide gemeinsam auf. Lies die drei Schritte, mische deine eigenen Karten und lege sie in der Reihenfolge der Zahlen."],
+["Der Familienkreis","Trage Name und Geburtstag ein, auch für Partner, Kinder, Eltern und Freunde. Du erhältst Sternzeichen, Seelenkarte und Jahreskarte, einen Geburtstags-Countdown und einen Gruß zum Teilen. Alles bleibt auf deinem Gerät, und jeden Eintrag kannst du jederzeit entfernen."],
+["Tageskarte und Klangraum","Oben auf der Seite ziehst du deine Tageskarte, sie bleibt den ganzen Tag dieselbe. Der goldene Knopf ♪ unten rechts öffnet den Klangraum: sanfte Musik, die nie gleich klingt. Wähle Stimmung und Lautstärke. Sie beginnt nur, wenn du sie startest."],
+["Wichtig zum Schluss","Tarot ist ein Spiegel für Nachdenken und Freude, keine Vorhersage und kein Ersatz für ärztlichen, psychologischen, rechtlichen oder finanziellen Rat. Diese Anleitung erreichst du jederzeit über „Anleitung“ im Menü. Nun wünsche ich dir von Herzen viel Freude und Wandlung."]];
+function fin(){gt.classList.remove("show");document.documentElement.style.overflow="";if(!only){ok={v:1,t:Date.now()};ls.s(K,ok)}}
+function show(){gt.classList.add("show");document.documentElement.style.overflow="hidden";gt.scrollTop=0;rd()}
+function rd(){let h="";
+if(step===1)h=`<div class="ey">✦ Bevor wir beginnen ✦</div><h2 id="gt">Deine Rechte</h2><p class="ctr">Schön, dass du da bist. Damit du dich sicher fühlst, hier das Wichtigste in Ruhe.</p><ul class="rl"><li><b>Deine Daten:</b> Es gibt keine Konten. Fortschritt, Notizen und Familienkreis liegen nur im Speicher deines Browsers. Wir sehen sie nicht.</li><li><b>Externe Schriften:</b> Google Fonts laden nur mit deiner Zustimmung im Cookie-Hinweis. Dabei wird deine IP-Adresse an Google übertragen.</li><li><b>Deine Rechte nach DSGVO:</b> Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Widerruf. Schreibe an in60tagenrauchfrei@gmail.com. Löschst du die Browserdaten, ist alles entfernt.</li><li><b>Urheberrecht:</b> © 2027 Frank Zimmermann. Alle Rechte vorbehalten. Die private Nutzung ist herzlich willkommen, Weitergabe oder Kopie nur mit Genehmigung.</li><li><b>Hinweis:</b> Tarot dient der Reflexion und Motivation. Es ersetzt keine ärztliche, psychologische, rechtliche oder finanzielle Beratung.</li></ul><div class="lk"><button class="lnk" data-l="datenschutz">Datenschutz lesen</button><button class="lnk" data-l="impressum">Impressum lesen</button></div><label class="chk"><input type="checkbox" id="gck"> Ich habe die Hinweise gelesen und bin einverstanden.</label><div class="row"><button class="btn" id="gn" disabled>Weiter</button></div>`;
+else if(step===2)h=`<div class="ey">✦ Ein kurzer Moment ✦</div><h2 id="gt">Bist du 18?</h2><p class="ctr">Diese Seite behandelt Themen wie Selbstreflexion, Beziehungen und Lebensfragen und richtet sich an Erwachsene. Bist du mindestens 18 Jahre alt?</p><div class="row"><button class="btn" id="gy">Ja, ich bin 18 oder älter</button><button class="btn o" id="gno">Nein, noch nicht</button></div>`;
+else if(step===0)h=`<h2 id="gt">Danke für deine Ehrlichkeit</h2><p class="ctr">Diese Seite ist für Erwachsene. Wenn du 18 bist, bist du herzlich willkommen. Bis dahin: Sei lieb zu dir und sprich mit einem Menschen, dem du vertraust, wenn dich etwas beschäftigt.</p><div class="row"><button class="btn o" id="gbk">Zurück</button></div>`;
+else{const q=G[gi];h=(only?'<button class="gx" id="gx" aria-label="Schließen">✕</button>':"")+`<div class="ey">✦ Anleitung · ${gi+1} von ${G.length} ✦</div><h2 id="gt">${q[0]}</h2><div class="gdots">${G.map((_,i)=>`<i class="${i===gi?"on":""}"></i>`).join("")}</div><p class="ctr" style="font-size:1.08rem;line-height:1.85">${q[1]}</p><div class="row">${gi?'<button class="btn o" id="gp">Zurück</button>':""}<button class="btn" id="gn">${gi===G.length-1?(only?"Verstanden ✦":"Eintreten ✦"):"Weiter"}</button></div>`}
+g.innerHTML=h;const f=g.querySelector("button:not([disabled]),input");f&&f.focus({preventScroll:true});
+const c=$("gck");if(c)c.onchange=()=>$("gn").disabled=!c.checked;
+const n=$("gn");if(n)n.onclick=()=>{if(step===1){step=2;rd()}else if(gi<G.length-1){gi++;rd();gt.scrollTop=0}else fin()};
+if($("gy"))$("gy").onclick=()=>{step=3;gi=0;rd()};if($("gno"))$("gno").onclick=()=>{step=0;rd()};if($("gbk"))$("gbk").onclick=()=>{step=2;rd()};
+if($("gp"))$("gp").onclick=()=>{gi--;rd()};if($("gx"))$("gx").onclick=fin}
+$("gg").onclick=()=>{only=true;step=3;gi=0;show()};
+addEventListener("keydown",e=>{if(e.key==="Escape"&&only&&gt.classList.contains("show"))fin()});
+if(!ok||ok.v!==1){only=false;step=1;show()}
+})();
+
+/* ===== ORAKEL + WHATSAPP / TELEGRAM ===== */
+(function(){
+let OT="";
+function famText(f){const c=calc(f);return`✦ ${f.n} · ${c.z[0]} ${c.z[1]}\nSeelenkarte: ${c.soul.name} – ${c.soul.tip}\nJahreskarte ${c.cy}: ${c.year.name} – ${c.year.tip}\nVon Herzen: Du bist ein Geschenk für uns alle.`}
+function getT(k){if(k==="o")return OT;if(k==="fall")return fam.length?"✦ Unser Familienkreis\n\n"+fam.map(f=>{const c=calc(f);return`${f.n} ${c.z[1]} ${c.z[0]} · Seelenkarte ${c.soul.name} · ${c.days===0?"heute Geburtstag 🎉":"Geburtstag in "+c.days+" Tagen"}`}).join("\n")+"\n\nMit Liebe gelegt – 21 Tage Transformation":"";const f=fam.find(x=>"f"+x.id===k);return f?famText(f):""}
+function oracle(){if(typeof prof==="undefined"||!prof){$("om").textContent="Bitte speichere zuerst dein Profil oben.";$("oo").innerHTML="";return}
+$("om").textContent="";const n=prof.name,d=new Date(),ds=d.toISOString().slice(0,10);
+const nm=n.toUpperCase().replace(/Ä/g,"AE").replace(/Ö/g,"OE").replace(/Ü/g,"UE").replace(/ß/g,"SS").replace(/[^A-Z]/g,"").split("").reduce((a,c)=>a+c.charCodeAt(0)-64,0);
+let h=0;(n+ds).split("").forEach(c=>h=(h*31+c.charCodeAt(0))>>>0);
+const R=[["Deine Startkarte",CARDS[red(dsum(prof.date))]],["Deine Namenskarte",CARDS[red(nm||1)]],["Orakelkarte von heute",CARDS[h%78]]];
+const hrs=Math.round(prof.min*21/6)/10,st=prof.date.split("-").reverse().join(".");
+OT=`✦ Mein Orakel · ${n}\n`+R.map(r=>`${r[0]}: ${r[1].name} – ${r[1].tip}`).join("\n")+`\nMein Rhythmus: ${prof.cards} Karten und ${prof.min} Minuten täglich\n21 Tage Transformation – Karten legen Mindshift`;
+$("oo").innerHTML=`<p class="ol">Für dich, ${esc(n)}: Diese Karten sprechen heute zu dir.</p>`+R.map(r=>`<div class="tg" style="--sc:${r[1].col}">${mc(r[1],r[0])}<div class="ct"><h3>${r[1].name}</h3><p class="kw">${r[1].kw}</p><p>${r[1].up}</p><p class="qs">${r[1].tip}</p></div></div>`).join("")+`<p class="p" style="text-align:center;margin-top:20px">Dein Start am ${st}, ${prof.cards} Karten und ${prof.min} Minuten täglich: In 21 Tagen schenkst du dir ${prof.cards*21} Karten und rund ${hrs} Stunden liebevoller Zuwendung.</p><div class="shr"><button class="btn wa" data-s="wa" data-k="o">Per WhatsApp senden</button><button class="btn tgm" data-s="tg" data-k="o">Per Telegram senden</button><button class="btn o" data-s="cp" data-k="o">Kopieren</button>${navigator.share?'<button class="btn o" data-s="sh" data-k="o">Teilen …</button>':""}</div>`}
+$("ob").onclick=oracle;$("sv").addEventListener("click",()=>setTimeout(()=>{if($("oo").innerHTML)oracle()},0));
+document.addEventListener("click",e=>{const b=e.target.closest("[data-s]");if(!b)return;const t=getT(b.dataset.k);if(!t){alert("Es gibt noch nichts zu senden. Füge zuerst jemanden zum Familienkreis hinzu oder befrage dein Orakel.");return}
+const u=/^https?:/.test(location.href)?location.href:"",k=b.dataset.s,old=b.textContent;
+if(k==="wa")open("https://wa.me/?text="+encodeURIComponent(t+(u?"\n"+u:"")),"_blank","noopener");
+else if(k==="tg")open("https://t.me/share/url?url="+encodeURIComponent(u||" ")+"&text="+encodeURIComponent(t),"_blank","noopener");
+else if(k==="sh")navigator.share({text:t,url:u||undefined}).catch(()=>{});
+else(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent="Kopiert ✓";setTimeout(()=>b.textContent=old,1800)},()=>{b.textContent="Nicht möglich"})});
+})();
+</script>
+</body>
+</html>
