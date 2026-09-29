@@ -10,9 +10,8 @@
 <meta name="apple-mobile-web-app-title" content="Mindshift">
 <meta name="application-name" content="21 Tage Mindshift">
 <meta name="description" content="21 Tage Transformation: Tarot-Programm, Kartenlexikon, Legemethoden und Familienkreis.">
-<meta name="color-scheme" content="dark light">
-<meta name="theme-color" content="#0e0817" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#f4ecdf" media="(prefers-color-scheme: light)">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0e0817">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
@@ -20,7 +19,6 @@
 <style>
 :root{--bg:#0e0817;--card:#1a1127;--ink:#ece3f2;--mute:#a998b8;--g:#e8b45a;--ok:#7ee0b5;--bad:#ff7a8a;--line:#3a2b4d;--dk:#1a1024;
 padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4ecdf;--card:#fbf6ec;--ink:#251532;--mute:#66587a;--g:#94640f;--ok:#1d7a55;--bad:#b03047;--line:#d5c6ae;--dk:#fbf6ec}}
 :root[data-theme="light"]{--bg:#f4ecdf;--card:#fbf6ec;--ink:#251532;--mute:#66587a;--g:#94640f;--ok:#1d7a55;--bad:#b03047;--line:#d5c6ae;--dk:#fbf6ec}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--ink);font:400 1rem/1.7 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
@@ -140,7 +138,7 @@ dialog.lg::backdrop{background:rgba(10,5,16,.75)}
 .nts div{color:var(--mute);font-size:.85rem;margin-top:6px}
 @media (max-width:700px){.sl{grid-template-columns:1fr;padding:18px}.cf{max-width:180px;margin:0 auto;width:100%}}
 
-/* ===== MYSTISCHE KARTEN ===== */
+
 .trk{gap:0;border-radius:20px}
 .sl{position:relative;overflow:hidden;grid-template-columns:230px 1fr;gap:34px;padding:34px 30px;border-color:color-mix(in srgb,var(--sc) 45%,var(--line));background:radial-gradient(ellipse at 18% 25%,color-mix(in srgb,var(--sc) 22%,transparent),transparent 55%),radial-gradient(ellipse at 90% 90%,color-mix(in srgb,#b98ae0 14%,transparent),transparent 50%),var(--card)}
 .sl::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;background-image:radial-gradient(1px 1px at 12% 20%,var(--ink),transparent),radial-gradient(1px 1px at 68% 12%,var(--ink),transparent),radial-gradient(1.5px 1.5px at 85% 40%,var(--g),transparent),radial-gradient(1px 1px at 40% 88%,var(--ink),transparent),radial-gradient(1.5px 1.5px at 92% 82%,var(--ink),transparent),radial-gradient(1px 1px at 55% 60%,var(--g),transparent)}
@@ -167,7 +165,7 @@ box-shadow:0 0 0 1px var(--sc),0 0 38px color-mix(in srgb,var(--sc) 38%,transpar
 @media (max-width:700px){.sl{grid-template-columns:1fr;gap:22px;padding:24px 18px}.cf{max-width:210px}}
 @media (prefers-reduced-motion:reduce){.cf,.cf .ar g.spin{animation:none}}
 
-/* ===== FAMILIENKREIS ===== */
+
 #fam h2{font-size:clamp(1.8rem,5vw,2.6rem);margin-bottom:8px}
 .frm{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:12px;margin:18px 0 6px;padding:20px;border:1px solid var(--g);border-radius:16px;background:radial-gradient(ellipse at 0 0,color-mix(in srgb,var(--g) 14%,transparent),transparent 60%),var(--card)}
 .frm label{display:block;font-size:.85rem;color:var(--g);font-weight:600;margin-bottom:4px}
@@ -187,7 +185,7 @@ box-shadow:0 0 0 1px var(--sc),0 0 38px color-mix(in srgb,var(--sc) 38%,transpar
 .pf .acts{display:flex;gap:8px;flex-wrap:wrap}.pf .btn{margin-top:6px;min-height:40px;padding:8px 18px;font-size:.9rem}
 @media (max-width:700px){.frm{grid-template-columns:1fr}}
 
-/* ===== LEGEMETHODEN-RONDELL ===== */
+
 #lgm h2{font-size:clamp(1.8rem,5vw,2.6rem);margin-bottom:8px}
 #lci{font-weight:600;min-width:70px;text-align:center}
 .ls{flex:0 0 100%;scroll-snap-align:center;position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:30px;padding:30px;border:1px solid color-mix(in srgb,var(--sc) 45%,var(--line));border-radius:20px;background:radial-gradient(ellipse at 15% 15%,color-mix(in srgb,var(--sc) 20%,transparent),transparent 55%),var(--card)}
@@ -205,7 +203,7 @@ box-shadow:0 0 0 1px var(--sc),0 0 38px color-mix(in srgb,var(--sc) 38%,transpar
 .pi b{color:var(--g);font:500 1rem "Bodoni Moda",serif}.pi.on{border-color:var(--sc);background:color-mix(in srgb,var(--sc) 12%,transparent)}
 @media (max-width:760px){.ls{grid-template-columns:1fr;padding:20px 16px;gap:22px}}
 
-/* ===== KLANGRAUM ===== */
+
 .snd{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:120;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
 .sb{width:54px;height:54px;border-radius:50%;border:1px solid var(--g);background:radial-gradient(circle,color-mix(in srgb,var(--g) 30%,#241338),#160d24);color:var(--g);font-size:1.5rem;cursor:pointer;box-shadow:0 0 22px color-mix(in srgb,var(--g) 40%,transparent)}
 .sb.on{animation:pu 3.2s ease-in-out infinite}@keyframes pu{50%{box-shadow:0 0 0 10px color-mix(in srgb,var(--g) 12%,transparent),0 0 34px color-mix(in srgb,var(--g) 55%,transparent)}}
@@ -220,7 +218,7 @@ box-shadow:0 0 0 1px var(--sc),0 0 38px color-mix(in srgb,var(--sc) 38%,transpar
 .sndp .btn{width:100%;margin-top:10px}
 @media (prefers-reduced-motion:reduce){.sb.on{animation:none}}
 
-/* ===== EINE WEBSEITE + TOR ===== */
+
 #sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .wrap{position:relative;z-index:1}
 .tabs{position:sticky;top:0;z-index:30;margin:-8px -16px 30px;padding:env(safe-area-inset-top,0px) 16px 0;overflow-x:auto;white-space:nowrap;scrollbar-width:none;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
@@ -250,7 +248,7 @@ box-shadow:0 0 0 1px var(--sc),0 0 38px color-mix(in srgb,var(--sc) 38%,transpar
 @media (max-width:700px){.gb{padding:28px 18px}}
 @media (prefers-reduced-motion:reduce){.hd h1 span{animation:none}}
 
-/* ===== ORAKEL + SENDEN ===== */
+
 .shr{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin:20px 0 6px}
 .shr .btn,.pf .acts .btn{margin-top:0}.shr .btn{min-height:44px;padding:9px 20px;font-size:.95rem}
 .btn.wa{background:#25d366;border-color:#25d366;color:#06301a}.btn.tgm{background:#2aabee;border-color:#2aabee;color:#06263a}
@@ -258,14 +256,14 @@ box-shadow:0 0 0 1px var(--sc),0 0 38px color-mix(in srgb,var(--sc) 38%,transpar
 .bn{border-color:#c9a0f0;background:linear-gradient(135deg,color-mix(in srgb,#b98ae0 14%,transparent),color-mix(in srgb,var(--g) 8%,transparent));padding:18px 20px}
 .bn h5{color:#c9a0f0;font-size:1.1rem;margin-bottom:6px}.bn .wq{font:italic 500 1.2rem/1.5 "Bodoni Moda",serif;color:var(--g);margin:6px 0 10px}.bn p:last-child{margin-bottom:0;line-height:1.8}
 
-/* ===== APP-FEINSCHLIFF: Retina, Touch, Tempo ===== */
+
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overscroll-behavior-y:none}
 a,button,select,input,label,[role=button]{touch-action:manipulation}
 .trk,.gate,.lgb,.tabs{-webkit-overflow-scrolling:touch}.trk{overscroll-behavior-x:contain}
 .sl:not(.vis) .cf,.sl:not(.vis) .ar g.spin{animation-play-state:paused}
 @media (display-mode:standalone){html,body{-webkit-touch-callout:none}}
-/* ===== FEINSCHLIFF v2: iPhone, Klangraum, Hintergrund ===== */
+
 :root{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
 html{max-width:100%;overflow-x:hidden}body{max-width:100vw}
 #sky{height:100vh;height:100lvh;background:radial-gradient(ellipse at 15% 0%,rgba(232,180,90,.10),transparent 50%),radial-gradient(ellipse at 90% 100%,rgba(185,138,224,.10),transparent 55%)}
@@ -296,7 +294,7 @@ input[type=date]{min-height:46px}
 .cf::before{border-color:rgba(232,180,90,.6)}.lay{background:radial-gradient(ellipse at center,#2b1745,#0e0817 78%)}
 .hl,.ac,.nf,.bn,.pi.on,.ls .qs,.ct .qs{background:rgba(232,180,90,.09)}.it{background:rgba(255,255,255,.04)}
 .tabs{background:var(--bg)}.sb{background:radial-gradient(circle,#4a2c6e,#160d24)}}
-/* ===== Legemethoden kompakt + Klangraum schmal ===== */
+
 #ltrk{align-items:flex-start;overflow-y:hidden;transition:height .35s ease}
 .ls{padding:22px;gap:14px 26px}
 .ls .ct h3{font-size:1.75rem}.ls .ct .kw{font-size:1rem;padding-bottom:10px}
@@ -318,6 +316,10 @@ input[type=date]{min-height:46px}
 .ib{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 12px;padding:8px 14px;margin-bottom:12px;border:1px solid var(--g);border-radius:12px;font-size:.85rem;background:rgba(232,180,90,.09)}
 .ib .btn{margin:0;min-height:30px;padding:3px 14px;font-size:.8rem}
 .exp .wrap,.exp .snd,.exp #gate,.exp .ck,.exp .fin,.exp #im{display:none!important}
+:root{color-scheme:dark;background:var(--bg)}
+.tabs{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.card,.ls,.sl,.pf{contain:layout style}
+#lex{min-height:680px}#lgm{min-height:700px}
 </style>
 </head>
 <body>
@@ -509,7 +511,7 @@ function finale(){const s=$("fin");s.classList.add("show");document.body.style.o
  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
  const cv=$("cv"),x=cv.getContext("2d");cv.width=innerWidth;cv.height=innerHeight;const col=["#e8b45a","#7ee0b5","#c25b6e","#b98ae0","#fff"];
  const mk=()=>({x:Math.random()*cv.width,y:-10,vx:(Math.random()-.5)*2,vy:1+Math.random()*2,s:3+Math.random()*5,c:col[Math.floor(Math.random()*5)],l:260});
- P=Array.from({length:150},mk);
+ P=Array.from({length:innerWidth<700?90:150},mk);
  (function loop(){x.clearRect(0,0,cv.width,cv.height);P.forEach((p,i)=>{p.x+=p.vx;p.y+=p.vy;p.l--;x.globalAlpha=Math.max(p.l/260,0);x.fillStyle=p.c;x.fillRect(p.x,p.y,p.s,p.s*.5);if(p.l<=0||p.y>cv.height)P[i]=mk()});raf=requestAnimationFrame(loop)})()}
 function closeFin(){$("fin").classList.remove("show");document.body.style.overflow="";if(raf)cancelAnimationFrame(raf);raf=null}
 $("cl").onclick=closeFin;
@@ -747,9 +749,9 @@ const rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const cv=$("sky"),cx=cv.getContext("2d"),mcv=document.createElement("canvas");mcv.id="mwc";mcv.setAttribute("aria-hidden","true");document.body.prepend(mcv);
 let W,H,DP=1,lf=0,LT=false,col="#e8b45a";const SH=[];
 const ST=Array.from({length:150},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.3+.3,p:Math.random()*6.28,v:Math.random()*.0015+.0004}));
-const lt=()=>{const d=document.documentElement.dataset.theme;return d==="light"||(d!=="dark"&&matchMedia("(prefers-color-scheme: light)").matches)};
+const lt=()=>document.documentElement.dataset.theme==="light";
 /* Milchstraße: einmal vorgerendert, kostet danach keine Leistung */
-function milky(){const g=mcv.getContext("2d");mcv.width=W*DP;mcv.height=H*DP;g.setTransform(DP,0,0,DP,0,0);g.clearRect(0,0,W,H);LT=lt();const L=Math.hypot(W,H);g.save();g.translate(W*.5,H*.5);g.rotate(-.55);
+function milky(){const g=mcv.getContext("2d");const md=Math.min(DP,1.5);mcv.width=W*md;mcv.height=H*md;g.setTransform(md,0,0,md,0,0);g.clearRect(0,0,W,H);LT=lt();const L=Math.hypot(W,H);g.save();g.translate(W*.5,H*.5);g.rotate(-.55);
 for(let i=0;i<15;i++){const x=(i/14-.5)*L*1.05,R=L*(.13+Math.random()*.05),k=LT?[150,100,20,.05]:(i%2?[185,138,224,.085]:[120,160,235,.075]);g.save();g.translate(x,0);g.scale(1,.34);const r=g.createRadialGradient(0,0,0,0,0,R);r.addColorStop(0,`rgba(${k[0]},${k[1]},${k[2]},${k[3]})`);r.addColorStop(1,`rgba(${k[0]},${k[1]},${k[2]},0)`);g.fillStyle=r;g.fillRect(-R,-R,2*R,2*R);g.restore()}
 for(let i=0;i<1100;i++){const v=(Math.random()+Math.random()+Math.random()-1.5)*L*.05,z=.4+Math.random()*.8;g.globalAlpha=.12+Math.random()*.4;g.fillStyle=LT?"#7a5518":(Math.random()<.2?"#ffd9a0":"#e6ecff");g.fillRect((Math.random()*2-1)*L*.55,v,z,z)}g.restore()}
 function rs(){const w=cv.clientWidth||innerWidth,h=cv.clientHeight||innerHeight;if(w===W&&h===H)return;DP=Math.min(devicePixelRatio||1,2);W=w;H=h;cv.width=W*DP;cv.height=H*DP;col=getComputedStyle(document.documentElement).getPropertyValue("--g").trim()||col;milky()}
@@ -771,7 +773,8 @@ hd.querySelector("p").textContent="Ein Programm für 21 Tage, ein Lexikon mit 78
 hd.insertAdjacentHTML("beforeend",'<div class="cta2"><button class="btn" id="hg">✦ Ziehe deine Tageskarte</button><button class="btn o" id="hz">Zum Programm</button></div><div id="tgc"></div>');
 $("hg").onclick=()=>{const d=new Date(),c=CARDS[Math.abs((d.getFullYear()*400+(d.getMonth()+1)*31+d.getDate())*7919)%78];$("tgc").innerHTML=`<div class="tg" style="--sc:${c.col}">${mc(c,"Deine Tageskarte")}<div class="ct"><h3>${c.name}</h3><p class="kw">${c.kw}</p><p>${c.up}</p><p class="qs">${c.tip}</p></div></div>`;$("tgc").scrollIntoView({behavior:rm?"auto":"smooth",block:"center"})};
 $("hz").onclick=()=>document.querySelector(".prog").scrollIntoView({behavior:rm?"auto":"smooth",block:"start"});
-build();lgBuild();renderFam();
+const lazy=(id,fn)=>{const el=$(id);let d=false;const run=()=>{if(!d){d=true;fn()}};if("IntersectionObserver" in window){const o=new IntersectionObserver(e=>{if(e[0].isIntersecting){o.disconnect();run()}},{rootMargin:"900px 0px"});o.observe(el)}else run()};
+lazy("lex",()=>build());lazy("lgm",()=>lgBuild());renderFam();
 /* Navigation */
 const T=[["home","Programm"],["lex","Kartenlexikon"],["lgm","Legemethoden"],["fam","Familienkreis"]],nav=document.querySelector(".tabs");
 nav.removeAttribute("role");nav.innerHTML=T.map((t,i)=>`<button data-t="${t[0]}" aria-current="${i===0}" aria-selected="${i===0}">${t[1]}</button>`).join("")+'<button class="gd" id="gg">✦ Anleitung</button>';
