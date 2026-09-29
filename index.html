@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="format-detection" content="telephone=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mindshift">
+<meta name="application-name" content="21 Tage Mindshift">
+<meta name="description" content="21 Tage Transformation: Tarot-Programm, Kartenlexikon, Legemethoden und Familienkreis.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0e0817" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f4ecdf" media="(prefers-color-scheme: light)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <title>21 Tage Transformation – Karten legen Mindshift</title>
 <style>
 :root{--bg:#0e0817;--card:#1a1127;--ink:#ece3f2;--mute:#a998b8;--g:#e8b45a;--ok:#7ee0b5;--bad:#ff7a8a;--line:#3a2b4d;--dk:#1a1024;
@@ -12,7 +23,7 @@ padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bott
 @media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4ecdf;--card:#fbf6ec;--ink:#251532;--mute:#66587a;--g:#94640f;--ok:#1d7a55;--bad:#b03047;--line:#d5c6ae;--dk:#fbf6ec}}
 :root[data-theme="light"]{--bg:#f4ecdf;--card:#fbf6ec;--ink:#251532;--mute:#66587a;--g:#94640f;--ok:#1d7a55;--bad:#b03047;--line:#d5c6ae;--dk:#fbf6ec}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:var(--bg);color:var(--ink);font:400 1rem/1.7 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden;background-image:radial-gradient(circle at 15% 10%,color-mix(in srgb,var(--g) 14%,transparent),transparent 45%)}
+body{background:var(--bg);color:var(--ink);font:400 1rem/1.7 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
 :focus-visible{outline:2px solid var(--g);outline-offset:3px}
 .wrap{max-width:860px;margin:0 auto;padding:20px 16px 60px}
 h1,h2,h3,.serif{font-family:"Bodoni Moda",Georgia,serif;font-weight:500;line-height:1.15}
@@ -246,6 +257,67 @@ box-shadow:0 0 0 1px var(--sc),0 0 38px color-mix(in srgb,var(--sc) 38%,transpar
 #orc .tg{margin-top:20px}#orc .ol{text-align:center;color:var(--g);font:italic 500 1.15rem "Bodoni Moda",serif;margin-top:18px}
 .bn{border-color:#c9a0f0;background:linear-gradient(135deg,color-mix(in srgb,#b98ae0 14%,transparent),color-mix(in srgb,var(--g) 8%,transparent));padding:18px 20px}
 .bn h5{color:#c9a0f0;font-size:1.1rem;margin-bottom:6px}.bn .wq{font:italic 500 1.2rem/1.5 "Bodoni Moda",serif;color:var(--g);margin:6px 0 10px}.bn p:last-child{margin-bottom:0;line-height:1.8}
+
+/* ===== APP-FEINSCHLIFF: Retina, Touch, Tempo ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overscroll-behavior-y:none}
+a,button,select,input,label,[role=button]{touch-action:manipulation}
+.trk,.gate,.lgb,.tabs{-webkit-overflow-scrolling:touch}.trk{overscroll-behavior-x:contain}
+.sl:not(.vis) .cf,.sl:not(.vis) .ar g.spin{animation-play-state:paused}
+@media (display-mode:standalone){html,body{-webkit-touch-callout:none}}
+/* ===== FEINSCHLIFF v2: iPhone, Klangraum, Hintergrund ===== */
+:root{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+html{max-width:100%;overflow-x:hidden}body{max-width:100vw}
+#sky{height:100vh;height:100lvh;background:radial-gradient(ellipse at 15% 0%,rgba(232,180,90,.10),transparent 50%),radial-gradient(ellipse at 90% 100%,rgba(185,138,224,.10),transparent 55%)}
+.wrap{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+.wrap>*{min-width:0;max-width:100%}
+.grid>*,.inp>*,.met>*,.frm>*{min-width:0}
+.inp input,.frm input,.frm select{min-width:0;max-width:100%;-webkit-appearance:none;appearance:none}
+input[type=date]{min-height:46px}
+.card,.bar,.hl,.ac,.nf,.bn,.qs,.quote{overflow-wrap:break-word}
+.gate.show{display:flex}.gb{margin:auto;max-width:100%}
+.snd{right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px))}
+.sndp{max-height:calc(100vh - 110px);max-height:calc(100dvh - 110px);overflow:auto;-webkit-overflow-scrolling:touch}
+.shr .btn,.pf .acts .btn{min-height:34px;padding:5px 14px;font-size:.8rem;gap:6px;margin-top:0}
+.shr{gap:8px;margin:14px 0 4px}.pf .acts{gap:6px}
+@media (max-width:700px){
+.grid,.inp{grid-template-columns:minmax(0,1fr)}
+.met{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.met div{padding:10px 6px}.met b{font-size:1.3rem}
+.sb{width:42px;height:42px;font-size:1.2rem}
+}
+@media (max-width:480px){
+.wrap{padding-left:14px;padding-right:14px}.tabs{margin-left:-14px;margin-right:-14px;padding-left:14px;padding-right:14px}
+.card{padding:18px 16px}.bar{padding:10px 14px;font-size:.82rem}.cta{padding:28px 16px}
+.hd h1{font-size:clamp(1.75rem,8.2vw,2.2rem)}.gb{padding:26px 16px}}
+@media (max-height:480px){.sb{width:38px;height:38px}.sndp{max-height:calc(100dvh - 70px);bottom:calc(58px + env(safe-area-inset-bottom,0px))}}
+@supports not (color:color-mix(in srgb,red,blue)){
+.sl,.ls,.tg,.pf,.fh,.frm{background:radial-gradient(ellipse at 15% 15%,rgba(232,180,90,.14),transparent 55%),var(--card)}
+.cf{background:radial-gradient(ellipse at 50% 42%,rgba(232,180,90,.22),transparent 62%),linear-gradient(165deg,#241338,#0e0817 70%);box-shadow:0 0 0 1px var(--sc,#e8b45a),0 18px 40px rgba(0,0,0,.45)}
+.cf::before{border-color:rgba(232,180,90,.6)}.lay{background:radial-gradient(ellipse at center,#2b1745,#0e0817 78%)}
+.hl,.ac,.nf,.bn,.pi.on,.ls .qs,.ct .qs{background:rgba(232,180,90,.09)}.it{background:rgba(255,255,255,.04)}
+.tabs{background:var(--bg)}.sb{background:radial-gradient(circle,#4a2c6e,#160d24)}}
+/* ===== Legemethoden kompakt + Klangraum schmal ===== */
+#ltrk{align-items:flex-start;overflow-y:hidden;transition:height .35s ease}
+.ls{padding:22px;gap:14px 26px}
+.ls .ct h3{font-size:1.75rem}.ls .ct .kw{font-size:1rem;padding-bottom:10px}
+.ls .ct h4{margin:12px 0 3px;font-size:1rem}.ls .ct p{line-height:1.6;font-size:.94rem;margin-bottom:6px}
+.stp li{margin-bottom:6px;padding-left:34px;font-size:.92rem;line-height:1.55}.stp li::before{width:23px;height:23px;font-size:.78rem}
+.ls .qs{margin-top:12px;padding:10px 14px;font-size:.92rem}.lm{margin-top:10px}
+.ls .pl{grid-column:1/-1;border-top:1px solid var(--line);padding-top:4px}
+.pg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px}
+.pi{padding:6px 8px;margin:0;gap:10px;font-size:.88rem;line-height:1.45}.pi i{flex:0 0 24px;height:24px;font-size:.78rem}.pi b{font-size:.95rem}
+@media (max-width:760px){.pg{grid-template-columns:minmax(0,1fr)}.ls{padding:16px 14px}}
+@media (prefers-reduced-motion:reduce){#ltrk{transition:none}}
+.sndp{width:min(250px,calc(100vw - 24px));padding:12px 14px;border-radius:14px}
+.sndp h4{font-size:1.05rem}.sndp p{font-size:.78rem;margin:2px 0 8px;line-height:1.4}
+.mo{flex-direction:row;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.mo button{flex:1 1 auto;min-height:34px;padding:5px 10px;font-size:.8rem;text-align:center;border-radius:99px}.mo small{display:none}
+.sndp label{font-size:.75rem}.sndp .btn{min-height:36px;padding:6px 14px;font-size:.85rem;margin-top:8px}
+.sb{width:40px;height:40px;font-size:1.1rem}
+#mwc{position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;z-index:0;pointer-events:none}
+.ib{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 12px;padding:8px 14px;margin-bottom:12px;border:1px solid var(--g);border-radius:12px;font-size:.85rem;background:rgba(232,180,90,.09)}
+.ib .btn{margin:0;min-height:30px;padding:3px 14px;font-size:.8rem}
+.exp .wrap,.exp .snd,.exp #gate,.exp .ck,.exp .fin,.exp #im{display:none!important}
 </style>
 </head>
 <body>
@@ -319,8 +391,8 @@ box-shadow:0 0 0 1px var(--sc),0 0 38px color-mix(in srgb,var(--sc) 38%,transpar
 </section>
 <section id="lgm" hidden>
 <h2>Legemethoden</h2>
-<p class="p">Jede Legung ist ein anderer Weg, mit den Karten zu sprechen. Blättere durch das Rondell, entdecke, welche Methode zu deiner Frage passt, und tippe auf eine Karte oder Position, um zu sehen, was sie bedeutet.</p>
-<div class="hl"><h5>Bevor du beginnst: dein kleines Ritual</h5>Suche dir einen ruhigen Platz, vielleicht mit Kerze oder Tee. Atme dreimal tief ein und aus. Formuliere deine Frage offen und freundlich („Was darf ich sehen?“ statt „Wird es klappen?“). Mische in deinem Tempo, bis dein Gefühl „jetzt“ sagt, und lege die Karten in der Reihenfolge der Zahlen. Schau zuerst nur die Bilder an, dann deute. Danke am Ende den Karten und dir selbst.</div>
+<p class="p">Neun Wege, mit den Karten zu sprechen. Blättere durch das Rondell und tippe auf eine Karte oder Position, um ihre Bedeutung zu sehen.</p>
+<div class="hl"><h5>Bevor du beginnst: dein kleines Ritual</h5>Atme dreimal tief, stelle eine offene Frage, mische in deinem Tempo und lege die Karten in Zahlenreihenfolge. Schau zuerst die Bilder an, dann deute. Danke am Ende.</div>
 <div class="trk" id="ltrk" tabindex="0" aria-label="Legemethoden, mit Pfeiltasten blättern" style="margin-top:20px"></div>
 <div class="cn"><button class="nv" id="lpv" aria-label="Vorherige Legung">‹</button><span id="lci">1 / 9</span><select id="ljp" aria-label="Zu Legung springen"></select><button class="nv" id="lnx" aria-label="Nächste Legung">›</button></div>
 </section>
@@ -329,7 +401,7 @@ box-shadow:0 0 0 1px var(--sc),0 0 38px color-mix(in srgb,var(--sc) 38%,transpar
 <p style="margin-bottom:8px;color:var(--ink);font-weight:600">© 2027 Frank Zimmermann – 21 Tage Transformation. Alle Rechte vorbehalten.</p>
 <p style="max-width:640px;margin:0 auto 18px">Diese Seite dient der persönlichen Reflexion und Motivation. Tarot ist kein Ersatz für ärztliche, psychologische, rechtliche oder finanzielle Beratung. Bei ernsten Belastungen wende dich bitte an Fachleute oder eine offizielle Beratungsstelle.</p>
 <div class="legal" id="legal"></div>
-<p><a href="mailto:in60tagenrauchfrei@gmail.com">E-Mail: in60tagenrauchfrei@gmail.com</a> | <a href="https://chat.whatsapp.com/Kisnv5LGuvj4WrKadqo98B?mode=gi_t" target="_blank" rel="noopener">WhatsApp-Gruppe beitreten</a> | <a href="#days">Zu den 21 Tagen</a></p>
+<p><a href="mailto:cocodemershop@gmail.com">E-Mail: cocodemershop@gmail.com</a> | <a href="https://chat.whatsapp.com/Kisnv5LGuvj4WrKadqo98B?mode=gi_t" target="_blank" rel="noopener">WhatsApp-Gruppe beitreten</a> | <a href="#days">Zu den 21 Tagen</a></p>
 </footer>
 </div>
 
@@ -346,7 +418,7 @@ box-shadow:0 0 0 1px var(--sc),0 0 38px color-mix(in srgb,var(--sc) 38%,transpar
 
 <dialog class="lg" id="lg" aria-labelledby="lgt"><div class="lgh"><h2 id="lgt"></h2><button class="btn o" id="lgx" style="margin:0;padding:8px 18px">Schließen</button></div><div class="lgb" id="lgb"></div></dialog>
 <div class="ck" id="ck" role="region" aria-label="Cookie-Einstellungen" hidden><div class="cki" id="cki"></div></div>
-<div class="snd"><div class="sndp" id="sndp" hidden><h4>✦ Klangraum</h4><p>Sanfte Musik, die nur für dich entsteht. Sie wird in jedem Moment neu komponiert und wiederholt sich nie.</p><div class="mo" id="mo"></div><label for="vol">Lautstärke</label><input type="range" id="vol" min="0" max="100"><button class="btn" id="pl">▶ Musik beginnen</button></div><button class="sb" id="sb" aria-label="Klangraum öffnen" aria-expanded="false">♪</button></div>
+<div class="snd"><div class="sndp" id="sndp" hidden><h4>✦ Klangraum</h4><p>Sanfte Musik, die sich nie wiederholt.</p><div class="mo" id="mo"></div><label for="vol">Lautstärke</label><input type="range" id="vol" min="0" max="100"><button class="btn" id="pl">▶ Musik beginnen</button></div><button class="sb" id="sb" aria-label="Klangraum öffnen" aria-expanded="false">♪</button></div>
 <script>
 const TL=[["Tag 1","Du ziehst deine erste Karte und formulierst dein Ziel. Ein Anfang macht Mut."],["Tag 3","Du erkennst Bildsprache und liest Karten ohne Buch. Erste Sicherheit entsteht."],["Tag 7","Die Tageskarte wird Routine. Du merkst, welche Themen wiederkehren."],["Tag 14","Du verbindest Karten zu Geschichten und legst Dreikarten-Legungen sicher."],["Tag 21","Du legst das Keltische Kreuz und deine eigene Transformationslegung."],["Danach","Ein Ritual, das bleibt. Wie schnell Gewohnheiten fest werden, ist bei jedem anders."]];
 const MS=[["1. Es gibt keine falsche Karte","Jede Karte ist eine Einladung, genauer hinzusehen. Wenn du eine Karte „schlecht“ nennst, frag dich, was sie dir zeigen will."],["2. Du bist nicht ausgeliefert","Tarot sagt keine Zukunft an. Du entscheidest, was du mit dem Bild machst. Damit bleibst du in deiner Kraft."],["3. Kleine Schritte gewinnen","Zehn Minuten am Tag schlagen einen Marathon im Monat. Dranbleiben ist wichtiger als Perfektion."],["4. Lebe im Jetzt","Du musst nur diese eine Karte heute verstehen. Morgen kommt die nächste."]];
@@ -448,7 +520,7 @@ render();
 
 /* ===== RECHTLICHES, COOKIES ===== */
 const F=t=>`<mark class="pl">[${t}]</mark>`;
-const MAIL="in60tagenrauchfrei@gmail.com";
+const MAIL="cocodemershop@gmail.com";
 const HINT='<div class="warn"><b>Vorlage, keine Rechtsberatung.</b> Ersetze alle markierten Felder mit deinen Angaben und lass die Texte vor dem Livegang von einer Anwältin, einem Anwalt oder einem Rechtstexte-Dienst (z. B. IT-Recht Kanzlei, Händlerbund, eRecht24) prüfen.</div>';
 const OP=`${F("Vor- und Nachname bzw. Firma inkl. Rechtsform")}<br>${F("Straße und Hausnummer")}<br>${F("PLZ Ort")}<br>Deutschland`;
 const L={
@@ -595,7 +667,7 @@ const dsum=t=>String(t).replace(/\D/g,"").split("").reduce((a,b)=>a+ +b,0);
 function red(n){while(n>22)n=dsum(n);return n%22}
 function calc(f){const[y,m,d]=f.d.split("-").map(Number),now=new Date(),t0=new Date(now.getFullYear(),now.getMonth(),now.getDate()),cy=now.getFullYear();
 let nb=new Date(cy,m-1,d);if(nb<t0)nb=new Date(cy+1,m-1,d);const days=Math.round((nb-t0)/864e5);
-let z=FZ.findLast(x=>m*100+d>=x[3])||FZ[11];const pad=n=>String(n).padStart(2,"0");
+let z=FZ.slice().reverse().find(x=>m*100+d>=x[3])||FZ[11];const pad=n=>String(n).padStart(2,"0");
 return{z,days,age:nb.getFullYear()-y-(days===0?0:1),cy,soul:CARDS[red(dsum(f.d))],year:CARDS[red(dsum(pad(d)+pad(m)+cy))]}}
 function mc(c,l){return`<div class="mc"><div class="cf" style="--sc:${c.col}"><small>${c.num}</small><div class="ar">${art(c)}</div><div><b>${c.name}</b></div></div><span>${l}</span></div>`}
 function renderFam(){const L=fam.map(f=>({f,c:calc(f)})).sort((a,b)=>a.c.days-b.c.days);
@@ -629,7 +701,7 @@ const LG=[
 {n:"Die Mindshift-Legung",k:"Deine Transformation in vier Schritten",c:4,t:"15 Minuten",col:"#7ee0b5",w:"Zu deinem 21-Tage-Programm: wenn du loslassen und Neues wählen möchtest.",s:["Atme und benenne, was sich verändern darf.","Ziehe vier Karten und lege sie als aufsteigende Treppe.","Beende mit einem konkreten Satz: Mein erster Schritt ist ..."],p:[[16,72,0,0,"Was ich loslasse","Was seine Zeit hatte und gehen darf."],[38,56,0,0,"Was mich noch hält","Die leise Angst oder Gewohnheit dahinter."],[62,40,0,0,"Was ich neu wähle","Die Kraft, die du jetzt einlädst."],[84,24,0,0,"Mein erster Schritt","Klein, konkret, heute möglich."]],e:"Tu den ersten Schritt innerhalb von 24 Stunden. So wird Wandlung wirklich."}];
 LG[7].p=Array.from({length:12},(_,k)=>{const a=(180+k*30)*Math.PI/180;return[+(50+31*Math.cos(a)).toFixed(1),+(50+36*Math.sin(a)).toFixed(1),0,0,"Monat "+(k+1),"Dein "+(k+1)+". Monat: was dich trägt und was wachsen darf."]}).concat([[50,50,0,0,"Das Leitmotiv","Der Stern über deinem Jahr. Er zeigt, wozu alle zwölf Monate dich einladen."]]);
 let lgC=0;const ltrk=$("ltrk");
-function lgSlide(s){return`<article class="ls" style="--sc:${s.col}${s.cw?";--cw:"+s.cw:""}" aria-label="${s.n}"><div><div class="lay">${s.p.map((q,i)=>`<div class="pc" data-n="${i}" style="left:${q[0]}%;top:${q[1]}%;--r:${q[2]||"0deg"};--o:${q[3]||0}"><b>${i+1}</b></div>`).join("")}</div><div class="lm"><span>${s.c} ${s.c==1?"Karte":"Karten"}</span><span>${s.t}</span></div><p class="qs">${s.e}</p></div><div class="ct"><h3>${s.n}</h3><p class="kw">${s.k}</p><h4>Wann sie dir guttut</h4><p>${s.w}</p><h4>So legst du sie</h4><ol class="stp">${s.s.map(t=>`<li>${t}</li>`).join("")}</ol><h4>Die Positionen</h4>${s.p.map((q,i)=>`<div class="pi" data-n="${i}"><i>${i+1}</i><div><b>${q[4]}</b><br>${q[5]}</div></div>`).join("")}</div></article>`}
+function lgSlide(s){return`<article class="ls" style="--sc:${s.col}${s.cw?";--cw:"+s.cw:""}" aria-label="${s.n}"><div><div class="lay">${s.p.map((q,i)=>`<div class="pc" data-n="${i}" style="left:${q[0]}%;top:${q[1]}%;--r:${q[2]||"0deg"};--o:${q[3]||0}"><b>${i+1}</b></div>`).join("")}</div><div class="lm"><span>${s.c} ${s.c==1?"Karte":"Karten"}</span><span>${s.t}</span></div><p class="qs">${s.e}</p></div><div class="ct"><h3>${s.n}</h3><p class="kw">${s.k}</p><h4>Wann sie dir guttut</h4><p>${s.w}</p><h4>So legst du sie</h4><ol class="stp">${s.s.map(t=>`<li>${t}</li>`).join("")}</ol></div><div class="ct pl"><h4>Die Positionen</h4><div class="pg">${s.p.map((q,i)=>`<div class="pi" data-n="${i}"><i>${i+1}</i><div><b>${q[4]}</b> ${q[5]}</div></div>`).join("")}</div></div></article>`}
 function lgBuild(){ltrk.innerHTML=LG.map(lgSlide).join("");$("ljp").innerHTML=LG.map((s,i)=>`<option value="${i}">${s.n}</option>`).join("");lgGo(0,true)}
 function lgGo(i,inst){i=Math.max(0,Math.min(LG.length-1,i));ltrk.scrollTo({left:i*ltrk.clientWidth,behavior:inst||matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});lgSet(i)}
 function lgSet(i){lgC=i;$("lci").textContent=(i+1)+" / "+LG.length;$("ljp").value=i}
@@ -665,19 +737,30 @@ $("mo").onclick=e=>{const b=e.target.closest("button");if(!b)return;S.m=+b.datas
 $("vol").value=S.v;$("vol").oninput=e=>{S.v=+e.target.value;save();if(ac&&on)mg.gain.setTargetAtTime(vol(),ac.currentTime,.3)};
 $("pl").onclick=()=>on?stop():play();
 $("sb").onclick=()=>{const h=$("sndp").hidden=!$("sndp").hidden;$("sb").setAttribute("aria-expanded",!h)};
-document.addEventListener("visibilitychange",()=>{if(ac&&on)document.hidden?ac.suspend():ac.resume()});
+document.addEventListener("visibilitychange",()=>{if(ac&&on)document.hidden?ac.suspend():ac.resume()});window.et21Stop=()=>{if(ac&&on)stop()};
 })();
 
 /* ===== EINE GROSSARTIGE WEBSEITE: Sternenhimmel, Tor, Anleitung ===== */
 (function(){
 const rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
 /* Sternenhimmel */
-const cv=$("sky"),cx=cv.getContext("2d");let W,H,col="#e8b45a",sh=null;
-const ST=Array.from({length:130},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.3+.3,p:Math.random()*6.28,v:Math.random()*.0015+.0004}));
-function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight;col=getComputedStyle(document.documentElement).getPropertyValue("--g").trim()||col}
-function dr(t){cx.clearRect(0,0,W,H);cx.fillStyle=col;ST.forEach(a=>{cx.globalAlpha=.15+.5*Math.abs(Math.sin(t*a.v+a.p));cx.beginPath();cx.arc(a.x*W,a.y*H,a.r,0,6.283);cx.fill()});
-if(!sh&&Math.random()<.002)sh={x:Math.random()*W*.8,y:Math.random()*H*.4,l:0};if(sh){sh.l+=9;cx.globalAlpha=Math.max(0,1-sh.l/160);cx.strokeStyle=col;cx.lineWidth=1.4;cx.beginPath();cx.moveTo(sh.x+sh.l,sh.y+sh.l*.5);cx.lineTo(sh.x+sh.l+50,sh.y+sh.l*.5+25);cx.stroke();if(sh.l>160)sh=null}
-if(!rm)requestAnimationFrame(dr)}
+const cv=$("sky"),cx=cv.getContext("2d"),mcv=document.createElement("canvas");mcv.id="mwc";mcv.setAttribute("aria-hidden","true");document.body.prepend(mcv);
+let W,H,DP=1,lf=0,LT=false,col="#e8b45a";const SH=[];
+const ST=Array.from({length:150},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.3+.3,p:Math.random()*6.28,v:Math.random()*.0015+.0004}));
+const lt=()=>{const d=document.documentElement.dataset.theme;return d==="light"||(d!=="dark"&&matchMedia("(prefers-color-scheme: light)").matches)};
+/* Milchstraße: einmal vorgerendert, kostet danach keine Leistung */
+function milky(){const g=mcv.getContext("2d");mcv.width=W*DP;mcv.height=H*DP;g.setTransform(DP,0,0,DP,0,0);g.clearRect(0,0,W,H);LT=lt();const L=Math.hypot(W,H);g.save();g.translate(W*.5,H*.5);g.rotate(-.55);
+for(let i=0;i<15;i++){const x=(i/14-.5)*L*1.05,R=L*(.13+Math.random()*.05),k=LT?[150,100,20,.05]:(i%2?[185,138,224,.085]:[120,160,235,.075]);g.save();g.translate(x,0);g.scale(1,.34);const r=g.createRadialGradient(0,0,0,0,0,R);r.addColorStop(0,`rgba(${k[0]},${k[1]},${k[2]},${k[3]})`);r.addColorStop(1,`rgba(${k[0]},${k[1]},${k[2]},0)`);g.fillStyle=r;g.fillRect(-R,-R,2*R,2*R);g.restore()}
+for(let i=0;i<1100;i++){const v=(Math.random()+Math.random()+Math.random()-1.5)*L*.05,z=.4+Math.random()*.8;g.globalAlpha=.12+Math.random()*.4;g.fillStyle=LT?"#7a5518":(Math.random()<.2?"#ffd9a0":"#e6ecff");g.fillRect((Math.random()*2-1)*L*.55,v,z,z)}g.restore()}
+function rs(){const w=cv.clientWidth||innerWidth,h=cv.clientHeight||innerHeight;if(w===W&&h===H)return;DP=Math.min(devicePixelRatio||1,2);W=w;H=h;cv.width=W*DP;cv.height=H*DP;col=getComputedStyle(document.documentElement).getPropertyValue("--g").trim()||col;milky()}
+function dr(t){if(!rm&&t-lf<33){requestAnimationFrame(dr);return}lf=t;cx.setTransform(DP,0,0,DP,0,0);cx.clearRect(0,0,W,H);cx.fillStyle=col;
+ST.forEach(a=>{cx.globalAlpha=.15+.5*Math.abs(Math.sin(t*a.v+a.p));cx.beginPath();cx.arc(a.x*W,a.y*H,a.r,0,6.283);cx.fill()});
+if(!rm){if(SH.length<4&&Math.random()<.014){const d=Math.random()<.75?1:-1,an=.35+Math.random()*.5,sp=8+Math.random()*8;SH.push({x:d>0?Math.random()*W*.8:W*.2+Math.random()*W*.8,y:Math.random()*H*.45,vx:d*Math.cos(an)*sp,vy:Math.sin(an)*sp,len:60+Math.random()*90,l:0,max:35+Math.random()*30})}
+const hc=LT?"148,100,15":"255,240,210";
+for(let i=SH.length-1;i>=0;i--){const q=SH[i];q.l++;q.x+=q.vx;q.y+=q.vy;const k=Math.min(1,q.l/6)*(1-q.l/q.max);if(k<=0||q.x<-100||q.x>W+100||q.y>H+100){SH.splice(i,1);continue}
+const n=Math.hypot(q.vx,q.vy),tx=q.x-q.vx/n*q.len,ty=q.y-q.vy/n*q.len,gr=cx.createLinearGradient(q.x,q.y,tx,ty);gr.addColorStop(0,`rgba(${hc},1)`);gr.addColorStop(1,`rgba(${hc},0)`);
+cx.globalAlpha=k;cx.strokeStyle=gr;cx.lineWidth=1.6;cx.lineCap="round";cx.beginPath();cx.moveTo(q.x,q.y);cx.lineTo(tx,ty);cx.stroke();cx.fillStyle=`rgb(${hc})`;cx.beginPath();cx.arc(q.x,q.y,1.7,0,6.283);cx.fill();cx.fillStyle=col}}
+cx.globalAlpha=1;if(!rm)requestAnimationFrame(dr)}
 rs();addEventListener("resize",()=>{rs();if(rm)dr(0)});dr(0);
 /* alle Rondelle auf einer Seite */
 const hd=document.querySelector(".hd");hd.id="home";
@@ -693,7 +776,7 @@ build();lgBuild();renderFam();
 const T=[["home","Programm"],["lex","Kartenlexikon"],["lgm","Legemethoden"],["fam","Familienkreis"]],nav=document.querySelector(".tabs");
 nav.removeAttribute("role");nav.innerHTML=T.map((t,i)=>`<button data-t="${t[0]}" aria-current="${i===0}" aria-selected="${i===0}">${t[1]}</button>`).join("")+'<button class="gd" id="gg">✦ Anleitung</button>';
 nav.onclick=e=>{const b=e.target.closest("button[data-t]");if(!b)return;b.dataset.t==="home"?scrollTo({top:0,behavior:rm?"auto":"smooth"}):$(b.dataset.t).scrollIntoView({behavior:rm?"auto":"smooth",block:"start"})};
-let ra;addEventListener("scroll",()=>{cancelAnimationFrame(ra);ra=requestAnimationFrame(()=>{let a="home";T.forEach(t=>{if($(t[0]).getBoundingClientRect().top<innerHeight*.4)a=t[0]});nav.querySelectorAll("[data-t]").forEach(b=>{const on=b.dataset.t===a;b.setAttribute("aria-selected",on);on&&b.scrollIntoView({block:"nearest",inline:"center"})})})},{passive:true});
+let ra,la="";addEventListener("scroll",()=>{cancelAnimationFrame(ra);ra=requestAnimationFrame(()=>{let a="home";T.forEach(t=>{if($(t[0]).getBoundingClientRect().top<innerHeight*.4)a=t[0]});if(a!==la){la=a;nav.querySelectorAll("[data-t]").forEach(b=>{const on=b.dataset.t===a;b.setAttribute("aria-selected",on);if(on)nav.scrollTo({left:b.offsetLeft-(nav.clientWidth-b.offsetWidth)/2,behavior:"smooth"})})}})},{passive:true});
 /* Tor: Rechte, 18+, Anleitung */
 const K="et21_gate",gt=$("gate"),g=$("gs");let ok=ls.g(K,null),step=1,gi=0,only=false;
 const G=[["Willkommen in deinem Kartenreich","Diese Seite ist dein persönlicher Raum für 21 Tage Wandlung mit Tarotkarten. Alles liegt auf einer einzigen, ruhigen Seite. Oben im Menü tippst du auf einen Bereich und gleitest sanft dorthin. Du kannst nichts falsch machen. Nimm dir Zeit."],
@@ -702,11 +785,11 @@ const G=[["Willkommen in deinem Kartenreich","Diese Seite ist dein persönlicher
 ["Die Legemethoden","Neun Wege, Karten zu legen. Das Bild zeigt, wo jede Karte liegt. Tippe auf eine Karte oder eine Position, dann leuchten beide gemeinsam auf. Lies die drei Schritte, mische deine eigenen Karten und lege sie in der Reihenfolge der Zahlen."],
 ["Der Familienkreis","Trage Name und Geburtstag ein, auch für Partner, Kinder, Eltern und Freunde. Du erhältst Sternzeichen, Seelenkarte und Jahreskarte, einen Geburtstags-Countdown und einen Gruß zum Teilen. Alles bleibt auf deinem Gerät, und jeden Eintrag kannst du jederzeit entfernen."],
 ["Tageskarte und Klangraum","Oben auf der Seite ziehst du deine Tageskarte, sie bleibt den ganzen Tag dieselbe. Der goldene Knopf ♪ unten rechts öffnet den Klangraum: sanfte Musik, die nie gleich klingt. Wähle Stimmung und Lautstärke. Sie beginnt nur, wenn du sie startest."],
-["Wichtig zum Schluss","Tarot ist ein Spiegel für Nachdenken und Freude, keine Vorhersage und kein Ersatz für ärztlichen, psychologischen, rechtlichen oder finanziellen Rat. Diese Anleitung erreichst du jederzeit über „Anleitung“ im Menü. Nun wünsche ich dir von Herzen viel Freude und Wandlung."]];
+["Wichtig zum Schluss","Tarot ist ein Spiegel für Nachdenken und Freude, keine Vorhersage und kein Ersatz für ärztlichen, psychologischen, rechtlichen oder finanziellen Rat. Dein Kartenreich steht dir drei Monate lang offen, danach schließt es sich sanft von selbst. Diese Anleitung erreichst du jederzeit über „Anleitung“ im Menü. Nun wünsche ich dir von Herzen viel Freude und Wandlung."]];
 function fin(){gt.classList.remove("show");document.documentElement.style.overflow="";if(!only){ok={v:1,t:Date.now()};ls.s(K,ok)}}
 function show(){gt.classList.add("show");document.documentElement.style.overflow="hidden";gt.scrollTop=0;rd()}
 function rd(){let h="";
-if(step===1)h=`<div class="ey">✦ Bevor wir beginnen ✦</div><h2 id="gt">Deine Rechte</h2><p class="ctr">Schön, dass du da bist. Damit du dich sicher fühlst, hier das Wichtigste in Ruhe.</p><ul class="rl"><li><b>Deine Daten:</b> Es gibt keine Konten. Fortschritt, Notizen und Familienkreis liegen nur im Speicher deines Browsers. Wir sehen sie nicht.</li><li><b>Externe Schriften:</b> Google Fonts laden nur mit deiner Zustimmung im Cookie-Hinweis. Dabei wird deine IP-Adresse an Google übertragen.</li><li><b>Deine Rechte nach DSGVO:</b> Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Widerruf. Schreibe an in60tagenrauchfrei@gmail.com. Löschst du die Browserdaten, ist alles entfernt.</li><li><b>Urheberrecht:</b> © 2027 Frank Zimmermann. Alle Rechte vorbehalten. Die private Nutzung ist herzlich willkommen, Weitergabe oder Kopie nur mit Genehmigung.</li><li><b>Hinweis:</b> Tarot dient der Reflexion und Motivation. Es ersetzt keine ärztliche, psychologische, rechtliche oder finanzielle Beratung.</li></ul><div class="lk"><button class="lnk" data-l="datenschutz">Datenschutz lesen</button><button class="lnk" data-l="impressum">Impressum lesen</button></div><label class="chk"><input type="checkbox" id="gck"> Ich habe die Hinweise gelesen und bin einverstanden.</label><div class="row"><button class="btn" id="gn" disabled>Weiter</button></div>`;
+if(step===1)h=`<div class="ey">✦ Bevor wir beginnen ✦</div><h2 id="gt">Deine Rechte</h2><p class="ctr">Schön, dass du da bist. Damit du dich sicher fühlst, hier das Wichtigste in Ruhe.</p><ul class="rl"><li><b>Deine Daten:</b> Es gibt keine Konten. Fortschritt, Notizen und Familienkreis liegen nur im Speicher deines Browsers. Wir sehen sie nicht.</li><li><b>Externe Schriften:</b> Google Fonts laden nur mit deiner Zustimmung im Cookie-Hinweis. Dabei wird deine IP-Adresse an Google übertragen.</li><li><b>Deine Rechte nach DSGVO:</b> Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Widerruf. Schreibe an cocodemershop@gmail.com. Löschst du die Browserdaten, ist alles entfernt.</li><li><b>Urheberrecht:</b> © 2027 Frank Zimmermann. Alle Rechte vorbehalten. Die private Nutzung ist herzlich willkommen, Weitergabe oder Kopie nur mit Genehmigung.</li><li><b>Dauer:</b> Dein Zugang gilt drei Monate ab dem ersten Besuch. Danach schließt sich das Programm von selbst, und du kannst deine Daten vorher sichern.</li><li><b>Hinweis:</b> Tarot dient der Reflexion und Motivation. Es ersetzt keine ärztliche, psychologische, rechtliche oder finanzielle Beratung.</li></ul><div class="lk"><button class="lnk" data-l="datenschutz">Datenschutz lesen</button><button class="lnk" data-l="impressum">Impressum lesen</button></div><label class="chk"><input type="checkbox" id="gck"> Ich habe die Hinweise gelesen und bin einverstanden.</label><div class="row"><button class="btn" id="gn" disabled>Weiter</button></div>`;
 else if(step===2)h=`<div class="ey">✦ Ein kurzer Moment ✦</div><h2 id="gt">Bist du 18?</h2><p class="ctr">Diese Seite behandelt Themen wie Selbstreflexion, Beziehungen und Lebensfragen und richtet sich an Erwachsene. Bist du mindestens 18 Jahre alt?</p><div class="row"><button class="btn" id="gy">Ja, ich bin 18 oder älter</button><button class="btn o" id="gno">Nein, noch nicht</button></div>`;
 else if(step===0)h=`<h2 id="gt">Danke für deine Ehrlichkeit</h2><p class="ctr">Diese Seite ist für Erwachsene. Wenn du 18 bist, bist du herzlich willkommen. Bis dahin: Sei lieb zu dir und sprich mit einem Menschen, dem du vertraust, wenn dich etwas beschäftigt.</p><div class="row"><button class="btn o" id="gbk">Zurück</button></div>`;
 else{const q=G[gi];h=(only?'<button class="gx" id="gx" aria-label="Schließen">✕</button>':"")+`<div class="ey">✦ Anleitung · ${gi+1} von ${G.length} ✦</div><h2 id="gt">${q[0]}</h2><div class="gdots">${G.map((_,i)=>`<i class="${i===gi?"on":""}"></i>`).join("")}</div><p class="ctr" style="font-size:1.08rem;line-height:1.85">${q[1]}</p><div class="row">${gi?'<button class="btn o" id="gp">Zurück</button>':""}<button class="btn" id="gn">${gi===G.length-1?(only?"Verstanden ✦":"Eintreten ✦"):"Weiter"}</button></div>`}
@@ -741,6 +824,40 @@ else if(k==="tg")open("https://t.me/share/url?url="+encodeURIComponent(u||" ")+"
 else if(k==="sh")navigator.share({text:t,url:u||undefined}).catch(()=>{});
 else(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent="Kopiert ✓";setTimeout(()=>b.textContent=old,1800)},()=>{b.textContent="Nicht möglich"})});
 })();
+
+/* ===== APP: Animationen nur sichtbar, Installation, Offline ===== */
+(function(){
+const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle("vis",e.isIntersecting)),{root:$("trk"),threshold:.1});
+const ob=()=>$("trk").querySelectorAll(".sl").forEach(x=>io.observe(x));const b0=build;build=function(){b0();ob()};ob();
+if("serviceWorker" in navigator&&/^https?:$/.test(location.protocol))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+const sa=matchMedia("(display-mode: standalone)").matches||navigator.standalone;
+if(!sa){$("legal").insertAdjacentHTML("beforeend",'<button class="lnk" id="inst">📲 Als App installieren</button>');let dp;
+const ov=()=>$("gate").classList.contains("show")?"hidden":"";
+function guide(){const ua=navigator.userAgent,ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1),saf=/Safari/.test(ua)&&!/Chrome|Chromium|Edg|OPR/.test(ua);
+const st=ios?["Tippe in Safari auf das Teilen-Symbol (Quadrat mit Pfeil nach oben).","Scrolle im Menü und wähle „Zum Home-Bildschirm“.","Tippe oben rechts auf „Hinzufügen“. Mindshift liegt nun als App auf deinem Startbildschirm."]:saf?["Wähle in der Menüleiste „Ablage“.","Klicke auf „Zum Dock hinzufügen“.","Bestätige mit „Hinzufügen“. Mindshift öffnet sich nun wie eine eigene Mac-App."]:["Öffne das Browser-Menü (drei Punkte) oder klicke auf das Installieren-Symbol in der Adressleiste.","Wähle „App installieren“ oder „Zum Startbildschirm hinzufügen“.","Bestätige. Mindshift erscheint als App auf deinem Gerät."];
+let im=$("im");if(!im){im=document.createElement("div");im.className="gate";im.id="im";im.setAttribute("role","dialog");im.setAttribute("aria-modal","true");document.body.appendChild(im)}
+im.innerHTML=`<div class="gb"><div class="ey">✦ Als App installieren ✦</div><h2>So geht es in drei Schritten</h2><ol class="stp" style="--sc:#e8b45a;margin:16px 0">${st.map(t=>`<li>${t}</li>`).join("")}</ol>${ios?'<p class="ctr" style="font-size:.85rem">Bitte öffne die Seite dafür direkt in Safari, nicht aus einer anderen App heraus.</p>':""}<div class="row"><button class="btn" id="imx">Verstanden</button></div></div>`;
+im.classList.add("show");document.documentElement.style.overflow="hidden";$("imx").onclick=()=>{im.classList.remove("show");document.documentElement.style.overflow=ov()}}
+function inst(){if(dp){dp.prompt();if(dp.userChoice)dp.userChoice.then(()=>{dp=null});return}guide()}
+function hideIb(p){const e=$("ib");if(e)e.remove();ls.s("et21_ib",p?9e15:Date.now())}
+function showIb(){if(Date.now()-ls.g("et21_ib",0)<6048e5||$("ib")||document.documentElement.classList.contains("exp"))return;
+document.querySelector(".bar").insertAdjacentHTML("beforebegin",'<div class="ib" id="ib"><span>📲 Mindshift als App auf deinen Startbildschirm</span><button class="btn" id="ibi">Installieren</button><button class="lnk" id="ibx">Später</button></div>');$("ibi").onclick=inst;$("ibx").onclick=()=>hideIb(false)}
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e});addEventListener("appinstalled",()=>hideIb(true));
+$("inst").onclick=inst;const iv=setInterval(()=>{if(!$("gate").classList.contains("show")){clearInterval(iv);setTimeout(showIb,1500)}},1000)}
+/* Drei Monate Zugang, danach schließt sich das Programm von selbst */
+const KF="et21_first",DAYS=90;let fs=ls.g(KF,null);if(!fs){const g0=ls.g("et21_gate",null);fs=(g0&&g0.t)||Date.now();ls.s(KF,fs)}
+const left=DAYS-Math.floor((Date.now()-fs)/864e5),br=document.querySelector(".bar");
+if(br)br.insertAdjacentHTML("beforeend",`<span>⏳ Zugang: noch ${Math.max(0,left)} Tage</span>`);
+if(left<=0){document.documentElement.classList.add("exp");if(window.et21Stop)window.et21Stop();
+const d=document.createElement("div");d.className="gate show";d.id="ex";d.innerHTML='<div class="gb"><div class="ey">✦ Ein Kreis schließt sich ✦</div><h2>Deine drei Monate sind vollendet</h2><p class="ctr">Danke, dass du dir 90 Tage Zeit für dich und deine Karten geschenkt hast. Das Programm schließt sich nun. Alles, was du hier eingetragen hast, ist dein Schatz: Sichere es mit einem Klick, bevor du gehst.</p><p class="ctr">Wenn du weitergehen möchtest, schreibe uns von Herzen gern.</p><div class="row"><button class="btn" id="exd">Meine Daten sichern</button><a class="btn o" href="mailto:cocodemershop@gmail.com">Wir bleiben in Kontakt</a></div></div>';
+document.body.appendChild(d);document.documentElement.style.overflow="hidden";
+$("exd").onclick=()=>{const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);o[k]=localStorage.getItem(k)}const b=new Blob([JSON.stringify(o,null,1)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="mein-kartenreich-sicherung.json";a.click()}}
+})();
+
+/* Legemethoden: Rondell passt seine Höhe der Karte an */
+(function(){const t=$("ltrk");function fit(){const c=t.children[lgC];if(c)t.style.height=c.offsetHeight+"px"}
+const a=lgSet;lgSet=function(i){a(i);fit()};const b=lgBuild;lgBuild=function(){b();fit()};
+addEventListener("resize",fit);addEventListener("load",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);fit()})();
 </script>
 </body>
 </html>
