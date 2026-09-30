@@ -229,7 +229,7 @@ box-shadow:0 0 0 1px var(--sc),0 0 38px color-mix(in srgb,var(--sc) 38%,transpar
 .chap>.p{text-align:center;max-width:62ch;margin:0 auto 18px}
 .hd{scroll-margin-top:64px;padding-top:10px}
 .hd .ey{font:italic 500 1.05rem "Bodoni Moda",serif;color:var(--g);letter-spacing:.12em;margin-bottom:10px}
-.hd h1 span{background:linear-gradient(90deg,var(--g),#e6b6ff,var(--g));background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shn 9s linear infinite}
+.hd h1 span{background:linear-gradient(90deg,var(--g),#e6b6ff,var(--g));background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent}
 @keyframes shn{to{background-position:220% 0}}
 .cta2{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:6px}
 .tg{display:flex;gap:26px;align-items:flex-start;text-align:left;flex-wrap:wrap;margin:28px auto 0;max-width:680px;padding:24px;border:1px solid var(--g);border-radius:20px;background:radial-gradient(ellipse at 10% 0,color-mix(in srgb,var(--sc) 22%,transparent),transparent 60%),var(--card);box-shadow:0 0 40px color-mix(in srgb,var(--sc) 22%,transparent)}
@@ -320,6 +320,20 @@ input[type=date]{min-height:46px}
 .tabs{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
 .card,.ls,.sl,.pf{contain:layout style}
 #lex{min-height:680px}#lgm{min-height:700px}
+
+/* Prager Orloj */
+.orl{margin:4px auto 46px;text-align:center}
+.orl .ey{font:italic 500 1.05rem "Bodoni Moda",Georgia,serif;color:var(--g);letter-spacing:.12em;margin-bottom:6px}
+.orl h2{font-size:clamp(1.7rem,5vw,2.6rem);color:var(--g);margin-bottom:8px}
+.orl .sub{color:var(--mute);max-width:52ch;margin:0 auto 18px}
+.orl svg{display:block;width:min(540px,96%);height:auto;margin:0 auto;}
+.orl .sh{transition:transform .8s ease;transform-box:fill-box;transform-origin:50% 50%}
+.orl .sh.op{transform:scaleX(0)}
+@media (prefers-reduced-motion:reduce){.orl .sh{transition:none}}
+.tabs{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--bg)}
+.orl .lg{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0 2px}
+.orl .lg span{border:1px solid var(--line);border-radius:99px;padding:5px 14px;font-size:.85rem;color:var(--mute);background:rgba(232,180,90,.07)}
+.orl .lg b{color:var(--g);font-weight:600}
 </style>
 </head>
 <body>
@@ -330,6 +344,15 @@ input[type=date]{min-height:46px}
   <h1>21 Tage Transformation<br><span>Karten legen Mindshift</span></h1>
   <p>Dein Fahrplan in drei Wochen: von der ersten Karte bis zur eigenen Transformationslegung, mit Zeitstrahl, Wissens-Checks und persönlicher Auswertung.</p>
 </header>
+
+<section class="orl" id="orloj" aria-labelledby="olt">
+<div class="ey">✦ Zeit der Sterne ✦</div>
+<h2 id="olt">Der Prager Orloj</h2>
+<p class="sub">Seit 1410 zeigt die Astronomische Uhr am Altstädter Rathaus in Prag Sonne, Mond und Tierkreis. Hier läuft sie live mit dir mit, und die Scheibe darunter zählt deine 21 Tage ab deinem Start.</p>
+<svg id="orl" viewBox="-106 -152 212 348" role="img" aria-label="Prager Astronomische Uhr Orloj mit Sonne, Mond, Tierkreis, Kalenderscheibe, den vier Figuren und dem Umgang der zwölf Apostel"></svg>
+<div class="lg"><span>☉ Sonne im Zeichen <b id="olS"></b></span><span>☾ <b id="olM"></b></span><span>Altböhmische Zeit <b id="olC"></b></span></div>
+<button class="btn o" id="olb" type="button">✦ Stundenschlag zeigen</button>
+</section>
 
 <div class="card"><h2>Willkommen in deinem Mindshift</h2>
 <p class="p">Diese Seite begleitet dich 21 Tage lang. Jeden Tag bekommst du einen Aha-Moment, einen Mindshift-Fokus und eine kleine Aufgabe mit deinen Karten. Tarot ist dabei dein Spiegel: Die Karten sagen nicht die Zukunft voraus, sie zeigen dir Gedankenmuster und geben dir bessere Fragen. Du übernimmst die Regie, die Karten liefern die Bilder.</p>
@@ -714,13 +737,18 @@ ltrk.addEventListener("click",e=>{const t=e.target.closest("[data-n]");if(!t)ret
 
 /* ===== KLANGRAUM: generative Entspannungsmusik ===== */
 (function(){
-const MD=[{n:"Mondlicht",d:"Tiefe, warme Ruhe",r:110,ch:[[0,7,15,19],[-4,3,7,14],[-2,5,10,14],[-7,0,3,10]],sc:[0,3,5,7,10]},{n:"Sternenmeer",d:"Weit, klar und leicht",r:146.83,ch:[[0,7,14,18],[5,9,12,19],[7,11,14,21],[2,9,14,17]],sc:[0,2,4,7,9]},{n:"Sonnenaufgang",d:"Sanft, hell und hoffnungsvoll",r:130.81,ch:[[0,7,11,16],[5,9,12,16],[-3,4,9,12],[-5,2,7,11]],sc:[0,2,4,7,9]}];
+const MD=[{n:"Mondlicht",d:"Tiefe, warme Ruhe",r:110,ch:[[0,7,15,19],[-4,3,7,14],[-2,5,10,14],[-7,0,3,10]],sc:[0,3,5,7,10]},{n:"Sternenmeer",d:"Weit, klar und leicht",r:146.83,ch:[[0,7,14,18],[5,9,12,19],[7,11,14,21],[2,9,14,17]],sc:[0,2,4,7,9]},{n:"Sonnenaufgang",d:"Sanft, hell und hoffnungsvoll",r:130.81,ch:[[0,7,11,16],[5,9,12,16],[-3,4,9,12],[-5,2,7,11]],sc:[0,2,4,7,9]},
+{n:"Waldquelle",d:"Hell, leicht, plätschernd",r:130.81,ch:[[0,7,12,16],[5,9,12,19],[7,11,14,19],[2,9,12,16]],sc:[0,2,4,7,9],o:[1,2,3]},
+{n:"Ozeantraum",d:"Tief, weit, schwebend",r:98,ch:[[0,7,14,17],[-2,5,12,16],[3,10,14,19],[-5,2,7,14]],sc:[0,2,3,7,9],o:[1,2],p:.6},
+{n:"Tempelklang",d:"Offen, still, meditativ",r:116.54,ch:[[0,7,12,19],[0,5,12,17],[-2,5,10,17],[0,7,14,19]],sc:[0,2,5,7,9],o:[1,2],p:.5},
+{n:"Nachtregen",d:"Zart, hoch, tropfend",r:123.47,ch:[[0,7,12,15],[-4,3,7,15],[-2,5,10,14],[-5,2,7,14]],sc:[0,3,5,7,10],o:[2,3]},
+{n:"Kristallhöhle",d:"Funkelnd, klar, magisch",r:164.81,ch:[[0,7,11,18],[5,12,16,21],[7,14,19,23],[2,9,14,21]],sc:[0,2,4,6,7,9,11],o:[1,2],p:.8}];
 let S=Object.assign({v:50,m:0},ls.g("et21_snd",{})),ac,mg,bus,dr,on=false,tm={},ci=0;
 if(!MD[S.m])S.m=0;
 const M=()=>MD[S.m],F=x=>M().r*Math.pow(2,x/12),R=(a,b)=>a+Math.random()*(b-a),pk=a=>a[Math.floor(Math.random()*a.length)];
 function tone(f,type,t,a,peak,dec,dst,pan){const o=ac.createOscillator(),g=ac.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(peak,t+a);g.gain.exponentialRampToValueAtTime(.0001,t+a+dec);o.connect(g);let n=g;if(pan!=null&&ac.createStereoPanner){const p=ac.createStereoPanner();p.pan.value=pan;g.connect(p);n=p}n.connect(dst);o.start(t);o.stop(t+a+dec+.2)}
 function pad(){const t=ac.currentTime,c=M().ch[ci++%4],lp=ac.createBiquadFilter();lp.type="lowpass";lp.frequency.value=750;lp.connect(bus);c.forEach((x,i)=>[-5,5].forEach(d=>tone(F(x)*Math.pow(2,d/1200),i%2?"triangle":"sine",t,R(4,6),.05,R(7,9),lp,R(-.6,.6))))}
-function bell(){const t=ac.currentTime,sc=M().sc,f=F(pk(sc)+12*pk([1,2])),p=R(-.8,.8);tone(f,"sine",t,.02,.06,R(4,6),bus,p);tone(f*2.01,"sine",t,.02,.015,2.5,bus,p);if(Math.random()<.35)tone(F(pk(sc)+24),"sine",t+R(.4,.9),.02,.035,4,bus,-p)}
+function bell(){if(Math.random()>(M().p||1))return;const t=ac.currentTime,sc=M().sc,f=F(pk(sc)+12*pk(M().o||[1,2])),p=R(-.8,.8);tone(f,"sine",t,.02,.06,R(4,6),bus,p);tone(f*2.01,"sine",t,.02,.015,2.5,bus,p);if(Math.random()<.35)tone(F(pk(sc)+24),"sine",t+R(.4,.9),.02,.035,4,bus,-p)}
 function bowl(){const t=ac.currentTime,f=F(pk(M().sc.slice(0,3))+12);tone(f,"sine",t,1.5,.06,14,bus,-.3);tone(f+R(1,2),"sine",t,1.5,.05,14,bus,.3)}
 function loop(k,fn,a,b){const go=()=>{if(!on)return;fn();tm[k]=setTimeout(go,R(a,b)*1000)};go()}
 function init(){ac=new(window.AudioContext||window.webkitAudioContext)();mg=ac.createGain();mg.gain.value=0;mg.connect(ac.destination);bus=ac.createGain();bus.connect(mg);
@@ -748,16 +776,16 @@ const rm=matchMedia("(prefers-reduced-motion: reduce)").matches;
 /* Sternenhimmel */
 const cv=$("sky"),cx=cv.getContext("2d"),mcv=document.createElement("canvas");mcv.id="mwc";mcv.setAttribute("aria-hidden","true");document.body.prepend(mcv);
 let W,H,DP=1,lf=0,LT=false,col="#e8b45a";const SH=[];
-const ST=Array.from({length:150},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.3+.3,p:Math.random()*6.28,v:Math.random()*.0015+.0004}));
+const ST=Array.from({length:90},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.3+.3,p:Math.random()*6.28,v:Math.random()*.0015+.0004}));
 const lt=()=>document.documentElement.dataset.theme==="light";
 /* Milchstraße: einmal vorgerendert, kostet danach keine Leistung */
 function milky(){const g=mcv.getContext("2d");const md=Math.min(DP,1.5);mcv.width=W*md;mcv.height=H*md;g.setTransform(md,0,0,md,0,0);g.clearRect(0,0,W,H);LT=lt();const L=Math.hypot(W,H);g.save();g.translate(W*.5,H*.5);g.rotate(-.55);
 for(let i=0;i<15;i++){const x=(i/14-.5)*L*1.05,R=L*(.13+Math.random()*.05),k=LT?[150,100,20,.05]:(i%2?[185,138,224,.085]:[120,160,235,.075]);g.save();g.translate(x,0);g.scale(1,.34);const r=g.createRadialGradient(0,0,0,0,0,R);r.addColorStop(0,`rgba(${k[0]},${k[1]},${k[2]},${k[3]})`);r.addColorStop(1,`rgba(${k[0]},${k[1]},${k[2]},0)`);g.fillStyle=r;g.fillRect(-R,-R,2*R,2*R);g.restore()}
 for(let i=0;i<1100;i++){const v=(Math.random()+Math.random()+Math.random()-1.5)*L*.05,z=.4+Math.random()*.8;g.globalAlpha=.12+Math.random()*.4;g.fillStyle=LT?"#7a5518":(Math.random()<.2?"#ffd9a0":"#e6ecff");g.fillRect((Math.random()*2-1)*L*.55,v,z,z)}g.restore()}
 function rs(){const w=cv.clientWidth||innerWidth,h=cv.clientHeight||innerHeight;if(w===W&&h===H)return;DP=Math.min(devicePixelRatio||1,2);W=w;H=h;cv.width=W*DP;cv.height=H*DP;col=getComputedStyle(document.documentElement).getPropertyValue("--g").trim()||col;milky()}
-function dr(t){if(!rm&&t-lf<33){requestAnimationFrame(dr);return}lf=t;cx.setTransform(DP,0,0,DP,0,0);cx.clearRect(0,0,W,H);cx.fillStyle=col;
+function dr(t){if(!rm&&t-lf<50){requestAnimationFrame(dr);return}lf=t;cx.setTransform(DP,0,0,DP,0,0);cx.clearRect(0,0,W,H);cx.fillStyle=col;
 ST.forEach(a=>{cx.globalAlpha=.15+.5*Math.abs(Math.sin(t*a.v+a.p));cx.beginPath();cx.arc(a.x*W,a.y*H,a.r,0,6.283);cx.fill()});
-if(!rm){if(SH.length<4&&Math.random()<.014){const d=Math.random()<.75?1:-1,an=.35+Math.random()*.5,sp=8+Math.random()*8;SH.push({x:d>0?Math.random()*W*.8:W*.2+Math.random()*W*.8,y:Math.random()*H*.45,vx:d*Math.cos(an)*sp,vy:Math.sin(an)*sp,len:60+Math.random()*90,l:0,max:35+Math.random()*30})}
+if(!rm){if(SH.length<2&&Math.random()<.005){const d=Math.random()<.75?1:-1,an=.35+Math.random()*.5,sp=8+Math.random()*8;SH.push({x:d>0?Math.random()*W*.8:W*.2+Math.random()*W*.8,y:Math.random()*H*.45,vx:d*Math.cos(an)*sp,vy:Math.sin(an)*sp,len:60+Math.random()*90,l:0,max:35+Math.random()*30})}
 const hc=LT?"148,100,15":"255,240,210";
 for(let i=SH.length-1;i>=0;i--){const q=SH[i];q.l++;q.x+=q.vx;q.y+=q.vy;const k=Math.min(1,q.l/6)*(1-q.l/q.max);if(k<=0||q.x<-100||q.x>W+100||q.y>H+100){SH.splice(i,1);continue}
 const n=Math.hypot(q.vx,q.vy),tx=q.x-q.vx/n*q.len,ty=q.y-q.vy/n*q.len,gr=cx.createLinearGradient(q.x,q.y,tx,ty);gr.addColorStop(0,`rgba(${hc},1)`);gr.addColorStop(1,`rgba(${hc},0)`);
@@ -861,6 +889,117 @@ $("exd").onclick=()=>{const o={};for(let i=0;i<localStorage.length;i++){const k=
 (function(){const t=$("ltrk");function fit(){const c=t.children[lgC];if(c)t.style.height=c.offsetHeight+"px"}
 const a=lgSet;lgSet=function(i){a(i);fit()};const b=lgBuild;lgBuild=function(){b();fit()};
 addEventListener("resize",fit);addEventListener("load",fit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);fit()})();
+
+/* ===== PRAGER ORLOJ: Sonne, Mond, Tierkreis live ===== */
+(function(){
+const NS="http://www.w3.org/2000/svg",sv=document.getElementById("orl");if(!sv)return;
+const rmo=matchMedia("(prefers-reduced-motion: reduce)").matches,RAD=Math.PI/180,GD="#e8b45a",CR="#f3e6c8",FN='"Bodoni Moda",Georgia,serif',SYM='"Segoe UI Symbol","Noto Sans Symbols 2","Apple Symbols",serif';
+function el(t,a,p){const n=document.createElementNS(NS,t);for(const k in a)n.setAttribute(k,a[k]);(p||sv).appendChild(n);return n}
+function arch(c){return`M${c-13},-112V-134a13,13 0 0 1 26,0V-112Z`}
+const df=el("defs",{});
+df.innerHTML=`<radialGradient id="ogS"><stop offset="0" stop-color="#fff3c4"/><stop offset="1" stop-color="#e8b45a"/></radialGradient>
+<linearGradient id="ogG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7d98a"/><stop offset=".5" stop-color="#b8821f"/><stop offset="1" stop-color="#f2cf7c"/></linearGradient>
+<linearGradient id="ogK" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2f7fd6"/><stop offset="1" stop-color="#173b7a"/></linearGradient>
+<linearGradient id="ogN" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#151b30"/><stop offset="1" stop-color="#090b15"/></linearGradient>
+<clipPath id="ogD"><circle r="74"/></clipPath>
+<clipPath id="ogW"><path d="${arch(-22)}"/><path d="${arch(22)}"/></clipPath>`;
+df.insertAdjacentHTML("beforeend",`<radialGradient id="ogM" cx=".38" cy=".33" r=".75"><stop offset="0" stop-color="#fff" stop-opacity=".3"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></radialGradient>`);
+/* 21-Tage-Scheibe */
+const cgC=el("g",{transform:"translate(0,150)"});
+el("circle",{r:41,fill:"#0a0710",stroke:"url(#ogG)","stroke-width":2.2},cgC);
+const cal=el("g",{},cgC),WC=["#27467a","#3c7a4a","#8a3a2a"],dsg=[],pt=(r,a)=>`${r*Math.sin(a)},${-r*Math.cos(a)}`;
+for(let i=0;i<21;i++){const a0=i/21*2*Math.PI,a1=(i+1)/21*2*Math.PI;
+ dsg.push(el("path",{d:`M${pt(38,a0)}A38,38 0 0 1 ${pt(38,a1)}L${pt(26,a1)}A26,26 0 0 0 ${pt(26,a0)}Z`,fill:WC[Math.floor(i/7)],stroke:GD,"stroke-width":.35},cal));
+ const g=el("g",{transform:`rotate(${(a0+a1)/2/RAD})`},cal);el("text",{y:-32,"text-anchor":"middle","dominant-baseline":"central","font-size":4.4,"font-weight":700,fill:CR,"font-family":FN},g).textContent=i+1}
+el("circle",{r:26,fill:"#10264f",stroke:GD,"stroke-width":.7},cgC);
+el("path",{d:"M-14,14V-2H-10V-10L-7,-14L-4,-10V-2H-2V-16L1,-22L4,-16V-2H6V-10L9,-14L12,-10V-2H14V14Z",fill:GD,opacity:.92,transform:"translate(0,-3) scale(.55)"},cgC);
+el("path",{d:"M-4,14V7A4,4 0 0 1 4,7V14Z",fill:"#10264f",transform:"translate(0,-3) scale(.55)"},cgC);
+const cdt=el("text",{y:15,"text-anchor":"middle","font-size":5,"font-weight":700,fill:CR,"font-family":FN},cgC);
+el("path",{d:"M-3,102.5L3,102.5L0,109.5Z",fill:GD,stroke:"#7a5212","stroke-width":.4});
+/* Turm mit Fenstern */
+const ws=[-22,22].map(c=>el("path",{d:arch(c),fill:"#0d0a16",stroke:GD,"stroke-width":.9}));
+const fg=[];const wg=el("g",{"clip-path":"url(#ogW)"});
+for(let i=0;i<12;i++){const g=el("g",{opacity:0},wg);el("circle",{cy:-5.6,r:2.1,fill:GD},g);el("path",{d:"M-3.3,4L-2.5,-2.8Q0,-3.8 2.5,-2.8L3.3,4Z",fill:GD},g);fg.push(g)}
+const sht=[-22,22].map(c=>el("path",{d:arch(c),fill:"#4a3a2a",stroke:GD,"stroke-width":.9,class:"sh"}));
+/* Ringe */
+el("circle",{r:98,fill:"#0a0710",stroke:"url(#ogG)","stroke-width":3.2});
+el("circle",{r:100.6,fill:"none",stroke:GD,"stroke-width":1.6,"stroke-dasharray":"1.6 2.4",opacity:.85});
+el("circle",{r:89,fill:"none",stroke:"#0c0912","stroke-width":11});
+el("circle",{r:94.2,fill:"none",stroke:GD,"stroke-width":.5});
+el("circle",{r:83.8,fill:"none",stroke:GD,"stroke-width":.5});
+el("circle",{r:79,fill:"none",stroke:"#15274f","stroke-width":9});
+for(let k=0;k<48;k++){const a=k*7.5*RAD;el("circle",{cx:96.6*Math.sin(a),cy:-96.6*Math.cos(a),r:.65,fill:"#f7d98a"})}
+/* Zifferblatt: Tag, Dämmerung, Nacht */
+const dl=el("g",{"clip-path":"url(#ogD)"});
+el("rect",{x:-74,y:-74,width:148,height:74,fill:"url(#ogK)"},dl);
+el("rect",{x:-74,y:0,width:148,height:74,fill:"url(#ogN)"},dl);
+[[0,5,"#b5432f",.9],[5,6,"#6b2a35",.9],[11,7,"#2b1832",.9]].forEach(b=>el("rect",{x:-74,y:b[0],width:148,height:b[1],fill:b[2],opacity:b[3]},dl));
+for(let k=0;k<24;k++){const a=k*15*RAD;el("line",{x1:34*Math.sin(a),y1:-34*Math.cos(a),x2:74*Math.sin(a),y2:-74*Math.cos(a),stroke:CR,"stroke-width":.4,opacity:.2},dl)}
+el("line",{x1:-74,y1:0,x2:74,y2:0,stroke:GD,"stroke-width":.7},dl);
+[["ORTUS",-71,"start"],["OCCASUS",71,"end"]].forEach(t=>{el("text",{x:t[1],y:-2,"text-anchor":t[2],"font-size":3.3,fill:GD,"font-family":FN,"letter-spacing":".3"}).textContent=t[0]});
+[["AURORA",-71,"start"],["CREPUSCULUM",71,"end"]].forEach(t=>el("text",{x:t[1],y:3.6,"text-anchor":t[2],"font-size":2.3,fill:"#f0c9a0","font-family":FN,"letter-spacing":".2",opacity:.85},dl).textContent=t[0]);
+el("circle",{r:74.6,fill:"none",stroke:GD,"stroke-width":.6});
+/* Römische Ziffern (fest) */
+const RO=["XII","I","II","III","IV","V","VI","VII","VIII","IX","X","XI"];
+for(let h=0;h<24;h++){const g=el("g",{transform:`rotate(${(h-12)*15})`});el("text",{y:-79,"text-anchor":"middle","dominant-baseline":"central","font-size":5,"font-weight":700,fill:CR,"font-family":FN},g).textContent=RO[h%12]}
+/* Altböhmische Ziffern (drehen mit Sonnenuntergang) */
+const cg=el("g",{});
+for(let n=1;n<=24;n++){const g=el("g",{transform:`rotate(${n*15})`},cg);el("text",{y:-89,"text-anchor":"middle","dominant-baseline":"central","font-size":6.2,"font-weight":700,fill:"url(#ogG)","font-family":FN},g).textContent=n}
+/* Tierkreisring (außermittig) */
+const zg=el("g",{});
+el("circle",{r:52,fill:"rgba(12,9,26,.74)",stroke:GD,"stroke-width":.9},zg);
+el("circle",{r:40,fill:"none",stroke:GD,"stroke-width":.5,"stroke-dasharray":"1.2 1.2"},zg);
+el("circle",{r:34,fill:"#0f2247",stroke:GD,"stroke-width":.7},zg);
+const ZS=["♈","♉","♊","♋","♌","♍","♎","♏","♐","♑","♒","♓"];
+for(let i=0;i<12;i++){const a=-(i*30)*RAD;el("line",{x1:41*Math.sin(a),y1:-41*Math.cos(a),x2:52*Math.sin(a),y2:-52*Math.cos(a),stroke:GD,"stroke-width":.4,opacity:.8},zg);
+ const g=el("g",{transform:`rotate(${-(i*30+15)})`},zg);el("text",{y:-46.5,"text-anchor":"middle","dominant-baseline":"central","font-size":7,fill:CR,"font-family":SYM},g).textContent=ZS[i]+"\uFE0E"}
+/* Erde, Zeiger, Mond, Sonne */
+el("circle",{r:8,fill:"#1d4b94",stroke:GD,"stroke-width":.8});
+const hg=el("g",{});
+const mh=el("line",{x1:0,y1:0,x2:0,y2:0,stroke:"#b9c6e8","stroke-width":.8,"stroke-linecap":"round",opacity:.75},hg);
+const sh=el("line",{x1:0,y1:0,x2:0,y2:0,stroke:GD,"stroke-width":1.5,"stroke-linecap":"round"},hg);
+const st=el("circle",{r:2.1,fill:GD},hg);
+const mg=el("g",{},hg);el("circle",{r:4.8,fill:"#20263d",stroke:"#9fb0d8","stroke-width":.5},mg);const ml=el("path",{d:"",fill:"#eef0ff"},mg);el("circle",{r:4.8,fill:"url(#ogM)"},mg);
+const sg=el("g",{},hg);el("path",{d:(()=>{let d="";for(let i=0;i<16;i++){const a=i*22.5*RAD,b=a-.11,c=a+.11,t=i%2?7.8:9.6;d+=`M${5*Math.sin(b)},${-5*Math.cos(b)}L${t*Math.sin(a)},${-t*Math.cos(a)}L${5*Math.sin(c)},${-5*Math.cos(c)}Z`}return d})(),fill:GD,opacity:.95},sg);el("circle",{r:5.6,fill:"url(#ogS)",stroke:"#fff3c4","stroke-width":.4},sg);
+el("circle",{r:2.6,fill:GD,stroke:"#7a5212","stroke-width":.5});
+/* Rechnen */
+const C=-6,R=40,SN=["Widder","Stier","Zwillinge","Krebs","Löwe","Jungfrau","Waage","Skorpion","Schütze","Steinbock","Wassermann","Fische"];
+function ec(a){const r=a*RAD,ux=Math.sin(r),uy=-Math.cos(r),b=uy*C,t=b+Math.sqrt(b*b-C*C+R*R);return[ux*t,uy*t]}
+const pad=n=>String(n).padStart(2,"0");
+function mname(p){return p<.03||p>.97?"Neumond":p<.22?"Zunehmende Sichel":p<.28?"Erstes Viertel":p<.47?"Zunehmender Mond":p<.53?"Vollmond":p<.72?"Abnehmender Mond":p<.78?"Letztes Viertel":"Abnehmende Sichel"}
+let lastH=-1,vis=true,pl=false;
+function upd(){const d=new Date(),hr=d.getHours()+d.getMinutes()/60+d.getSeconds()/3600,n=(d-Date.UTC(2000,0,1,12))/864e5,L=(280.46+.9856474*n)%360,g=(357.528+.9856003*n)*RAD;
+ let lam=(L+1.915*Math.sin(g)+.02*Math.sin(2*g))%360;if(lam<0)lam+=360;
+ const dec=Math.asin(Math.sin(23.44*RAD)*Math.sin(lam*RAD)),ha=Math.acos(Math.max(-1,Math.min(1,-Math.tan(50.09*RAD)*Math.tan(dec))))/RAD;
+ const a=(hr-12)*15,P=ec(a),beta=Math.atan2(P[0],-(P[1]-C))/RAD;
+ cg.setAttribute("transform",`rotate(${ha})`);
+ const st0=(typeof start!=="undefined"&&start)||ls.g("et21_first",Date.now()),x=Math.max(0,Math.min(21,(Date.now()-st0)/864e5)),dd=typeof done!=="undefined"?done:[];
+ cal.setAttribute("transform",`rotate(${-x*360/21})`);cdt.textContent="Tag "+Math.min(21,Math.floor(x)+1);
+ dsg.forEach((q,i)=>q.setAttribute("fill",dd.includes(i+1)?GD:WC[Math.floor(i/7)]));
+ zg.setAttribute("transform",`translate(0,${C}) rotate(${beta+lam})`);
+ const ux=Math.sin(a*RAD),uy=-Math.cos(a*RAD);
+ sh.setAttribute("x2",ux*88);sh.setAttribute("y2",uy*88);st.setAttribute("cx",ux*88);st.setAttribute("cy",uy*88);
+ sg.setAttribute("transform",`translate(${P[0]},${P[1]})`);
+ const p=(((Date.now()-Date.UTC(2000,0,6,18,14))/864e5/29.530588)%1+1)%1,Q=ec(a-p*360),th=Math.atan2(P[1]-Q[1],P[0]-Q[0])/RAD,k=(1-Math.cos(2*Math.PI*p))/2,rx=4.8*Math.abs(1-2*k);
+ mh.setAttribute("x2",Q[0]);mh.setAttribute("y2",Q[1]);
+ mg.setAttribute("transform",`translate(${Q[0]},${Q[1]}) rotate(${th})`);
+ ml.setAttribute("d",`M0,-4.8A4.8,4.8 0 0 1 0,4.8A${rx},4.8 0 0 ${k<.5?0:1} 0,-4.8Z`);
+ const oc=(((hr-12-ha/15)%24)+24)%24;
+ document.getElementById("olS").textContent=SN[Math.floor(lam/30)];
+ document.getElementById("olM").textContent=mname(p);
+ document.getElementById("olC").textContent=Math.floor(oc)+":"+pad(Math.floor(oc%1*60));
+ if(d.getMinutes()===0&&d.getSeconds()<15&&lastH!==d.getHours()&&vis){lastH=d.getHours();play()}}
+function play(){if(pl)return;pl=true;ws.forEach(w=>w.setAttribute("fill","#3a2611"));sht.forEach(x=>x.classList.add("op"));
+ if(rmo){setTimeout(()=>{ws.forEach(w=>w.setAttribute("fill","#0d0a16"));sht.forEach(x=>x.classList.remove("op"));pl=false},2200);return}
+ const t0=performance.now(),D=2500,S=520;
+ (function f(now){const t=now-t0;let act=false;
+  fg.forEach((g,i)=>{const u=(t-i*S)/D;if(u<0){act=true;return}if(u>1){g.setAttribute("opacity",0);return}act=true;g.setAttribute("opacity",1);g.setAttribute("transform",`translate(${-40+80*u},-118)`)});
+  if(act)requestAnimationFrame(f);else{ws.forEach(w=>w.setAttribute("fill","#0d0a16"));sht.forEach(x=>x.classList.remove("op"));pl=false}})(t0)}
+document.getElementById("olb").onclick=play;
+upd();
+if("IntersectionObserver" in window)new IntersectionObserver(e=>{vis=e[0].isIntersecting;if(vis)upd()},{threshold:.1}).observe(sv);
+setInterval(()=>{if(vis&&!document.hidden)upd()},15000);
+})();
 </script>
 </body>
 </html>
