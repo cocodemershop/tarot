@@ -21,7 +21,7 @@
 padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}
 :root[data-theme="light"]{--bg:#f4ecdf;--card:#fbf6ec;--ink:#251532;--mute:#66587a;--g:#94640f;--ok:#1d7a55;--bad:#b03047;--line:#d5c6ae;--dk:#fbf6ec}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{background:var(--bg);color:var(--ink);font:400 1rem/1.7 "Instrument Sans",system-ui,sans-serif;overflow-x:hidden}
+body{background:var(--bg);color:var(--ink);font:400 1rem/1.7 "Instrument Sans",system-ui,sans-serif;overflow-x:clip}
 :focus-visible{outline:2px solid var(--g);outline-offset:3px}
 .wrap{max-width:860px;margin:0 auto;padding:20px 16px 60px}
 h1,h2,h3,.serif{font-family:"Bodoni Moda",Georgia,serif;font-weight:500;line-height:1.15}
@@ -93,6 +93,7 @@ dialog.lg::backdrop{background:rgba(10,5,16,.75)}
 .lgh h2{font-size:1.4rem;color:var(--g)}
 .lgb{padding:8px 22px 26px;overflow:auto;max-height:calc(88vh - 70px);font-size:.95rem}
 .lgb h3{font-size:1.1rem;color:var(--ink);margin:20px 0 6px}
+.lgb a{color:var(--g);text-underline-offset:3px}
 .lgb p,.lgb li{color:var(--mute);margin-bottom:8px}.lgb ul,.lgb ol{padding-left:22px}
 .lgb .warn{border-left:3px solid var(--bad);padding:10px 14px;background:color-mix(in srgb,var(--bad) 8%,transparent);border-radius:0 8px 8px 0;margin:14px 0;color:var(--ink)}
 .lgb input,.lgb textarea{width:100%;background:transparent;border:1px solid var(--line);border-radius:8px;padding:10px;color:var(--ink);font:inherit;margin-bottom:10px}
@@ -183,7 +184,8 @@ box-shadow:0 0 0 1px var(--sc),0 0 38px color-mix(in srgb,var(--sc) 38%,transpar
 .pf .tx{flex:1;min-width:230px}.pf .tx p{margin-bottom:10px}.pf .tx b{color:var(--g);font-family:"Bodoni Moda",serif;font-weight:500}
 .cd{display:inline-block;padding:4px 14px;border-radius:99px;border:1px solid var(--g);color:var(--g);font-size:.85rem;font-weight:600;margin-top:6px}
 .pf .acts{display:flex;gap:8px;flex-wrap:wrap}.pf .btn{margin-top:6px;min-height:40px;padding:8px 18px;font-size:.9rem}
-@media (max-width:700px){.frm{grid-template-columns:1fr}}
+.rec{margin:18px 0 6px}.rec h3{color:var(--g);font-size:1.3rem;margin-bottom:8px}.rec p{margin-bottom:6px}.rec small{display:block;color:var(--mute);font-size:.8rem;margin-top:10px}.fhint{font-size:.8rem;margin:0;align-self:end}.fx{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.fx[hidden]{display:none}
+@media (max-width:700px){.frm{grid-template-columns:1fr}.fx{grid-template-columns:1fr}}
 
 
 #lgm h2{font-size:clamp(1.8rem,5vw,2.6rem);margin-bottom:8px}
@@ -265,7 +267,7 @@ a,button,select,input,label,[role=button]{touch-action:manipulation}
 @media (display-mode:standalone){html,body{-webkit-touch-callout:none}}
 
 :root{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
-html{max-width:100%;overflow-x:hidden}body{max-width:100vw}
+html{max-width:100%;overflow-x:clip}body{max-width:100vw;overflow-x:clip}
 #sky{height:100vh;height:100lvh;background:radial-gradient(ellipse at 15% 0%,rgba(232,180,90,.10),transparent 50%),radial-gradient(ellipse at 90% 100%,rgba(185,138,224,.10),transparent 55%)}
 .wrap{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
 .wrap>*{min-width:0;max-width:100%}
@@ -326,7 +328,7 @@ input[type=date]{min-height:46px}
 .orl .ey{font:italic 500 1.05rem "Bodoni Moda",Georgia,serif;color:var(--g);letter-spacing:.12em;margin-bottom:6px}
 .orl h2{font-size:clamp(1.7rem,5vw,2.6rem);color:var(--g);margin-bottom:8px}
 .orl .sub{color:var(--mute);max-width:52ch;margin:0 auto 18px}
-.orl svg{display:block;width:min(540px,96%);height:auto;margin:0 auto;}
+.orl svg{display:block;width:min(420px,88%);height:auto;margin:0 auto;}
 .orl .sh{transition:transform .8s ease;transform-box:fill-box;transform-origin:50% 50%}
 .orl .sh.op{transform:scaleX(0)}
 @media (prefers-reduced-motion:reduce){.orl .sh{transition:none}}
@@ -334,6 +336,70 @@ input[type=date]{min-height:46px}
 .orl .lg{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0 2px}
 .orl .lg span{border:1px solid var(--line);border-radius:99px;padding:5px 14px;font-size:.85rem;color:var(--mute);background:rgba(232,180,90,.07)}
 .orl .lg b{color:var(--g);font-weight:600}
+
+/* ===== DREI-KARTEN-LEGUNG ===== */
+.dkp{display:flex;justify-content:center;gap:14px;margin:20px 0 4px}.dkp .dkb{width:84px;height:126px}.dkp .dkb:nth-child(1){transform:rotate(-8deg)}.dkp .dkb:nth-child(2){transform:translateY(-8px)}.dkp .dkb:nth-child(3){transform:rotate(8deg)}
+.dkd{border:1px solid var(--g);border-radius:18px;background:var(--bg);color:var(--ink);width:min(1040px,96vw);max-height:94vh;padding:0;overflow:auto;margin:auto}
+.dkd::backdrop{background:rgba(6,3,12,.88);backdrop-filter:blur(4px)}
+html:has(dialog.dkd[open]){overflow:hidden}
+.dkw{padding:18px 20px 28px}.dkh{display:flex;justify-content:space-between;align-items:center;gap:10px}.dkh h3{color:var(--g);font-size:1.6rem}.dkh .btn{margin:0;min-height:40px;padding:6px 16px}
+.dkm{text-align:center;color:var(--g);font-weight:600;min-height:1.7em;margin:10px 0}
+.dkl{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;color:var(--mute);font-size:.9rem}.dkl .btn{margin:0;min-height:38px;padding:6px 18px;font-size:.9rem}
+.dkslots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:540px;margin:16px auto 6px;text-align:center}
+.dks b{display:block;color:var(--g);font:500 1.05rem "Bodoni Moda",serif;margin-top:8px}.dks small{display:block;color:var(--mute);font-size:.78rem;line-height:1.3}
+.dkc{position:relative;aspect-ratio:2/3;perspective:900px}
+.dke{position:absolute;inset:0;border:1px dashed var(--g);border-radius:10px;display:grid;place-items:center;color:var(--g);font:700 1.6rem "Bodoni Moda",serif;opacity:.6}.dkc.on .dke{display:none}
+.dki{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.3,.7,.2,1)}.dki.fl{transform:rotateY(180deg)}
+.dkbk,.dkfc{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}.dkfc{transform:rotateY(180deg)}
+.dkfc .cf{height:100%;width:100%;animation:none;padding:8% 6%}
+.dkb{display:block;border-radius:8px;border:1px solid #e8b45a;background:radial-gradient(circle,rgba(232,180,90,.55) 0 7%,transparent 8%),repeating-linear-gradient(45deg,rgba(232,180,90,.16) 0 3px,transparent 3px 7px),linear-gradient(165deg,#2e1748,#0e0817);box-shadow:inset 0 0 0 3px #0e0817,inset 0 0 0 4px rgba(232,180,90,.6)}
+.dkfan{position:relative;margin:14px auto 0;max-width:900px}
+.dkk{position:absolute;top:28px;left:50%;width:var(--cw);height:var(--ch);padding:0;border:0;background:none;cursor:pointer;transform:translateX(-50%) rotate(var(--a));transition:transform .18s;animation:dkin .5s both}
+.dkk .dkb{width:100%;height:100%}
+.dkk:hover,.dkk:focus-visible{transform:translateX(-50%) rotate(var(--a)) translateY(-26px);z-index:300;outline:none}.dkk:hover .dkb,.dkk:focus-visible .dkb{box-shadow:0 0 18px #e8b45a,inset 0 0 0 3px #0e0817,inset 0 0 0 4px #e8b45a}
+.dkk.gone{visibility:hidden}@keyframes dkin{from{opacity:0}}
+.dkx{border-left:3px solid var(--sc,var(--g));padding:12px 16px;margin:12px 0;background:color-mix(in srgb,var(--ink) 4%,transparent);border-radius:0 10px 10px 0;animation:dkin .6s both}.dkx h4{color:var(--g);font:500 1.15rem "Bodoni Moda",serif}.dkx .kw{color:var(--mute);font-size:.88rem;margin-bottom:4px}.dkx .tip{color:var(--g);margin-top:6px}
+@media (prefers-reduced-motion:reduce){.dki{transition:none}.dkk,.dkx{animation:none;transition:none}}
+
+/* ===== REITER-LEISTE ===== */
+nav.tabs{gap:2px;justify-content:center;scroll-snap-type:x proximity;scroll-padding:0 24px}
+nav.tabs button{font-size:.95rem;padding:12px 12px;flex:0 0 auto;scroll-snap-align:center;transition:color .2s,border-color .2s,background .2s}
+nav.tabs button:hover{color:var(--ink);background:color-mix(in srgb,var(--g) 8%,transparent)}
+nav.tabs button[aria-selected="true"]{color:var(--g);border-bottom-color:var(--g)}
+nav.tabs .gd{margin-left:8px;border:1px solid color-mix(in srgb,var(--g) 55%,transparent);border-radius:99px;min-height:34px;align-self:center;padding:5px 14px;font-size:.88rem}
+nav.tabs .gd:hover{background:color-mix(in srgb,var(--g) 14%,transparent)}
+@media (max-width:860px){nav.tabs{justify-content:flex-start;-webkit-mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 28px),transparent)}nav.tabs button{font-size:.9rem;padding:12px 13px}nav.tabs button:first-child{margin-left:10px}nav.tabs .gd{margin-right:14px}}
+
+/* ===== DREI KARTEN PREMIUM ===== */
+.dkey{text-align:center;font:italic 500 1.05rem "Bodoni Moda",Georgia,serif;color:var(--g);letter-spacing:.14em;margin-bottom:6px}
+#dk>.p{text-align:center;max-width:58ch;margin:10px auto 6px}
+.dkp{gap:clamp(16px,5vw,44px);margin:34px 0 26px;padding:30px 10px 8px;position:relative}
+.dkp::before{content:"";position:absolute;left:50%;top:50%;width:min(560px,100%);height:260px;transform:translate(-50%,-50%);background:radial-gradient(ellipse,rgba(232,180,90,.22),rgba(185,138,224,.12) 45%,transparent 70%);filter:blur(10px);pointer-events:none}
+.dkp figure{position:relative;text-align:center;}
+.dkp figcaption{margin-top:12px;font:500 1rem "Bodoni Moda",serif;color:var(--g);letter-spacing:.06em}
+.dkp .dkb{position:relative;overflow:hidden;width:clamp(74px,22vw,110px);height:auto;aspect-ratio:2/3;box-shadow:0 14px 34px rgba(0,0,0,.5),0 0 26px rgba(232,180,90,.25),inset 0 0 0 3px #0e0817,inset 0 0 0 4px rgba(232,180,90,.7)}
+.dkp figure:nth-child(1) .dkb{transform:rotate(-9deg)}.dkp figure:nth-child(3) .dkb{transform:rotate(9deg)}.dkp figure:nth-child(2) .dkb{transform:translateY(-10px)}
+.dkb::after{content:"✦";position:absolute;inset:0;display:grid;place-items:center;color:#f7d98a;font-size:clamp(.7rem,2.4vw,1.5rem);text-shadow:0 0 10px rgba(232,180,90,.8)}
+.dkp .dkb::before{content:"";position:absolute;inset:-40% auto -40% -60%;width:40%;background:linear-gradient(90deg,transparent,rgba(255,240,200,.45),transparent);transform:rotate(18deg);animation:dkshine 4.5s ease-in-out infinite}
+@keyframes dkfloat{50%{transform:translateY(-8px)}}@keyframes dkshine{0%,55%{left:-60%}100%{left:170%}}
+#dko{position:relative;overflow:hidden;background:linear-gradient(135deg,#f7d98a,#e8b45a 55%,#c98d2f);border-color:#f7d98a;color:#1a1024;font-size:1.1rem;padding:15px 38px;box-shadow:0 8px 28px rgba(232,180,90,.35),0 0 0 4px rgba(232,180,90,.12);transition:transform .2s,box-shadow .2s}
+#dko:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(232,180,90,.5),0 0 0 6px rgba(232,180,90,.16)}
+#dko::after{content:"";position:absolute;inset:0 auto 0 -60%;width:40%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:dkshine 3.6s ease-in-out infinite}
+.dksb{margin-top:12px;color:var(--mute);font-size:.85rem}
+.dkd{background:radial-gradient(ellipse at 50% -10%,rgba(185,138,224,.28),transparent 55%),radial-gradient(ellipse at 50% 110%,rgba(232,180,90,.16),transparent 60%),radial-gradient(1px 1px at 12% 18%,#fff8,transparent),radial-gradient(1px 1px at 82% 28%,#fff8,transparent),radial-gradient(1.5px 1.5px at 66% 72%,#f7d98acc,transparent),radial-gradient(1px 1px at 28% 62%,#fff6,transparent),var(--bg);border:1px solid rgba(232,180,90,.7);box-shadow:0 0 0 1px rgba(232,180,90,.2),0 30px 90px rgba(0,0,0,.7),0 0 70px rgba(185,138,224,.2)}
+.dkh h3{background:linear-gradient(90deg,#f7d98a,#e8b45a 50%,#f7d98a);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:clamp(1.5rem,4vw,2rem);letter-spacing:.03em}
+.dkq{display:block;width:min(520px,100%);margin:14px auto 0;background:rgba(0,0,0,.25);border:1px solid color-mix(in srgb,var(--g) 55%,transparent);border-radius:99px;padding:11px 20px;color:var(--ink);font:italic 500 1rem "Bodoni Moda",Georgia,serif;text-align:center}.dkq:focus{outline:none;box-shadow:0 0 0 3px rgba(232,180,90,.25)}.dkq:disabled{opacity:.7}
+.dkm{font:italic 500 1.1rem "Bodoni Moda",Georgia,serif}
+.dkc.next .dke{opacity:1;background:rgba(232,180,90,.08);box-shadow:0 0 24px rgba(232,180,90,.45),inset 0 0 18px rgba(232,180,90,.15);animation:dkpulse 1.8s ease-in-out infinite}
+@keyframes dkpulse{50%{box-shadow:0 0 38px rgba(232,180,90,.75),inset 0 0 26px rgba(232,180,90,.3)}}
+.dki.fl .dkfc{animation:dkglow 1.6s ease-out}@keyframes dkglow{0%{box-shadow:0 0 0 rgba(247,217,138,0)}35%{box-shadow:0 0 46px 10px rgba(247,217,138,.85)}100%{box-shadow:0 0 18px rgba(232,180,90,.35)}}
+.dkfc{border-radius:10px}
+.dkk:hover,.dkk:focus-visible{transform:translateX(-50%) rotate(var(--a)) translateY(-34px) scale(1.08)}
+.dkqt{text-align:center;font:italic 500 1.25rem/1.4 "Bodoni Moda",Georgia,serif;color:var(--g);margin:24px 0 6px}
+.dkx{border:1px solid color-mix(in srgb,var(--sc,var(--g)) 40%,transparent);border-left:3px solid var(--sc,var(--g));padding:16px 20px;border-radius:0 14px 14px 0;background:linear-gradient(120deg,color-mix(in srgb,var(--sc,var(--g)) 10%,transparent),transparent 65%),var(--card);box-shadow:0 10px 26px rgba(0,0,0,.25)}
+.dkx h4{font-size:1.3rem;margin-bottom:2px}.dkx p{margin-bottom:6px}
+@media (prefers-reduced-motion:reduce){.dkp figure,.dkp .dkb::before,#dko::after,.dkc.next .dke,.dki.fl .dkfc{animation:none}}
+@media (min-width:701px){.dkslots{max-width:420px;gap:12px}.dkw{padding-top:14px}}
 </style>
 </head>
 <body>
@@ -373,7 +439,7 @@ input[type=date]{min-height:46px}
 <ol class="steps">
 <li><h4>Wähle dein Deck</h4><p class="p">Nimm ein Deck, dessen Bilder dich ansprechen. Ein Rider-Waite-Deck eignet sich besonders gut zum Lernen.</p></li>
 <li><h4>Schaffe deinen Platz</h4><p class="p">Ein Tisch, ein Tuch, eine Kerze, ein Notizbuch. Immer derselbe Ort, immer dieselbe Zeit.</p></li>
-<li><h4>Suche Verbündete</h4><p class="p">Erzähle mindestens einer Person von deinem Plan. Oder tritt der WhatsApp-Gruppe unten bei.</p></li>
+<li><h4>Suche Verbündete</h4><p class="p">Erzähle mindestens einer Person von deinem Plan. Oder folge unten dem <a href="https://whatsapp.com/channel/0029Vb9Izau4IBh8cdFsoZ0Z" target="_blank" rel="noopener" style="color:var(--g)">WhatsApp-Kanal</a>.</p></li>
 <li><h4>Aktiviere den Schalter</h4><p class="p">Klicke unten auf „Schalter umlegen“. Ab dann öffnet sich täglich eine neue Mission.</p></li></ol></div>
 
 <div class="card"><h2>Dein persönliches Profil</h2>
@@ -407,12 +473,13 @@ input[type=date]{min-height:46px}
 </section>
 <section id="fam" hidden>
 <h2>Familienkreis</h2>
-<p class="p">Jeder Mensch trägt ein Sternzeichen, eine Seelenkarte und ein Jahresthema in sich. Trage dich und die Menschen ein, die du liebst: Partner, Kinder, Eltern, Geschwister, Freunde. Für jede und jeden entsteht eine eigene Geburtskarte zum Staunen, Schenken und Teilen.</p>
-<div class="frm"><div><label for="fn1">Name</label><input id="fn1" maxlength="40" autocomplete="off" placeholder="z. B. Lena"></div><div><label for="fd1">Geburtstag</label><input id="fd1" type="date"></div><div><label for="fr1">Wer ist das?</label><select id="fr1"><option>Ich</option><option>Partner:in</option><option>Kind</option><option>Mutter / Vater</option><option>Geschwister</option><option>Großeltern</option><option>Freund:in</option></select></div><button class="btn" id="fadd">✦ Geburtskarte enthüllen</button></div>
+<p class="p">Jeder Mensch trägt ein Sternzeichen, einen Aszendenten, eine Seelenkarte und ein Jahresthema in sich. Trage dich und die Menschen ein, die du liebst: Partner, Kinder, Eltern, Geschwister, Freunde. Mit Geburtszeit und Geburtsort berechnen wir auch den Aszendenten. Für jede und jeden entsteht eine eigene Geburtskarte zum Staunen, Schenken und Teilen.</p>
+<div class="fh rec"><h3>✦ Schenke es weiter</h3><p>Jede Geschichte wird schöner, wenn man sie teilt. Kennst du einen Menschen, dem 21 Tage Ruhe, Klarheit und ein Blick in die Sterne guttun würden? Sende ihm eine kleine Einladung, so persönlich wie ein Brief.</p><div class="shr"><button class="btn wa" data-s="wa" data-k="rec">WhatsApp</button><button class="btn tgm" data-s="tg" data-k="rec">Telegram</button><button class="btn o" data-s="sh" data-k="rec" id="frs">Teilen</button><button class="btn o" data-s="cp" data-k="rec">Einladung kopieren</button></div><small>Verschickt wird nur die Einladung. Namen, Geburtstage und Karten aus deinem Kreis bleiben bei dir, solange du sie nicht selbst sendest.</small></div>
+<div class="frm"><div><label for="fn1">Name</label><input id="fn1" maxlength="40" autocomplete="off" placeholder="z. B. Lena"></div><div><label for="fd1">Geburtstag</label><input id="fd1" type="date"></div><div><label for="fr1">Wer ist das?</label><select id="fr1"><option>Ich</option><option>Partner:in</option><option>Kind</option><option>Mutter / Vater</option><option>Geschwister</option><option>Großeltern</option><option>Freund:in</option></select></div><div><label for="ft1">Geburtszeit (für den Aszendenten)</label><input id="ft1" type="time"></div><div><label for="fo1">Geburtsort</label><select id="fo1"><option value="">– nicht angeben –</option></select></div><p class="p fhint">Optional. Den Aszendenten, den „aufsteigenden“ Teil deines Wesens, gibt es nur mit genauer Uhrzeit und Ort. Steht beides auf der Geburtsurkunde, trage es ein.</p><div class="fx" id="fxo" hidden><div><label for="fla">Breitengrad</label><input id="fla" type="number" step="0.01" min="-66" max="66" placeholder="z. B. 52.52"></div><div><label for="flo">Längengrad</label><input id="flo" type="number" step="0.01" min="-180" max="180" placeholder="z. B. 13.40"></div><div><label for="fof">UTC-Abweichung in Stunden</label><input id="fof" type="number" step="0.5" min="-12" max="14" placeholder="z. B. 1"></div></div><button class="btn" id="fadd">✦ Geburtskarte enthüllen</button></div>
 <div class="msg" id="fmsg" role="status"></div>
 <div id="fhm"></div><div id="flist"></div>
 <div class="shr"><span class="p" style="margin:0">Ganzen Familienkreis senden:</span><button class="btn wa" data-s="wa" data-k="fall">WhatsApp</button><button class="btn tgm" data-s="tg" data-k="fall">Telegram</button></div>
-<p class="p" style="text-align:center;font-size:.85rem">Die Daten bleiben nur in deinem Browser gespeichert. Sternzeichen und Kartendeutung dienen der Freude und Reflexion, nicht der Vorhersage.</p>
+<p class="p" style="text-align:center;font-size:.85rem">Die Daten bleiben nur in deinem Browser gespeichert und werden nicht geteilt. Nur was du selbst sendest, verlässt dein Gerät. Sternzeichen und Kartendeutung dienen der Freude und Reflexion, nicht der Vorhersage.</p>
 </section>
 <section id="lgm" hidden>
 <h2>Legemethoden</h2>
@@ -421,12 +488,29 @@ input[type=date]{min-height:46px}
 <div class="trk" id="ltrk" tabindex="0" aria-label="Legemethoden, mit Pfeiltasten blättern" style="margin-top:20px"></div>
 <div class="cn"><button class="nv" id="lpv" aria-label="Vorherige Legung">‹</button><span id="lci">1 / 9</span><select id="ljp" aria-label="Zu Legung springen"></select><button class="nv" id="lnx" aria-label="Nächste Legung">›</button></div>
 </section>
+<section id="dk" class="chap">
+<div class="dkey">✦ Orakel der drei Zeiten ✦</div>
+<h2>Die Drei-Karten-Legung</h2>
+<p class="p">Gestern, heute, morgen: Mische in Ruhe, denke an deine Frage und wähle mit der Maus drei Karten aus dem Fächer mit allen 78 Karten. Sie erzählen dir, was dich geprägt hat, was dich jetzt bewegt und was auf dich zukommt.</p>
+<div class="dkp" aria-hidden="true"><figure><i class="dkb"></i><figcaption>Gestern</figcaption></figure><figure><i class="dkb"></i><figcaption>Heute</figcaption></figure><figure><i class="dkb"></i><figcaption>Morgen</figcaption></figure></div>
+<div style="text-align:center"><button class="btn" id="dko">✦ Karten befragen</button><p class="dksb">Dauert etwa drei Minuten · nichts wird gespeichert</p></div>
+<dialog id="dkd" class="dkd" aria-labelledby="dkt"><div class="dkw">
+<div class="dkh"><h3 id="dkt">Gestern · Heute · Morgen</h3><button class="btn o" id="dkx" aria-label="Fenster schließen">✕</button></div>
+<input class="dkq" id="dkq" maxlength="90" autocomplete="off" placeholder="Deine Frage an die Karten (optional) …" aria-label="Deine Frage an die Karten">
+<p class="dkm" id="dkm" role="status" aria-live="polite"></p>
+<div class="dkl"><label><input type="checkbox" id="dkrv" checked> Umgekehrte Karten zulassen</label><button class="btn o" id="dksh">🔀 Neu mischen</button></div>
+<div class="dkslots" id="dksl"></div>
+<div class="dkfan" id="dkfan" role="group" aria-label="Fächer mit 78 Karten. Mit den Pfeiltasten wechseln, mit Enter wählen."></div>
+<div id="dkr"></div>
+<div class="shr" id="dkac" hidden><button class="btn wa" data-d="wa">WhatsApp</button><button class="btn tgm" data-d="tg">Telegram</button><button class="btn o" data-d="cp">Kopieren</button><button class="btn o" data-d="nw">Neu legen</button></div>
+</div></dialog>
+</section>
 <footer class="foot">
 <div class="q">„Du gibst nichts auf. Du gewinnst deinen Blick zurück.“</div>
 <p style="margin-bottom:8px;color:var(--ink);font-weight:600">© 2027 Frank Zimmermann – 21 Tage Transformation. Alle Rechte vorbehalten.</p>
 <p style="max-width:640px;margin:0 auto 18px">Diese Seite dient der persönlichen Reflexion und Motivation. Tarot ist kein Ersatz für ärztliche, psychologische, rechtliche oder finanzielle Beratung. Bei ernsten Belastungen wende dich bitte an Fachleute oder eine offizielle Beratungsstelle.</p>
 <div class="legal" id="legal"></div>
-<p><a href="mailto:cocodemershop@gmail.com">E-Mail: cocodemershop@gmail.com</a> | <a href="https://chat.whatsapp.com/Kisnv5LGuvj4WrKadqo98B?mode=gi_t" target="_blank" rel="noopener">WhatsApp-Gruppe beitreten</a> | <a href="#days">Zu den 21 Tagen</a></p>
+<p><a href="mailto:cocodemershop@gmail.com">E-Mail: cocodemershop@gmail.com</a> | <a href="https://whatsapp.com/channel/0029Vb9Izau4IBh8cdFsoZ0Z" target="_blank" rel="noopener">WhatsApp-Kanal folgen</a> | <a href="#days">Zu den 21 Tagen</a></p>
 </footer>
 </div>
 
@@ -558,9 +642,9 @@ impressum:["Impressum",HINT+`<h3>Angaben gemäß § 5 DDG</h3><p>${OP}</p>
 datenschutz:["Datenschutzerklärung",HINT+`<h3>1. Verantwortlicher</h3><p>${OP}<br>E-Mail: ${MAIL}</p>
 <h3>2. Überblick</h3><p>Wir verarbeiten personenbezogene Daten nur, soweit es für den Betrieb dieser Seite nötig ist oder du eingewilligt hast. Grundlage sind die DSGVO und das TDDDG.</p>
 <h3>3. Hosting und Server-Logfiles</h3><p>Beim Aufruf dieser Seite verarbeitet der Hosting-Anbieter technisch notwendige Daten (IP-Adresse, Datum und Uhrzeit, aufgerufene Datei, Browser). Zweck ist der sichere und stabile Betrieb. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO. Hosting-Anbieter: ${F("Anbieter, Sitz, Auftragsverarbeitungsvertrag prüfen")}. Speicherdauer: ${F("z. B. 7 Tage")}.</p>
-<h3>4. Speicherung in deinem Browser (Fortschritt und Profil)</h3><p>Wenn du das Programm nutzt, speichert die Seite deinen Vornamen, dein Startdatum, Karten pro Tag, Übungsminuten, deinen Fortschritt und deine Cookie-Auswahl im lokalen Speicher deines Browsers (localStorage). Diese Daten werden nicht an uns oder Dritte übertragen. Die Speicherung ist für die von dir gewünschte Funktion erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Du kannst die Daten jederzeit in den Browser-Einstellungen löschen.</p>
+<h3>4. Speicherung in deinem Browser (Fortschritt und Profil)</h3><p>Wenn du das Programm nutzt, speichert die Seite deinen Vornamen, dein Startdatum, Karten pro Tag, Übungsminuten, deinen Fortschritt und deine Cookie-Auswahl sowie im Familienkreis Namen, Geburtsdatum und optional Geburtszeit und Geburtsort im lokalen Speicher deines Browsers (localStorage). Diese Daten werden nicht an uns oder Dritte übertragen. Die Speicherung ist für die von dir gewünschte Funktion erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Du kannst die Daten jederzeit in den Browser-Einstellungen löschen.</p>
 <h3>5. Externe Schriftarten (Google Fonts)</h3><p>Nur wenn du zustimmst, lädt die Seite Schriftarten von Google (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland). Dabei wird deine IP-Adresse an Google übertragen, eine Übermittlung in die USA ist möglich. Rechtsgrundlage: Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO und § 25 Abs. 1 TDDDG. Ohne Zustimmung zeigt die Seite Systemschriften. Du kannst die Einwilligung jederzeit mit Wirkung für die Zukunft unter „Cookie-Einstellungen“ ändern.</p>
-<h3>6. Kontakt per E-Mail und WhatsApp</h3><p>Wenn du uns schreibst, verarbeiten wir deine Angaben zur Bearbeitung der Anfrage (Art. 6 Abs. 1 lit. b oder f DSGVO). Der Link zur WhatsApp-Gruppe führt zu einem Dienst von WhatsApp Ireland Limited. Mit dem Klick verlässt du diese Seite, es gilt die Datenschutzerklärung von WhatsApp.</p>
+<h3>6. Kontakt per E-Mail und WhatsApp</h3><p>Wenn du uns schreibst, verarbeiten wir deine Angaben zur Bearbeitung der Anfrage (Art. 6 Abs. 1 lit. b oder f DSGVO). Der Link zum WhatsApp-Kanal führt zu einem Dienst von WhatsApp Ireland Limited. Mit dem Klick verlässt du diese Seite, es gilt die Datenschutzerklärung von WhatsApp.</p>
 <h3>7. Zahlungen und Vertragsdaten</h3><p>${F("Falls du Zahlungen abwickelst: Zahlungsdienstleister, Daten, Rechtsgrundlage Art. 6 Abs. 1 lit. b DSGVO, gesetzliche Aufbewahrungsfristen nennen. Sonst streichen")}</p>
 <h3>8. Deine Rechte</h3><p>Du hast das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21 DSGVO). Erteilte Einwilligungen kannst du jederzeit widerrufen. Schreibe dazu an ${MAIL}.</p>
 <h3>9. Beschwerderecht</h3><p>Du kannst dich bei einer Datenschutz-Aufsichtsbehörde beschweren, z. B. bei der für uns zuständigen Behörde: ${F("zuständige Landesdatenschutzbehörde eintragen")}.</p>
@@ -591,6 +675,10 @@ liefer:["Lieferbedingungen",HINT+`<h3>Digitale Bereitstellung</h3><p>Das Program
 <h3>Zugang und Dauer</h3><p>Du erhältst Zugang für ${F("Dauer, z. B. unbefristet / 12 Monate")}.</p>
 <h3>Was du brauchst</h3><p>Siehe „Technische Anforderungen“. Ein Tarotdeck und ein Notizbuch sind nicht enthalten.</p>
 <h3>Störungen</h3><p>Wenn du keinen Zugang erhältst, prüfe deinen Spam-Ordner und schreibe an ${MAIL}.</p>`],
+google:["Google-Richtlinien",`<h3>Google Fonts</h3><p>Diese Seite kann Schriftarten von Google Fonts laden, aber nur nach deiner Einwilligung (siehe „Cookie-Einstellungen“). Dabei wird deine IP-Adresse an Google übertragen. Anbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Ohne Einwilligung werden Systemschriften verwendet.</p>
+<h3>Google-Datenschutzerklärung und Nutzungsbedingungen</h3><p>Wenn Daten an Google übertragen werden, gelten die Datenschutzerklärung und die Nutzungsbedingungen von Google:</p><ul><li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a></li><li><a href="https://policies.google.com/terms" target="_blank" rel="noopener">Nutzungsbedingungen von Google</a></li><li><a href="https://developers.google.com/fonts/faq/privacy" target="_blank" rel="noopener">Datenschutz bei Google Fonts</a></li></ul>
+<h3>Inhalte und Google-Richtlinien</h3><p>Diese Seite hält sich an die allgemeinen Inhaltsrichtlinien von Google, etwa zu Spam, irreführenden Angaben, Datenschutz und Nutzerdaten, sowie an die Richtlinien für Apps und Inhalte, falls die Seite über Google-Dienste (z. B. Google Play oder Google Suche) verbreitet wird:</p><ul><li><a href="https://play.google.com/about/developer-content-policy/" target="_blank" rel="noopener">Richtlinien für Entwicklerinhalte (Google Play)</a></li><li><a href="https://developers.google.com/search/docs/essentials/spam-policies" target="_blank" rel="noopener">Spam-Richtlinien der Google Suche</a></li></ul>
+<h3>Hinweis zu Inhalt und Nutzerdaten</h3><p>Tarot dient hier der Reflexion, Unterhaltung und Selbstentwicklung. Es werden keine medizinischen, psychologischen, rechtlichen oder finanziellen Ratschläge gegeben und keine Heilversprechen gemacht. Fortschritt und Profil bleiben im lokalen Speicher deines Browsers und werden nicht an uns oder Dritte übertragen. Es gibt keine Werbung und keine Tracking- oder Analysedienste von Google.</p>`],
 gewaehr:["Gesetzliche Gewährleistung",`<p>Für dieses digitale Produkt gelten die gesetzlichen Mängelrechte, insbesondere nach den §§ 327 ff. BGB (Verträge über digitale Produkte). Sie hast du unabhängig von freiwilligen Garantien.</p>
 <h3>Deine Rechte bei Mängeln</h3><ul><li>Nacherfüllung, also Herstellung des vertragsgemäßen Zustands</li><li>Minderung des Preises</li><li>Rücktritt bzw. Beendigung des Vertrags, wenn die Nacherfüllung scheitert oder nicht möglich ist</li><li>Schadensersatz nach den gesetzlichen Voraussetzungen</li></ul>
 <h3>Fristen</h3><p>Die Fristen richten sich nach den gesetzlichen Vorschriften. Bei einer einmaligen Bereitstellung beträgt die Verjährung in der Regel zwei Jahre. Bei einer dauerhaften Bereitstellung gilt sie mindestens für den Bereitstellungszeitraum und darüber hinaus.</p>
@@ -602,7 +690,7 @@ technik:["Technische Anforderungen",`<h3>Endgerät und Browser</h3><ul><li>Aktue
 <h3>Was du sonst brauchst</h3><ul><li>Ein Tarotdeck mit 78 Karten (empfohlen: Rider-Waite-Bildsprache)</li><li>Ein Notizbuch und einen Stift</li><li>Täglich etwa 10 bis 20 Minuten Ruhe</li></ul>
 <h3>Hinweise</h3><p>Im privaten Modus oder nach dem Löschen der Browserdaten geht dein Fortschritt verloren. Nutze zum Fortsetzen denselben Browser und dasselbe Gerät.</p>`]
 };
-const LEG=[["impressum","Impressum"],["datenschutz","Datenschutz"],["ck","Cookie-Einstellungen"],["liefer","Lieferbedingungen"],["widerruf","Widerrufsbelehrung"],["agb","AGB"],["gewaehr","Gesetzliche Gewährleistung"],["formular","Vertrag widerrufen"],["technik","Technische Anforderungen"]];
+const LEG=[["impressum","Impressum"],["datenschutz","Datenschutz"],["ck","Cookie-Einstellungen"],["liefer","Lieferbedingungen"],["widerruf","Widerrufsbelehrung"],["agb","AGB"],["gewaehr","Gesetzliche Gewährleistung"],["formular","Vertrag widerrufen"],["technik","Technische Anforderungen"],["google","Google-Richtlinien"]];
 $("legal").innerHTML=LEG.map(x=>`<button class="lnk" data-l="${x[0]}">${x[1]}</button>`).join("");
 const dlg=$("lg");
 function openLegal(k){if(k==="ck"){showCk(true);return}const d=L[k];$("lgt").textContent=d[0];$("lgb").innerHTML=d[1];dlg.showModal();$("lgb").scrollTop=0;
@@ -686,6 +774,27 @@ $("chips").onclick=e=>{const b=e.target.closest("button");if(!b)return;grp=b.dat
 const FZ=[["Wassermann","♒","Luft",120,"Freiheitsliebend, erfinderisch und mit weitem Herzen. Du bringst frische Ideen in jede Runde und schenkst anderen den Mut, sie selbst zu sein."],["Fische","♓","Wasser",219,"Sanft, träumerisch und tief mitfühlend. Du spürst, was andere brauchen, bevor sie es sagen, und trägst Poesie und Trost in die Welt."],["Widder","♈","Feuer",321,"Mutig, herzlich und voller Tatendrang. Du gehst voran, entfachst Begeisterung und erinnerst alle an die Schönheit eines Anfangs."],["Stier","♉","Erde",420,"Verlässlich, sinnlich und warmherzig. Du schaffst Geborgenheit, genießt das Schöne und schenkst deinen Liebsten einen Ort zum Ankommen."],["Zwillinge","♊","Luft",521,"Neugierig, witzig und wandelbar. Du verbindest Menschen mit Worten und Leichtigkeit und bringst Lachen in jeden Raum."],["Krebs","♋","Wasser",621,"Fürsorglich, intuitiv und tief mit der Familie verbunden. Dein Herz ist ein warmes Zuhause, in dem sich andere sicher fühlen."],["Löwe","♌","Feuer",723,"Großzügig, strahlend und herzlich. Du wärmst wie die Sonne, und wer in deinem Licht steht, fühlt sich gesehen und mutig."],["Jungfrau","♍","Erde",823,"Aufmerksam, liebevoll und hilfsbereit. Du kümmerst dich um die kleinen Dinge, die Liebe spürbar machen, und schenkst Klarheit."],["Waage","♎","Luft",923,"Harmonisch, charmant und gerecht. Du suchst Ausgleich und Schönheit und führst Menschen mit deiner Sanftheit wieder zusammen."],["Skorpion","♏","Wasser",1023,"Tief, leidenschaftlich und treu. Du siehst hinter die Fassaden, wandelst dich mutig und liebst mit einer Kraft, die trägt."],["Schütze","♐","Feuer",1122,"Optimistisch, weitherzig und abenteuerlustig. Du suchst Sinn und Freiheit und steckst andere mit deiner Zuversicht an."],["Steinbock","♑","Erde",1222,"Beständig, weise und zielstrebig. Du baust mit Geduld an dem, was zählt, und bist für deine Liebsten ein ruhiger, starker Fels."]];
 const EC={Feuer:"#d9722e",Wasser:"#4c8fc4",Luft:"#8b8fd6",Erde:"#7fb069"};
 const FE={Feuer:"Feuer prägt euch: Begeisterung, Mut und Wärme. Bei euch wird viel gelacht, angepackt und gefeiert.",Wasser:"Wasser prägt euch: Gefühl, Nähe und Intuition. Ihr versteht euch oft ohne Worte.",Luft:"Luft prägt euch: Ideen, Gespräche und Leichtigkeit. Bei euch darf jeder eigenständig denken.",Erde:"Erde prägt euch: Verlässlichkeit, Genuss und Geborgenheit. Ihr seid ein sicherer Hafen füreinander."};
+const AS=[["Widder","♈","Feuer","Nach außen wirkst du mutig, direkt und voller Tatkraft. Menschen spüren sofort deinen Antrieb und folgen gern deinem Mut."],
+["Stier","♉","Erde","Dein erster Eindruck ist ruhig, warm und verlässlich. Du strahlst Geborgenheit aus und schenkst anderen Sicherheit."],
+["Zwillinge","♊","Luft","Du kommst neugierig, wach und redegewandt herein. Mit Leichtigkeit verbindest du Menschen und Ideen."],
+["Krebs","♋","Wasser","Du wirkst sanft, fürsorglich und einfühlsam. Andere spüren bei dir sofort, dass sie willkommen sind."],
+["Löwe","♌","Feuer","Du trittst herzlich, strahlend und großzügig auf. Deine Wärme und dein Selbstvertrauen lassen jeden Raum heller werden."],
+["Jungfrau","♍","Erde","Du erscheinst aufmerksam, klar und hilfsbereit. Dein Blick fürs Wesentliche macht dich zu einem ruhigen Anker."],
+["Waage","♎","Luft","Du begegnest der Welt charmant, fair und harmonisch. Mit Stil und Takt schaffst du Ausgleich, wo du hinkommst."],
+["Skorpion","♏","Wasser","Du wirkst tiefgründig, magnetisch und intensiv. Hinter deinem ruhigen Blick spüren Menschen große innere Kraft."],
+["Schütze","♐","Feuer","Du kommst offen, optimistisch und abenteuerlustig an. Dein Humor und deine Weite stecken andere an."],
+["Steinbock","♑","Erde","Du trittst ernsthaft, besonnen und zielstrebig auf. Andere vertrauen deiner Ruhe und deiner Verlässlichkeit."],
+["Wassermann","♒","Luft","Du wirkst eigenständig, originell und freiheitsliebend. Mit deinen Ideen bringst du frischen Wind in jede Runde."],
+["Fische","♓","Wasser","Du erscheinst sanft, verträumt und mitfühlend. Deine Intuition öffnet Herzen, ohne dass du viele Worte brauchst."]];
+const CITY=[["Berlin",52.52,13.405,"Europe/Berlin"],["Hamburg",53.55,9.99,"Europe/Berlin"],["München",48.137,11.575,"Europe/Berlin"],["Köln",50.938,6.96,"Europe/Berlin"],["Frankfurt am Main",50.11,8.68,"Europe/Berlin"],["Stuttgart",48.775,9.18,"Europe/Berlin"],["Düsseldorf",51.227,6.774,"Europe/Berlin"],["Neuss",51.198,6.69,"Europe/Berlin"],["Essen",51.455,7.012,"Europe/Berlin"],["Dortmund",51.514,7.468,"Europe/Berlin"],["Leipzig",51.34,12.375,"Europe/Berlin"],["Dresden",51.05,13.74,"Europe/Berlin"],["Hannover",52.375,9.735,"Europe/Berlin"],["Nürnberg",49.452,11.077,"Europe/Berlin"],["Bremen",53.08,8.8,"Europe/Berlin"],["Wien",48.21,16.37,"Europe/Vienna"],["Graz",47.07,15.44,"Europe/Vienna"],["Salzburg",47.8,13.04,"Europe/Vienna"],["Zürich",47.376,8.54,"Europe/Zurich"],["Bern",46.948,7.447,"Europe/Zurich"],["Basel",47.56,7.59,"Europe/Zurich"],["Amsterdam",52.37,4.9,"Europe/Amsterdam"],["Brüssel",50.85,4.35,"Europe/Brussels"],["Paris",48.857,2.35,"Europe/Paris"],["London",51.507,-0.128,"Europe/London"],["Rom",41.9,12.5,"Europe/Rome"],["Madrid",40.417,-3.704,"Europe/Madrid"],["Warschau",52.23,21.01,"Europe/Warsaw"],["Prag",50.075,14.44,"Europe/Prague"],["Istanbul",41.01,28.98,"Europe/Istanbul"],["Moskau",55.75,37.62,"Europe/Moscow"],["New York",40.71,-74.0,"America/New_York"],["Los Angeles",34.05,-118.24,"America/Los_Angeles"]];
+function tzOff(tz,y,mo,d,h,mi){const f=new Intl.DateTimeFormat("en-US",{timeZone:tz,hourCycle:"h23",year:"numeric",month:"numeric",day:"numeric",hour:"numeric",minute:"numeric",second:"numeric"});
+const off=t=>{const q={};f.formatToParts(new Date(t)).forEach(x=>q[x.type]=+x.value);return(Date.UTC(q.year,q.month-1,q.day,q.hour,q.minute,q.second)-t)/6e4};
+const loc=Date.UTC(y,mo-1,d,h,mi);let o=off(loc);o=off(loc-o*6e4);return o}
+function calcAsc(f){if(!f.t||f.la==null||f.lo==null)return null;try{
+const[y,m,d]=f.d.split("-").map(Number),[h,mi]=f.t.split(":").map(Number),o=f.tz?tzOff(f.tz,y,m,d,h,mi):(+f.off||0)*60,
+ut=Date.UTC(y,m-1,d,h,mi)-o*6e4,jd=ut/864e5+2440587.5,T=(jd-2451545)/36525,R=Math.PI/180,
+g=280.46061837+360.98564736629*(jd-2451545)+.000387933*T*T,ramc=(((g+f.lo)%360)+360)%360*R,eps=(23.439291-.0130042*T)*R,la=Math.max(-66,Math.min(66,f.la))*R;
+let a=Math.atan2(Math.cos(ramc),-(Math.sin(ramc)*Math.cos(eps)+Math.tan(la)*Math.sin(eps)))/R;a=((a%360)+360)%360;return AS[Math.floor(a/30)]}catch(e){return null}}
 let fam=ls.g("et21_fam",[]);
 const esc=t=>String(t).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const dsum=t=>String(t).replace(/\D/g,"").split("").reduce((a,b)=>a+ +b,0);
@@ -693,22 +802,27 @@ function red(n){while(n>22)n=dsum(n);return n%22}
 function calc(f){const[y,m,d]=f.d.split("-").map(Number),now=new Date(),t0=new Date(now.getFullYear(),now.getMonth(),now.getDate()),cy=now.getFullYear();
 let nb=new Date(cy,m-1,d);if(nb<t0)nb=new Date(cy+1,m-1,d);const days=Math.round((nb-t0)/864e5);
 let z=FZ.slice().reverse().find(x=>m*100+d>=x[3])||FZ[11];const pad=n=>String(n).padStart(2,"0");
-return{z,days,age:nb.getFullYear()-y-(days===0?0:1),cy,soul:CARDS[red(dsum(f.d))],year:CARDS[red(dsum(pad(d)+pad(m)+cy))]}}
+return{z,days,age:nb.getFullYear()-y-(days===0?0:1),cy,soul:CARDS[red(dsum(f.d))],year:CARDS[red(dsum(pad(d)+pad(m)+cy))],asc:calcAsc(f)}}
 function mc(c,l){return`<div class="mc"><div class="cf" style="--sc:${c.col}"><small>${c.num}</small><div class="ar">${art(c)}</div><div><b>${c.name}</b></div></div><span>${l}</span></div>`}
 function renderFam(){const L=fam.map(f=>({f,c:calc(f)})).sort((a,b)=>a.c.days-b.c.days);
-$("flist").innerHTML=L.length?L.map(({f,c})=>{const zc=EC[c.z[2]];return`<article class="pf" style="--zc:${zc}"><h3>${esc(f.n)}</h3><div class="meta">${esc(f.r)} · ${f.d.split("-").reverse().join(".")} · ${c.age} Jahre</div><span class="cd">${c.days===0?"Heute ist Geburtstag! 🎉":"Noch "+c.days+" Tage bis zum Geburtstag"}</span>
-<div class="row"><div class="zb"><i>${c.z[1]}&#xFE0E;</i>${c.z[0]}<small>Element ${c.z[2]}</small></div>${mc(c.soul,"Seelenkarte")}${mc(c.year,"Jahreskarte "+c.cy)}
-<div class="tx"><p><b>Sternzeichen ${c.z[0]}:</b> ${c.z[4]}</p><p><b>Seelenkarte ${c.soul.name}:</b> ${c.soul.up}</p><p><b>Dein Jahresmotto ${c.cy}, ${c.year.name}:</b> ${c.year.tip}</p></div></div>
+$("flist").innerHTML=L.length?L.map(({f,c})=>{const zc=EC[c.z[2]];return`<article class="pf" style="--zc:${zc}"><h3>${esc(f.n)}</h3><div class="meta">${esc(f.r)} · ${f.d.split("-").reverse().join(".")}${f.t?" · "+f.t+" Uhr"+(f.on?" · "+esc(f.on):""):""} · ${c.age} Jahre</div><span class="cd">${c.days===0?"Heute ist Geburtstag! 🎉":"Noch "+c.days+" Tage bis zum Geburtstag"}</span>
+<div class="row"><div class="zb"><i>${c.z[1]}&#xFE0E;</i>${c.z[0]}<small>Element ${c.z[2]}</small></div>${c.asc?`<div class="zb" style="--zc:${EC[c.asc[2]]}"><i>${c.asc[1]}&#xFE0E;</i>Aszendent ${c.asc[0]}<small>Element ${c.asc[2]}</small></div>`:""}${mc(c.soul,"Seelenkarte")}${mc(c.year,"Jahreskarte "+c.cy)}
+<div class="tx"><p><b>Sternzeichen ${c.z[0]}:</b> ${c.z[4]}</p>${c.asc?`<p><b>Aszendent ${c.asc[0]}:</b> ${c.asc[3]}</p>`:""}<p><b>Seelenkarte ${c.soul.name}:</b> ${c.soul.up}</p><p><b>Dein Jahresmotto ${c.cy}, ${c.year.name}:</b> ${c.year.tip}</p></div></div>
 <div class="acts"><button class="btn wa" data-s="wa" data-k="f${f.id}">WhatsApp</button><button class="btn tgm" data-s="tg" data-k="f${f.id}">Telegram</button><button class="btn o" data-a="cp" data-i="${f.id}">Kopieren</button><button class="btn o" data-a="del" data-i="${f.id}">Entfernen</button></div></article>`}).join(""):'<p class="p" style="text-align:center;margin:26px 0">Noch ist der Kreis leer. Beginne mit dir selbst, dann folgen die Menschen, die dir am Herzen liegen.</p>';
 if(L.length>1){const n={};L.forEach(({c})=>n[c.z[2]]=(n[c.z[2]]||0)+1);const top=Object.keys(n).sort((a,b)=>n[b]-n[a])[0],nx=L[0];
 $("fhm").innerHTML=`<div class="fh"><h3>Euer Familienelement: ${top}</h3><p>${FE[top]}</p><p style="margin-top:8px;color:var(--g)">Nächster Geburtstag im Kreis: ${esc(nx.f.n)}, ${nx.c.days===0?"heute":"in "+nx.c.days+" Tagen"} 🎂</p></div>`}else $("fhm").innerHTML=""}
+$("fo1").innerHTML+=CITY.map((c,i)=>`<option value="${i}">${c[0]}</option>`).join("")+'<option value="x">Anderer Ort …</option>';if(!navigator.share)$("frs").style.display="none";$("fo1").onchange=()=>{$("fxo").hidden=$("fo1").value!=="x"};
 $("fadd").onclick=()=>{const n=$("fn1").value.trim(),d=$("fd1").value;if(!n||!d){$("fmsg").textContent="Bitte Name und Geburtstag eintragen.";return}
-fam.push({id:Date.now(),n,d,r:$("fr1").value});ls.s("et21_fam",fam);$("fn1").value="";$("fd1").value="";$("fmsg").textContent="✦ "+n+" ist jetzt Teil deines Familienkreises.";renderFam()};
+const t=$("ft1").value,ov=$("fo1").value;let pl={};
+if(t&&!ov||!t&&ov){$("fmsg").textContent="Für den Aszendenten brauchst du Geburtszeit und Geburtsort.";return}
+if(t&&ov==="x"){const la=parseFloat($("fla").value),lo=parseFloat($("flo").value),of=parseFloat($("fof").value);if(isNaN(la)||isNaN(lo)||isNaN(of)){$("fmsg").textContent="Bitte Breitengrad, Längengrad und UTC-Abweichung eintragen.";return}pl={t,la,lo,off:of,on:"eigener Ort"}}
+else if(t){const c=CITY[+ov];pl={t,la:c[1],lo:c[2],tz:c[3],on:c[0]}}
+fam.push({id:Date.now(),n,d,r:$("fr1").value,...pl});ls.s("et21_fam",fam);$("fn1").value="";$("fd1").value="";$("ft1").value="";$("fo1").value="";$("fxo").hidden=true;$("fmsg").textContent="✦ "+n+" ist jetzt Teil deines Familienkreises.";renderFam()};
 $("flist").onclick=e=>{const b=e.target.closest("button");if(!b)return;const f=fam.find(x=>x.id==b.dataset.i);if(!f)return;
 if(b.dataset.a==="del"){fam=fam.filter(x=>x!==f);ls.s("et21_fam",fam);renderFam()}
-else{const c=calc(f),t=`✦ ${f.n} · ${c.z[0]} ${c.z[1]}\nSeelenkarte: ${c.soul.name} – ${c.soul.tip}\nJahreskarte ${c.cy}: ${c.year.name} – ${c.year.tip}\nVon Herzen: Du bist ein Geschenk für uns alle.`;
+else{const c=calc(f),t=`✦ ${f.n} · ${c.z[0]} ${c.z[1]}${c.asc?" · Aszendent "+c.asc[0]+" "+c.asc[1]:""}\nSeelenkarte: ${c.soul.name} – ${c.soul.tip}\nJahreskarte ${c.cy}: ${c.year.name} – ${c.year.tip}\nVon Herzen: Du bist ein Geschenk für uns alle.`;
 (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent="Kopiert ✓"},()=>{b.textContent="Kopieren nicht möglich"})}};
-function view(k){document.querySelectorAll(".wrap>*").forEach(el=>{if(el.classList.contains("bar")||el.classList.contains("tabs")||el.classList.contains("foot")||el.id==="lex"||el.id==="fam"||el.id==="lgm")return;el.hidden=k!=="p"});
+function view(k){document.querySelectorAll(".wrap>*").forEach(el=>{if(el.classList.contains("bar")||el.classList.contains("tabs")||el.classList.contains("foot")||el.id==="lex"||el.id==="fam"||el.id==="dk"||el.id==="lgm")return;el.hidden=k!=="p"});
 $("lex").hidden=k!=="k";$("fam").hidden=k!=="f";$("lgm").hidden=k!=="l";[["tp","p"],["tk","k"],["tf","f"],["tl","l"]].forEach(a=>$(a[0]).setAttribute("aria-selected",k===a[1]));if(k==="k")build();if(k==="f")renderFam();if(k==="l")lgBuild();scrollTo({top:0})}
 $("tp").onclick=()=>view("p");$("tk").onclick=()=>view("k");$("tf").onclick=()=>view("f");$("tl").onclick=()=>view("l");
 
@@ -804,7 +918,7 @@ $("hz").onclick=()=>document.querySelector(".prog").scrollIntoView({behavior:rm?
 const lazy=(id,fn)=>{const el=$(id);let d=false;const run=()=>{if(!d){d=true;fn()}};if("IntersectionObserver" in window){const o=new IntersectionObserver(e=>{if(e[0].isIntersecting){o.disconnect();run()}},{rootMargin:"900px 0px"});o.observe(el)}else run()};
 lazy("lex",()=>build());lazy("lgm",()=>lgBuild());renderFam();
 /* Navigation */
-const T=[["home","Programm"],["lex","Kartenlexikon"],["lgm","Legemethoden"],["fam","Familienkreis"]],nav=document.querySelector(".tabs");
+const T=[["home","Programm"],["lex","Kartenlexikon"],["lgm","Legemethoden"],["fam","Familienkreis"],["dk","Drei Karten"]],nav=document.querySelector(".tabs");
 nav.removeAttribute("role");nav.innerHTML=T.map((t,i)=>`<button data-t="${t[0]}" aria-current="${i===0}" aria-selected="${i===0}">${t[1]}</button>`).join("")+'<button class="gd" id="gg">✦ Anleitung</button>';
 nav.onclick=e=>{const b=e.target.closest("button[data-t]");if(!b)return;b.dataset.t==="home"?scrollTo({top:0,behavior:rm?"auto":"smooth"}):$(b.dataset.t).scrollIntoView({behavior:rm?"auto":"smooth",block:"start"})};
 let ra,la="";addEventListener("scroll",()=>{cancelAnimationFrame(ra);ra=requestAnimationFrame(()=>{let a="home";T.forEach(t=>{if($(t[0]).getBoundingClientRect().top<innerHeight*.4)a=t[0]});if(a!==la){la=a;nav.querySelectorAll("[data-t]").forEach(b=>{const on=b.dataset.t===a;b.setAttribute("aria-selected",on);if(on)nav.scrollTo({left:b.offsetLeft-(nav.clientWidth-b.offsetWidth)/2,behavior:"smooth"})})}})},{passive:true});
@@ -814,7 +928,7 @@ const G=[["Willkommen in deinem Kartenreich","Diese Seite ist dein persönlicher
 ["Das 21-Tage-Programm","Jeder Tag ist eine kleine Einladung. Tippe auf einen Tag, um Aha-Moment, Übung und Wissens-Check zu öffnen, und schließe ihn ab. Dein Fortschrittsbalken füllt sich, und nach Tag 21 wartet eine kleine Feier. Dein Stand bleibt in deinem Browser gespeichert."],
 ["Das Kartenlexikon","78 Karten in einem Rondell. Wische nach links und rechts oder nutze die Pfeile und das Auswahlfeld. Oben filterst du nach Großer Arkana oder einer der vier Farben. Zu jeder Karte findest du die Bedeutung aufrecht und umgekehrt und darunter ein Notizfeld nur für dich."],
 ["Die Legemethoden","Neun Wege, Karten zu legen. Das Bild zeigt, wo jede Karte liegt. Tippe auf eine Karte oder eine Position, dann leuchten beide gemeinsam auf. Lies die drei Schritte, mische deine eigenen Karten und lege sie in der Reihenfolge der Zahlen."],
-["Der Familienkreis","Trage Name und Geburtstag ein, auch für Partner, Kinder, Eltern und Freunde. Du erhältst Sternzeichen, Seelenkarte und Jahreskarte, einen Geburtstags-Countdown und einen Gruß zum Teilen. Alles bleibt auf deinem Gerät, und jeden Eintrag kannst du jederzeit entfernen."],
+["Der Familienkreis","Trage Name und Geburtstag ein, auch für Partner, Kinder, Eltern und Freunde. Mit Geburtszeit und Geburtsort berechnen wir zusätzlich den Aszendenten. Du erhältst Sternzeichen, Aszendent, Seelenkarte und Jahreskarte, einen Geburtstags-Countdown und einen Gruß zum Teilen. Alles bleibt auf deinem Gerät, und jeden Eintrag kannst du jederzeit entfernen."],
 ["Tageskarte und Klangraum","Oben auf der Seite ziehst du deine Tageskarte, sie bleibt den ganzen Tag dieselbe. Der goldene Knopf ♪ unten rechts öffnet den Klangraum: sanfte Musik, die nie gleich klingt. Wähle Stimmung und Lautstärke. Sie beginnt nur, wenn du sie startest."],
 ["Wichtig zum Schluss","Tarot ist ein Spiegel für Nachdenken und Freude, keine Vorhersage und kein Ersatz für ärztlichen, psychologischen, rechtlichen oder finanziellen Rat. Dein Kartenreich steht dir drei Monate lang offen, danach schließt es sich sanft von selbst. Diese Anleitung erreichst du jederzeit über „Anleitung“ im Menü. Nun wünsche ich dir von Herzen viel Freude und Wandlung."]];
 function fin(){gt.classList.remove("show");document.documentElement.style.overflow="";if(!only){ok={v:1,t:Date.now()};ls.s(K,ok)}}
@@ -834,11 +948,48 @@ addEventListener("keydown",e=>{if(e.key==="Escape"&&only&&gt.classList.contains(
 if(!ok||ok.v!==1){only=false;step=1;show()}
 })();
 
+/* ===== DREI-KARTEN-LEGUNG ===== */
+(function(){
+const dlg=$("dkd"),fan=$("dkfan"),sl=$("dksl"),rd=$("dkr"),ms=$("dkm"),ac=$("dkac"),rmq=matchMedia("(prefers-reduced-motion:reduce)");
+const SL=[["Gestern","Was dich geprägt hat"],["Heute","Was dich jetzt bewegt"],["Morgen","Was auf dich zukommt"]];
+let deck=[],pick=[],used=new Set(),busy=false;const q=()=>$("dkq").value.trim();
+const rnd=n=>{const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]%n};
+function shuffle(){deck=CARDS.map(c=>({c,rev:false}));for(let i=deck.length-1;i>0;i--){const j=rnd(i+1);[deck[i],deck[j]]=[deck[j],deck[i]]}const r=$("dkrv").checked;deck.forEach(d=>d.rev=r&&rnd(2)===1)}
+const face=d=>`<div class="cf" style="--sc:${d.c.col};animation:none;${d.rev?"transform:rotate(180deg);":""}"><small>${d.c.num}</small><div class="ar">${art(d.c)}</div><div><b>${d.c.name}</b></div></div>`;
+function drawSlots(){sl.innerHTML=SL.map((x,i)=>`<div class="dks"><div class="dkc" id="dkc${i}"><div class="dke">${i+1}</div></div><b>${x[0]}</b><small>${x[1]}</small></div>`).join("")}
+function fanBuild(){const w=fan.clientWidth||320,cw=w<520?46:60,ch=cw*1.5,R=Math.max(200,Math.min(430,w*.55)),th=Math.min(.85,Math.asin(Math.min(.99,(w/2-cw/2-6)/R))),st=2*th/77;
+fan.style.cssText=`--cw:${cw}px;--ch:${ch}px;height:${Math.ceil(ch+R*(1-Math.cos(th))+60)}px`;
+fan.innerHTML=deck.map((d,i)=>`<button class="dkk${used.has(i)?" gone":""}" data-i="${i}" tabindex="${i?-1:0}" aria-label="Karte ${i+1} von 78 wählen" style="--a:${((i-38.5)*st*180/Math.PI).toFixed(2)}deg;transform-origin:50% ${ch+R}px;animation-delay:${i*6}ms"><i class="dkb"></i></button>`).join("")}
+function msg(){const n=pick.length;sl.querySelectorAll(".dkc").forEach((x,i)=>x.classList.toggle("next",i===n&&n<3));ms.textContent=n<3?(n===0?"Atme einmal tief durch, denke an deine Frage und wähle die erste Karte für „Gestern“.":`Wunderbar. Wähle jetzt Karte ${n+1} von 3 für „${SL[n][0]}“.`):"✦ Deine Legung ist vollständig. Lies, was die Karten dir sagen."}
+function renderRead(){rd.innerHTML=(q()?`<p class="dkqt">„${esc(q())}“</p>`:"")+pick.map((d,i)=>`<article class="dkx" style="--sc:${d.c.col}"><h4>${SL[i][0]} · ${d.c.name}${d.rev?" (umgekehrt)":""}</h4><p class="kw">${d.c.kw}</p><p>${d.rev?d.c.rv:d.c.up}</p><p class="tip">✦ ${d.c.tip}</p></article>`).join("");
+if(pick.length===3){const n=pick.map(d=>d.c.name);rd.insertAdjacentHTML("beforeend",`<div class="fh"><h3>Dein roter Faden</h3><p>Von <b>${n[0]}</b> über <b>${n[1]}</b> zu <b>${n[2]}</b>. Was gestern war, darf Wurzel sein. Heute liegt dein Spielraum, und morgen wächst aus dem, was du jetzt wählst.</p></div>`);ac.hidden=false;rd.scrollIntoView({behavior:rmq.matches?"auto":"smooth",block:"nearest"})}else ac.hidden=true}
+function take(b){const i=+b.dataset.i,d=deck[i],n=pick.length;pick.push(d);used.add(i);busy=true;$("dkq").disabled=true;const fr=b.getBoundingClientRect();b.classList.add("gone");
+const box=$("dkc"+n);box.innerHTML=`<div class="dki"><div class="dkb dkbk"></div><div class="dkfc">${face(d)}</div></div>`;box.classList.add("on");
+const el=box.firstChild,tr=box.getBoundingClientRect(),nb=[...fan.querySelectorAll(".dkk:not(.gone)")].sort((a,c)=>Math.abs(a.dataset.i-i)-Math.abs(c.dataset.i-i))[0];
+if(nb){fan.querySelectorAll(".dkk").forEach(x=>x.tabIndex=-1);nb.tabIndex=0}
+const done=()=>{el.classList.add("fl");setTimeout(()=>{busy=false;msg();renderRead();if(nb&&pick.length<3)nb.focus({preventScroll:true})},rmq.matches?0:800)};
+if(rmq.matches||!el.animate){done();return}
+el.animate([{transform:`translate(${fr.left+fr.width/2-tr.left-tr.width/2}px,${fr.top+fr.height/2-tr.top-tr.height/2}px) scale(${fr.width/tr.width})`},{transform:"none"}],{duration:650,easing:"cubic-bezier(.2,.8,.2,1)"}).onfinish=done}
+function reset(){$("dkq").disabled=false;if(arguments[0]!==1)$("dkq").value="";pick=[];used=new Set();busy=false;shuffle();drawSlots();fanBuild();rd.innerHTML="";ac.hidden=true;msg()}
+fan.onclick=e=>{const b=e.target.closest(".dkk");if(!b||busy||pick.length>=3||b.classList.contains("gone"))return;take(b)};
+fan.onkeydown=e=>{if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft")return;const a=[...fan.querySelectorAll(".dkk:not(.gone)")],i=a.indexOf(document.activeElement);if(i<0)return;e.preventDefault();const n=a[Math.max(0,Math.min(a.length-1,i+(e.key==="ArrowRight"?1:-1)))];a.forEach(x=>x.tabIndex=-1);n.tabIndex=0;n.focus()};
+const txt=()=>"✦ Meine Drei-Karten-Legung\n"+(q()?"Meine Frage: „"+q()+"“\n":"")+pick.map((d,i)=>`${SL[i][0]}: ${d.c.name}${d.rev?" (umgekehrt)":""} – ${d.c.tip}`).join("\n")+"\n21 Tage Transformation – Karten legen Mindshift";
+ac.onclick=e=>{const b=e.target.closest("[data-d]");if(!b)return;const k=b.dataset.d,u=/^https?:/.test(location.href)?location.href:"",t=txt();
+if(k==="nw"){reset();dlg.scrollTo({top:0,behavior:"smooth"})}
+else if(k==="wa")open("https://wa.me/?text="+encodeURIComponent(t+(u?"\n"+u:"")),"_blank","noopener");
+else if(k==="tg")open("https://t.me/share/url?url="+encodeURIComponent(u||" ")+"&text="+encodeURIComponent(t),"_blank","noopener");
+else{const o=b.textContent;(navigator.clipboard?navigator.clipboard.writeText(t+(u?"\n"+u:"")):Promise.reject()).then(()=>{b.textContent="Kopiert ✓";setTimeout(()=>b.textContent=o,1800)},()=>{b.textContent="Nicht möglich"})}};
+$("dko").onclick=()=>{dlg.showModal();reset()};$("dkx").onclick=()=>dlg.close();$("dksh").onclick=()=>reset();$("dkrv").onchange=()=>reset(1);
+dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
+let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{if(dlg.open)fanBuild()},150)});
+})();
+
 /* ===== ORAKEL + WHATSAPP / TELEGRAM ===== */
 (function(){
 let OT="";
-function famText(f){const c=calc(f);return`✦ ${f.n} · ${c.z[0]} ${c.z[1]}\nSeelenkarte: ${c.soul.name} – ${c.soul.tip}\nJahreskarte ${c.cy}: ${c.year.name} – ${c.year.tip}\nVon Herzen: Du bist ein Geschenk für uns alle.`}
-function getT(k){if(k==="o")return OT;if(k==="fall")return fam.length?"✦ Unser Familienkreis\n\n"+fam.map(f=>{const c=calc(f);return`${f.n} ${c.z[1]} ${c.z[0]} · Seelenkarte ${c.soul.name} · ${c.days===0?"heute Geburtstag 🎉":"Geburtstag in "+c.days+" Tagen"}`}).join("\n")+"\n\nMit Liebe gelegt – 21 Tage Transformation":"";const f=fam.find(x=>"f"+x.id===k);return f?famText(f):""}
+function famText(f){const c=calc(f);return`✦ ${f.n} · ${c.z[0]} ${c.z[1]}${c.asc?" · Aszendent "+c.asc[0]+" "+c.asc[1]:""}\nSeelenkarte: ${c.soul.name} – ${c.soul.tip}\nJahreskarte ${c.cy}: ${c.year.name} – ${c.year.tip}\nVon Herzen: Du bist ein Geschenk für uns alle.`}
+const REC="✦ Ich habe etwas Schönes für dich entdeckt: „21 Tage Transformation“. Ein sanftes Tarot-Programm mit einer kleinen Mission pro Tag, einem Lexikon mit 78 Karten, Legemethoden und einem Familienkreis, der für jeden, den du liebst, Sternzeichen, Aszendent und Seelenkarte enthüllt. Nichts davon verlässt dein Gerät. Schau einmal hinein, ich glaube, es passt zu dir. 🌙\n\nAuch im WhatsApp-Kanal dabei sein: https://whatsapp.com/channel/0029Vb9Izau4IBh8cdFsoZ0Z";
+function getT(k){if(k==="rec")return REC;if(k==="o")return OT;if(k==="fall")return fam.length?"✦ Unser Familienkreis\n\n"+fam.map(f=>{const c=calc(f);return`${f.n} ${c.z[1]} ${c.z[0]}${c.asc?" · Aszendent "+c.asc[0]:""} · Seelenkarte ${c.soul.name} · ${c.days===0?"heute Geburtstag 🎉":"Geburtstag in "+c.days+" Tagen"}`}).join("\n")+"\n\nMit Liebe gelegt – 21 Tage Transformation":"";const f=fam.find(x=>"f"+x.id===k);return f?famText(f):""}
 function oracle(){if(typeof prof==="undefined"||!prof){$("om").textContent="Bitte speichere zuerst dein Profil oben.";$("oo").innerHTML="";return}
 $("om").textContent="";const n=prof.name,d=new Date(),ds=d.toISOString().slice(0,10);
 const nm=n.toUpperCase().replace(/Ä/g,"AE").replace(/Ö/g,"OE").replace(/Ü/g,"UE").replace(/ß/g,"SS").replace(/[^A-Z]/g,"").split("").reduce((a,c)=>a+c.charCodeAt(0)-64,0);
@@ -849,11 +1000,11 @@ OT=`✦ Mein Orakel · ${n}\n`+R.map(r=>`${r[0]}: ${r[1].name} – ${r[1].tip}`)
 $("oo").innerHTML=`<p class="ol">Für dich, ${esc(n)}: Diese Karten sprechen heute zu dir.</p>`+R.map(r=>`<div class="tg" style="--sc:${r[1].col}">${mc(r[1],r[0])}<div class="ct"><h3>${r[1].name}</h3><p class="kw">${r[1].kw}</p><p>${r[1].up}</p><p class="qs">${r[1].tip}</p></div></div>`).join("")+`<p class="p" style="text-align:center;margin-top:20px">Dein Start am ${st}, ${prof.cards} Karten und ${prof.min} Minuten täglich: In 21 Tagen schenkst du dir ${prof.cards*21} Karten und rund ${hrs} Stunden liebevoller Zuwendung.</p><div class="shr"><button class="btn wa" data-s="wa" data-k="o">Per WhatsApp senden</button><button class="btn tgm" data-s="tg" data-k="o">Per Telegram senden</button><button class="btn o" data-s="cp" data-k="o">Kopieren</button>${navigator.share?'<button class="btn o" data-s="sh" data-k="o">Teilen …</button>':""}</div>`}
 $("ob").onclick=oracle;$("sv").addEventListener("click",()=>setTimeout(()=>{if($("oo").innerHTML)oracle()},0));
 document.addEventListener("click",e=>{const b=e.target.closest("[data-s]");if(!b)return;const t=getT(b.dataset.k);if(!t){alert("Es gibt noch nichts zu senden. Füge zuerst jemanden zum Familienkreis hinzu oder befrage dein Orakel.");return}
-const u=/^https?:/.test(location.href)?location.href:"",k=b.dataset.s,old=b.textContent;
+const u=/^https?:/.test(location.href)?location.href:"",k=b.dataset.s,k2=b.dataset.k,old=b.textContent;
 if(k==="wa")open("https://wa.me/?text="+encodeURIComponent(t+(u?"\n"+u:"")),"_blank","noopener");
 else if(k==="tg")open("https://t.me/share/url?url="+encodeURIComponent(u||" ")+"&text="+encodeURIComponent(t),"_blank","noopener");
 else if(k==="sh")navigator.share({text:t,url:u||undefined}).catch(()=>{});
-else(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent="Kopiert ✓";setTimeout(()=>b.textContent=old,1800)},()=>{b.textContent="Nicht möglich"})});
+else(navigator.clipboard?navigator.clipboard.writeText(t+(k2==="rec"&&u?"\n"+u:"")):Promise.reject()).then(()=>{b.textContent="Kopiert ✓";setTimeout(()=>b.textContent=old,1800)},()=>{b.textContent="Nicht möglich"})});
 })();
 
 /* ===== APP: Animationen nur sichtbar, Installation, Offline ===== */
