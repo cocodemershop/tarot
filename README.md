@@ -4,7 +4,7 @@ Live: https://cocodemershop.github.io/tarot/
 
 ## Veröffentlichen (GitHub Pages)
 1. Repo `tarot` im Account `cocodemershop` öffnen.
-2. Den **Inhalt** dieses Ordners ins Repo hochladen (Add file → Upload files). Den vorhandenen Ordner `cards/` (78 Kartenbilder + g0.jpg) behalten.
+2. Den **Inhalt** dieses Ordners ins Repo hochladen (Add file → Upload files). Den Ordner `cards/` mit den 78 Kartenbildern (`g0.jpg` … `s3_13.jpg`) ebenfalls ins Repo legen. Fehlt er, zeigt die Seite gezeichnete Karten statt Fotos.
 3. Settings → Pages → Branch `main`, Ordner `/ (root)`.
 
 ## Nach Updates

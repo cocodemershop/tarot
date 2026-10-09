@@ -1349,6 +1349,8 @@ else if(k==="sh")navigator.share({text:t,url:u||undefined}).catch(()=>{});
 else(navigator.clipboard?navigator.clipboard.writeText(t+(k2==="rec"&&u?"\n"+u:"")):Promise.reject()).then(()=>{b.textContent="Kopiert ✓";setTimeout(()=>b.textContent=old,1800)},()=>{b.textContent="Nicht möglich"})});
 })();
 
+/* Fallback: fehlt ein Kartenbild, wird die gezeichnete Karte gezeigt */
+document.addEventListener("error",e=>{const im=e.target;if(!im||im.tagName!=="IMG")return;const f=im.closest(".cf.im");const k=(im.getAttribute("src")||"").match(/cards\/([^/]+)\.jpg$/);if(!f||!k)return;const c=CARDS.find(x=>x.id===k[1]);if(!c)return;f.classList.remove("im");f.innerHTML='<small>'+c.num+'</small><div class="ar">'+art(c)+'</div><div><b>'+c.name+'</b></div>'},true);
 /* ===== APP: Animationen nur sichtbar, Installation, Offline ===== */
 (function(){
 const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle("vis",e.isIntersecting)),{root:$("trk"),threshold:.1});
