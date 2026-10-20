@@ -13,9 +13,9 @@ if("IntersectionObserver" in window){const o=new IntersectionObserver(e=>{if(e[0
 document.querySelectorAll(".mx-chips button").forEach(b=>b.addEventListener("click",()=>{
  document.querySelectorAll(".mx-chips button").forEach(x=>x.setAttribute("aria-pressed",x===b));render(b.dataset.g)}));
 function show(i){cur=(i+list.length)%list.length;const c=list[cur],im=$("mxli");
- im.src="cards/"+c[0]+".jpg";im.alt=c[1]+" · "+c[2];$("mxln").textContent=c[1];$("mxlk").textContent=c[2];
+ im.src="cards/"+c[0]+".webp";im.alt=c[1]+" · "+c[2];$("mxln").textContent=c[1];$("mxlk").textContent=c[2];
  $("mxlc").textContent=(cur+1)+" / "+list.length;
- const nx=list[(cur+1)%list.length];(new Image).src="cards/"+nx[0]+".jpg"}
+ const nx=list[(cur+1)%list.length];(new Image).src="cards/"+nx[0]+".webp"}
 rail.addEventListener("click",e=>{const b=e.target.closest(".mx-card");if(!b)return;show(+b.dataset.i);dlg.showModal()});
 $("mxlp").onclick=()=>show(cur-1);$("mxlnx").onclick=()=>show(cur+1);$("mxlx").onclick=()=>dlg.close();
 dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});

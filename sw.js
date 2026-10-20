@@ -1,6 +1,6 @@
 /* Kartenreich Service Worker – bei jeder Änderung CACHE erhöhen */
-const CACHE = "kartenreich-v7";
-const CORE = ["./", "index.html", "app.min.css?v=7", "app.min.js?v=7", "manifest.webmanifest",
+const CACHE = "kartenreich-v14";
+const CORE = ["./", "index.html", "app.min.css?v=14", "app.min.js?v=14", "manifest.webmanifest",
   "fonts/Lora-Variable.woff", "fonts/Lora-Italic-Variable.woff", "img/logo.webp",
   "img/hero-g0.webp", "img/hero-g21.webp", "img/hero-back.webp", "icons/icon-192.png"];
 self.addEventListener("install", e => {

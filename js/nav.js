@@ -14,5 +14,7 @@ tm.onclick=e=>{e.stopPropagation();const o=mp.hidden;mp.hidden=!o;tm.setAttribut
 mp.addEventListener("click",e=>{const ob=e.target.closest("button[data-o]");if(ob&&!nav.contains(ob)){const f={dk:window.openDk,sk:window.openSk,lg:window.openLg,fk:window.openFk,pd:window.openPd,tr:window.openTr}[ob.dataset.o];if(f)f()}setTimeout(close,0)});
 document.addEventListener("click",e=>{if(!mw.contains(e.target)&&!mp.contains(e.target))close()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")close()});
-const nh=()=>document.documentElement.style.setProperty("--nh",nav.offsetHeight+"px");nh();addEventListener("resize",nh);
+/* Höhe der Leiste ohne erzwungenes Layout beim Start messen */
+const nh=h=>document.documentElement.style.setProperty("--nh",Math.round(h)+"px");
+if(window.ResizeObserver)new ResizeObserver(es=>{const e=es[es.length-1],b=e.borderBoxSize&&e.borderBoxSize[0];nh(b?b.blockSize:nav.offsetHeight)}).observe(nav);else{const f=()=>nh(nav.offsetHeight);requestAnimationFrame(f);addEventListener("resize",f)}
 })();

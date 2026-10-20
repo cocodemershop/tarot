@@ -10,11 +10,12 @@ const $=id=>document.getElementById(id),DAY=864e5;
 function elapsed(){return start?Math.min(21,Math.max(0,Math.floor((Date.now()-start)/DAY))+1):0}
 function unlocked(){const e=elapsed();return e<1?1:Math.min(21,Math.ceil(e/7)*7)}
 const WN=["Hinschauen","Fragen &amp; Verbinden","Eigene Wege"],wkd=w=>start?new Date(start+(w-1)*7*DAY).toLocaleDateString("de-DE",{day:"numeric",month:"long"}):"";
-const wkh=(w,u)=>{const o=(w-1)*7+1<=u;return`<div class="wkh${o?" on":""}"><b>Woche ${w}</b><span>${WN[w-1]}</span><small>${o?"✦ geöffnet":"🔒 öffnet am "+(wkd(w)||"nach dem Start")}</small></div>`}
+const wkh=(w,u)=>{const o=(w-1)*7+1<=u;return`<div class="wkh${o?" on":""}"><b>Woche ${w}</b><span>${WN[w-1]}</span><small>${o?"✦ geöffnet":"🔒 öffnet "+(wkd(w)?"am "+wkd(w):"nach dem Start")}</small></div>`}
 function fmt(n){return n.toLocaleString("de-DE")}
 function metrics(){const e=elapsed(),c=prof?prof.cards:0,m=prof?prof.min:0;$("m1").textContent=fmt(e*c);$("m2").textContent=fmt(e*m);$("m3").textContent=done.length}
 function saveProfile(){const n=$("un").value.trim(),d=$("ud").value,c=parseInt($("uc").value),m=parseInt($("um").value);
  if(!n||!d||isNaN(c)||isNaN(m)){$("pm").textContent="Bitte fülle alle vier Felder aus.";return}
+ if(c<1||c>30||m<1||m>240){$("pm").textContent="Bitte wähle 1 bis 30 Karten und 1 bis 240 Minuten pro Tag.";return}
  prof={name:n,date:d,cards:c,min:m};ls.s(SP,prof);start=new Date(d).getTime();ls.s(ST,start);$("pm").textContent="Gespeichert. Schön, dass du dabei bist, "+n+".";metrics();render()}
 function phase(d){return d<=7?"Woche 1: Hinschauen":d<=14?"Woche 2: Fragen &amp; Verbinden":"Woche 3: Eigene Wege"}
 const TBK="et21_tb",TBV=ls.g(TBK,{});
@@ -24,7 +25,7 @@ function render(){const u=unlocked();
  $("days").innerHTML=D.map((x,i)=>{const n=i+1,lock=n>u,ok=done.includes(n);
  const fq="<ol>"+x[8].map(q=>`<li>${q}</li>`).join("")+"</ol>";
  const tb=x[10].map((l,k)=>`<label class="tbf"><span>${l}</span><input type="text" maxlength="300" data-tb="t${n}_${k}" value="${ea(TBV["t"+n+"_"+k]||"")}" autocomplete="off"></label>`).join("");
- return(n%7===1?wkh(Math.ceil(n/7),u):"")+`<div class="card${lock?" locked":""}${ok?" completed":""}" id="c${n}"><div class="dh" data-n="${n}" tabindex="0" role="button" aria-expanded="false"><div class="l"><span class="dn">TAG ${n}</span><span class="dt">${x[0]}</span></div><span class="ph">${lock?"🔒 Woche "+Math.ceil(n/7)+" öffnet am "+(wkd(Math.ceil(n/7))||"nach dem Start"):phase(n)}</span></div>
+ return(n%7===1?wkh(Math.ceil(n/7),u):"")+`<div class="card${lock?" locked":""}${ok?" completed":""}" id="c${n}"><div class="dh" data-n="${n}" tabindex="0" role="button" aria-expanded="false"><div class="l"><span class="dn">TAG ${n}</span><span class="dt">${x[0]}</span></div><span class="ph">${lock?"🔒 Woche "+Math.ceil(n/7)+" öffnet "+(wkd(Math.ceil(n/7))?"am "+wkd(Math.ceil(n/7)):"nach dem Start"):phase(n)}</span></div>
  <div class="dc"><p class="wq2">${x[1]}</p><p class="lead">${x[2]}</p>
  ${sec("hl","Das lernst du heute",`<p>${x[3]}</p>`)}
  ${sec("nf","Ein Kartenbeispiel",`<p>${x[4]}</p>`)}
@@ -38,7 +39,7 @@ function render(){const u=unlocked();
  <p class="ab">✦ ${x[12]}</p>
  <button class="btn${ok?" done":" o"}" data-t="${n}">${ok?"✓ Tag erledigt":"Tag als erledigt markieren"}</button></div></div>`}).join("");
  progress()}
-function progress(){const c=done.length;$("pf").style.width=c/21*100+"%";$("pt").textContent=c+" / 21 Tagen abgeschlossen";$("pf").parentElement.setAttribute("aria-valuenow",c);metrics()}
+function progress(){const c=done.length;$("pf").style.width=c/21*100+"%";$("pt").textContent=c+" / 21 Tage abgeschlossen";$("pf").parentElement.setAttribute("aria-valuenow",c);metrics()}
 $("days").addEventListener("click",e=>{
  const h=e.target.closest(".dh"),t=e.target.closest("[data-t]"),q=e.target.closest(".qb");
  if(q){const n=+q.dataset.n,k=+q.dataset.k,c=D[n-1][4][2];q.parentElement.querySelectorAll(".qb").forEach((b,i)=>{b.disabled=true;if(i===c)b.classList.add("c");else if(i===k)b.classList.add("w")});$("qe"+n).classList.add("show");return}
@@ -60,7 +61,7 @@ function finale(){const s=$("fin");s.classList.add("show");document.body.style.o
  (function loop(){x.clearRect(0,0,cv.width,cv.height);P.forEach((p,i)=>{p.x+=p.vx;p.y+=p.vy;p.l--;x.globalAlpha=Math.max(p.l/260,0);x.fillStyle=p.c;x.fillRect(p.x,p.y,p.s,p.s*.5);if(p.l<=0||p.y>cv.height)P[i]=mk()});raf=requestAnimationFrame(loop)})()}
 function closeFin(){$("fin").classList.remove("show");document.body.style.overflow="";if(raf)cancelAnimationFrame(raf);raf=null}
 $("cl").onclick=closeFin;
-$("rs").onclick=function(){if(!armed){armed=true;this.textContent="Wirklich neu starten? Nochmal klicken";return}
+$("rs").onclick=function(){if(!armed){armed=true;this.textContent="Wirklich neu starten? Noch einmal klicken";return}
  armed=false;this.textContent="Neu starten";done=[];start=null;ls.s(SK,[]);ls.s(ST,null);closeFin();render();scrollTo({top:0,behavior:"smooth"})};
 if(prof){$("un").value=prof.name;$("ud").value=prof.date;$("uc").value=prof.cards;$("um").value=prof.min}
 render();

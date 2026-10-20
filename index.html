@@ -34,7 +34,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <title>Tarot lernen in 21 Tagen · 78 einmalige Karten | Kartenreich</title>
-<link rel="stylesheet" href="app.min.css?v=7">
+<link rel="stylesheet" href="app.min.css?v=14">
 <link rel="preload" href="fonts/Lora-Variable.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="img/hero-back.webp" as="image" type="image/webp">
 </head>
@@ -42,7 +42,7 @@
 <noscript><p style="margin:0;padding:14px 16px;text-align:center;background:#1a1127;color:#ece3f2;font-family:system-ui,sans-serif">Kartenreich braucht JavaScript, um Karten zu ziehen und deinen Fortschritt zu speichern. Bitte aktiviere JavaScript in deinem Browser.</p></noscript>
 <!-- ===== Seite ===== -->
 <div class="wrap">
-<div class="bar"><span><b>●</b> Dein Kartenraum ist offen</span><span>Kartenreich · 21 Tage · 78 Karten</span></div>
+<div class="bar"><span><b>●</b> Dein Kartenraum ist offen</span><span>Kartenreich · 21 Tage · 78 Karten</span><span class="bzg" hidden>⏳ Zugang: noch 90 Tage</span></div>
 <nav class="tabs" role="tablist" aria-label="Bereiche"><button role="tab" id="tp" aria-selected="true">21-Tage-Programm</button><button role="tab" id="tk" aria-selected="false">Kartenlexikon</button><button role="tab" id="tf" aria-selected="false">Kartenkreis</button><button role="tab" id="tl" aria-selected="false">Legemethoden</button></nav>
 <!-- Hero -->
 <header class="mx-hero" id="home">
@@ -148,7 +148,7 @@
 <div class="card"><h2>Dein Start-Ritual</h2>
 <p class="p">Vier Schritte, bevor du Tag 1 beginnst. Sie kosten nur wenige Minuten.</p>
 <ol class="steps">
-<li><h4>Wähle dein Deck</h4><p class="p">Nimm ein Deck, dessen Bilder dich ansprechen. Ein Rider-Waite-Deck eignet sich besonders gut zum Lernen.</p></li>
+<li><h4>Wähle dein Deck</h4><p class="p">Das Kartenreich-Deck mit allen 78 Karten ist hier schon eingebaut. Wenn du zusätzlich mit echten Karten legen möchtest, nimm ein Deck, dessen Bilder dich ansprechen.</p></li>
 <li><h4>Schaffe deinen Platz</h4><p class="p">Ein Tisch, ein Tuch, eine Kerze, ein Notizbuch. Immer derselbe Ort, immer dieselbe Zeit.</p></li>
 <li><h4>Suche Verbündete</h4><p class="p">Erzähle mindestens einer Person von deinem Plan. Oder folge unten dem <a href="https://whatsapp.com/channel/0029Vb9Izau4IBh8cdFsoZ0Z" target="_blank" rel="noopener" style="color:var(--g)">WhatsApp-Kanal</a>.</p></li>
 <li><h4>Aktiviere den Schalter</h4><p class="p">Ab dem Start öffnet sich Woche für Woche ein neuer Abschnitt mit sieben Tagen.</p></li></ol></div>
@@ -168,7 +168,7 @@
 
 </div></details>
 <div class="card dl kr-lock"><h2>Dein 21-Tage-Journal zum Download</h2><p class="p">Alle 21 Tage auf Papier: zum Ausdrucken oder Ausfüllen am Tablet.</p><button class="btn" id="pdo" type="button">✦ Arbeitsbuch öffnen</button></div>
-<div class="prog kr-lock"><div class="r"><span>Dein 21-Tage-Weg</span><span id="pt">0 / 21 Tagen abgeschlossen</span></div><div class="tr" role="progressbar" aria-label="Fortschritt" aria-valuemin="0" aria-valuemax="21"><i id="pf"></i></div></div>
+<div class="prog kr-lock"><div class="r"><span>Dein 21-Tage-Weg</span><span id="pt">0 / 21 Tage abgeschlossen</span></div><div class="tr" role="progressbar" aria-label="Fortschritt" aria-valuemin="0" aria-valuemax="21"><i id="pf"></i></div></div>
 
 <div id="days" class="kr-lock"></div>
 
@@ -202,11 +202,11 @@
 <section id="fam" hidden>
 <h2>Unser Kartenkreis</h2>
 <p class="p">Jeder Mensch trägt ein Sternzeichen, einen Aszendenten, eine Seelenkarte und ein Jahresthema in sich. Trage dich und die Menschen ein, die du liebst: Partner, Kinder, Eltern, Geschwister, Freunde. Mit Geburtszeit und Geburtsort berechnen wir auch den Aszendenten. Für jede und jeden entsteht eine eigene Geburtskarte zum Staunen, Schenken und Teilen.</p>
-<div class="fh rec"><h3>✦ Schenke es weiter</h3><p>Jede Geschichte wird schöner, wenn man sie teilt. Kennst du einen Menschen, dem 21 Tage Ruhe, Klarheit und ein Blick in die Sterne guttun würden? Sende ihm eine kleine Einladung, so persönlich wie ein Brief.</p><div class="shr"><button class="btn wa" data-s="wa" data-k="rec">WhatsApp</button><button class="btn tgm" data-s="tg" data-k="rec">Telegram</button><button class="btn o" data-s="sh" data-k="rec" id="frs">Teilen</button><button class="btn o" data-s="cp" data-k="rec">Einladung kopieren</button></div><small>Verschickt wird nur die Einladung. Namen, Geburtstage und Karten aus deinem Kreis bleiben bei dir, solange du sie nicht selbst sendest.</small></div>
+<div class="fh rec"><h3>✦ Schenke es weiter</h3><p>Jede Geschichte wird schöner, wenn man sie teilt. Kennst du einen Menschen, dem 21 Tage Ruhe, Klarheit und ein Blick in die Sterne guttun würden? Sende ihm eine kleine Einladung, so persönlich wie ein Brief.</p><div class="shr"><button class="btn wa" data-s="wa" data-k="rec">WhatsApp</button><button class="btn tgm" data-s="tg" data-k="rec">Telegram</button><button class="btn fb" data-s="fb" data-k="rec">Facebook</button><button class="btn ig" data-s="ig" data-k="rec">Instagram</button><button class="btn o" data-s="sh" data-k="rec" id="frs">Teilen</button><button class="btn o" data-s="cp" data-k="rec">Einladung kopieren</button></div><small>Verschickt wird nur die Einladung. Namen, Geburtstage und Karten aus deinem Kreis bleiben bei dir, solange du sie nicht selbst sendest.</small></div>
 <div class="frm"><div><label for="fn1">Name</label><input id="fn1" maxlength="40" autocomplete="off" placeholder="z. B. Lena"></div><div><label for="fd1">Geburtstag</label><input id="fd1" type="date"></div><div><label for="fr1">Wer ist das?</label><select id="fr1"><option>Ich</option><option>Partner:in</option><option>Kind</option><option>Mutter / Vater</option><option>Geschwister</option><option>Großeltern</option><option>Freund:in</option></select></div><div><label for="ft1">Geburtszeit (für den Aszendenten)</label><input id="ft1" type="time"></div><div><label for="fo1">Geburtsort</label><select id="fo1"><option value="">– nicht angeben –</option></select></div><p class="p fhint">Optional. Den Aszendenten, den „aufsteigenden“ Teil deines Wesens, gibt es nur mit genauer Uhrzeit und Ort. Steht beides auf der Geburtsurkunde, trage es ein.</p><div class="fx" id="fxo" hidden><div><label for="fla">Breitengrad</label><input id="fla" type="number" step="0.01" min="-66" max="66" placeholder="z. B. 52.52"></div><div><label for="flo">Längengrad</label><input id="flo" type="number" step="0.01" min="-180" max="180" placeholder="z. B. 13.40"></div><div><label for="fof">UTC-Abweichung in Stunden</label><input id="fof" type="number" step="0.5" min="-12" max="14" placeholder="z. B. 1"></div></div><button class="btn" id="fadd">✦ Geburtskarte enthüllen</button></div>
 <div class="msg" id="fmsg" role="status"></div>
 <div id="fhm"></div><div id="flist"></div>
-<div class="shr"><span class="p" style="margin:0">Ganzen Kartenkreis senden:</span><button class="btn wa" data-s="wa" data-k="fall">WhatsApp</button><button class="btn tgm" data-s="tg" data-k="fall">Telegram</button></div>
+<div class="shr"><span class="p" style="margin:0">Ganzen Kartenkreis senden:</span><button class="btn wa" data-s="wa" data-k="fall">WhatsApp</button><button class="btn tgm" data-s="tg" data-k="fall">Telegram</button><button class="btn fb" data-s="fb" data-k="fall">Facebook</button><button class="btn ig" data-s="ig" data-k="fall">Instagram</button></div>
 <p class="p" style="text-align:center;font-size:.85rem">Die Daten bleiben nur in deinem Browser gespeichert und werden nicht geteilt. Nur was du selbst sendest, verlässt dein Gerät. Sternzeichen und Kartendeutung dienen der Freude und Reflexion, nicht der Vorhersage.</p>
 </section>
 </div></dialog>
@@ -242,7 +242,7 @@
 <div class="dkh"><h3 id="pdt">Dein 21-Tage-Journal</h3><button class="btn o" id="pdx" type="button" aria-label="Fenster schließen">✕</button></div>
 <div class="pdc" aria-hidden="true"><span class="k">✦ KARTENREICH ✦</span><b>Transformation</b><span class="s">✦</span><small>21 TAGE · 78 KARTEN</small></div>
 <p class="pdi">Manche Gedanken brauchen Papier. Dieses Arbeitsbuch ist dein stiller Begleiter durch alle 21 Tage: zum Ausdrucken, zum Ausfüllen am Tablet oder zum Hineinkritzeln mit deinem Lieblingsstift. Kein Prüfungsheft, sondern ein Ort, an dem deine eigenen Worte zählen.</p>
-<div class="pdchips"><span>71 Seiten</span><span>21 Tage</span><span>PDF · 3 MB</span></div>
+<div class="pdchips"><span>71 Seiten</span><span>21 Tage</span><span>PDF · 2,7 MB</span></div>
 <ul class="pdl">
 <li><b>Jeder Tag</b> mit Erklärung, Kartenbeispiel, Aufgabe, drei Fragen und einer kleinen Überraschung.</li>
 <li><b>Dein freier Kartenraum:</b> pro Tag eine Seite, auf der nichts „richtig“ sein muss.</li>
@@ -263,7 +263,7 @@
 <div class="kprompt" id="klpr" aria-live="polite" hidden><span id="klprt"></span><button class="btn o" type="button" id="klall">Alle aufdecken</button></div>
 <section class="kspread" id="klsp" aria-label="Deine drei Karten"></section>
 <section class="kdeut" id="kld" aria-live="polite" hidden></section>
-<div class="kac" id="klac" hidden><button class="btn wa" type="button" data-kl="wa">WhatsApp</button><button class="btn tgm" type="button" data-kl="tg">Telegram</button><button class="btn o" type="button" data-kl="cp">Kopieren</button><button class="btn o" type="button" data-kl="nw">Neu legen</button></div>
+<div class="kac" id="klac" hidden><button class="btn wa" type="button" data-kl="wa">WhatsApp</button><button class="btn tgm" type="button" data-kl="tg">Telegram</button><button class="btn fb" type="button" data-kl="fb">Facebook</button><button class="btn ig" type="button" data-kl="ig">Instagram</button><button class="btn o" type="button" data-kl="cp">Kopieren</button><button class="btn o" type="button" data-kl="nw">Neu legen</button></div>
 <section class="kpay" id="klpay" hidden><h3>Noch eine Legung?</h3><p>Deine kostenlose Legung hast du genutzt. Für jede weitere freuen wir uns über eine kleine Spende von <b>1 bis 5 €</b>. Danach startet deine Legung sofort.</p><div class="kamt" id="klamt" role="group" aria-label="Spendenbetrag wählen"><button type="button" data-a="1" aria-pressed="false">1 €</button><button type="button" data-a="2" aria-pressed="false">2 €</button><button type="button" class="on" data-a="3" aria-pressed="true">3 €</button><button type="button" data-a="4" aria-pressed="false">4 €</button><button type="button" data-a="5" aria-pressed="false">5 €</button></div><a class="btn lg" id="klppme" href="#" target="_blank" rel="noopener noreferrer"><svg class="ppl" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path fill="#003087" d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106z"/><path fill="#009cde" d="M21.222 6.917a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg><span>Mit PayPal spenden (3 €)</span></a><button class="btn o" id="klpaid" type="button" hidden>Ich habe gespendet, Legung starten</button><p class="kerr" id="klerr" role="alert" hidden></p><small class="knote"><svg class="ppl" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><path fill="#003087" d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106z"/><path fill="#009cde" d="M21.222 6.917a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg><span>Sichere Zahlung über PayPal. Dabei verbindest du dich mit PayPal.</span></small></section>
 <p class="khint">Tarot ist hier ein Spiegel, keine Vorhersage. Die Karten geben dir bessere Fragen, Entscheidungen triffst du selbst.</p>
 </div></dialog>
@@ -315,10 +315,12 @@
 <div class="snd"><div class="sndp" id="sndp" hidden><h4>✦ Klangraum</h4><p>Sanfte Musik, die sich nie wiederholt.</p><div class="mo" id="mo"></div><label for="vol">Lautstärke</label><input type="range" id="vol" min="0" max="100"><button class="btn" id="pl">▶ Musik beginnen</button></div><button class="sb" id="sb" aria-label="Klangraum öffnen" aria-expanded="false">♪</button></div>
 
 <!-- Skripte: Reihenfolge ist wichtig, sie teilen sich den globalen Gültigkeitsbereich -->
-<!-- Quelldateien (Reihenfolge wichtig), gebündelt in app.min.js durch build.sh:
+<!-- Quelldateien (Reihenfolge wichtig), gebündelt in app.min.js durch build.sh: -->
+<!-- data-src="js/compat.js" -->
 <!-- data-src="js/data-program.js" -->
 <!-- data-src="js/program.js" -->
 <!-- data-src="js/legal-consent.js" -->
+<!-- data-src="js/social.js" -->
 <!-- data-src="js/cards.js" -->
 <!-- data-src="js/family.js" -->
 <!-- data-src="js/spreads.js" -->
@@ -343,7 +345,6 @@
 <!-- data-src="js/preview.js" -->
 <!-- data-src="js/buy-swirl.js" -->
 <!-- data-src="js/landing.js" -->
--->
-<script defer src="app.min.js?v=7"></script>
+<script defer src="app.min.js?v=14"></script>
 </body>
 </html>

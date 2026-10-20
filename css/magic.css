@@ -1,0 +1,251 @@
+/* =====================================================================
+   magic.css · Kartenreich Startseite (lädt zuletzt, mobil zuerst)
+   Schriften lokal, Hero mit Kartenfächer, Deck-Galerie, Tagebuch, Angebot
+   ===================================================================== */
+@font-face{font-family:"Bodoni Moda";src:url(../fonts/Lora-Variable.woff) format("woff");font-weight:400 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Bodoni Moda";src:url(../fonts/Lora-Italic-Variable.woff) format("woff");font-weight:400 700;font-style:italic;font-display:swap}
+@font-face{font-family:"Lora";src:url(../fonts/Lora-Variable.woff) format("woff");font-weight:400 700;font-style:normal;font-display:swap}
+@font-face{font-family:"Lora";src:url(../fonts/Lora-Italic-Variable.woff) format("woff");font-weight:400 700;font-style:italic;font-display:swap}
+
+:root{--gold-1:#f6de9e;--gold-2:#e3c383;--gold-3:#b8873b;--mx-glow:rgba(232,180,90,.22);--mx-r:18px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Instrument Sans","Segoe UI",Roboto,system-ui,sans-serif;-webkit-text-size-adjust:100%;text-rendering:optimizeLegibility}
+h1,h2,h3,.serif{font-family:"Lora","Bodoni Moda",Georgia,serif}
+
+/* Schutz: Bilder nicht speicherbar per Langdruck, Texte nicht markierbar */
+body{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+img{-webkit-user-drag:none;-webkit-touch-callout:none;user-select:none}
+input,textarea,select,[contenteditable=true],#lg .lgb,#lg .lgb *{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+
+/* ---------- Hero ---------- */
+.mx-hero{text-align:center;padding:26px 4px 34px;position:relative}
+.mx-brand{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:18px}
+.mx-brand img{width:54px;height:auto;filter:drop-shadow(0 4px 16px rgba(232,180,90,.35))}
+.mx-brand span{font:600 .72rem/1 -apple-system,system-ui,sans-serif;letter-spacing:.42em;text-transform:uppercase;color:var(--g);padding-left:.42em}
+.mx-hero h1{font-size:clamp(2.15rem,9.4vw,3.9rem);line-height:1.06;font-weight:500;margin:0 auto 14px;max-width:16ch;
+  background:linear-gradient(180deg,var(--gold-1),var(--gold-2) 55%,var(--gold-3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.mx-hero h1 span{display:block;font-style:italic;font-weight:400;font-size:.52em;margin-top:.45em;line-height:1.25;
+  background:none;color:var(--ink);-webkit-text-fill-color:var(--ink)}
+.mx-lead{font-size:1.04rem;line-height:1.65;color:var(--ink);opacity:.86;max-width:40ch;margin:0 auto 8px}
+.mx-fan{position:relative;height:clamp(250px,74vw,380px);margin:14px auto 12px;max-width:520px}
+.mx-fan::before{content:"";position:absolute;inset:8% 10%;background:radial-gradient(closest-side,var(--mx-glow),transparent);filter:blur(10px)}
+.mx-fan img{position:absolute;left:50%;top:50%;width:clamp(128px,38vw,200px);height:auto;border-radius:9px;
+  box-shadow:0 18px 40px rgba(0,0,0,.55),0 0 0 1px rgba(232,180,90,.35);transform-origin:50% 92%}
+.mx-fan .c1{transform:translate(-50%,-50%) translateX(-46%) rotate(-12deg)}
+.mx-fan .c3{transform:translate(-50%,-50%) translateX(46%) rotate(12deg)}
+.mx-fan .c2{transform:translate(-50%,-52%);z-index:2;box-shadow:0 24px 50px rgba(0,0,0,.6),0 0 0 1px rgba(232,180,90,.5),0 0 60px rgba(232,180,90,.25)}
+@media (prefers-reduced-motion:no-preference){
+  .mx-fan .c2{animation:mxfloat 6s ease-in-out infinite}
+  .mx-fan .c1{animation:mxl 7s ease-in-out infinite}
+  .mx-fan .c3{animation:mxr 7s ease-in-out infinite}
+}
+@keyframes mxfloat{50%{transform:translate(-50%,-55%)}}
+@keyframes mxl{50%{transform:translate(-50%,-50%) translateX(-49%) rotate(-14deg)}}
+@keyframes mxr{50%{transform:translate(-50%,-50%) translateX(49%) rotate(14deg)}}
+.mx-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:18px 0 18px}
+.mx-cta .btn{margin:0}
+@media (max-width:520px){.mx-cta{flex-direction:column;align-items:stretch}.mx-cta .btn{width:100%}}
+.mx-hero .trust{margin-top:4px}
+
+/* ---------- Abschnitte ---------- */
+.mx-sec{text-align:center;padding:46px 0 40px;position:relative}
+.mx-sec::before{content:"✦";display:block;color:var(--g);font-size:.9rem;margin:0 auto 22px;width:160px;
+  background:linear-gradient(90deg,transparent,var(--line) 30%,transparent 46%,transparent 54%,var(--line) 70%,transparent) center/100% 1px no-repeat;line-height:1}
+.mx-ey{font:600 .72rem/1.2 -apple-system,system-ui,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:var(--g);margin-bottom:10px}
+.mx-sec h2{font-size:clamp(1.6rem,6.6vw,2.4rem);font-weight:500;line-height:1.15;margin:0 auto 12px;max-width:20ch}
+.mx-p{color:var(--mute);font-size:1rem;line-height:1.7;max-width:46ch;margin:0 auto 20px}
+.mx-p a{color:var(--g)}
+.mx-hint{font-size:.82rem;color:var(--mute);margin-top:10px}
+
+/* Chips */
+.mx-chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 16px 12px;margin:0 -16px;justify-content:flex-start;-webkit-overflow-scrolling:touch}
+.mx-chips::-webkit-scrollbar{display:none}
+.mx-chips button{flex:0 0 auto;min-height:40px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:500 .9rem -apple-system,system-ui,sans-serif;cursor:pointer}
+.mx-chips button[aria-pressed=true]{border-color:var(--g);color:#1a1024;background:linear-gradient(180deg,var(--gold-1),var(--gold-2))}
+@media (min-width:760px){.mx-chips{justify-content:center}}
+
+/* Galerie */
+.mx-rail{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(132px,40vw,184px);gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:6px 16px 18px;margin:0 -16px;scrollbar-width:none;-webkit-overflow-scrolling:touch;min-height:250px}
+.mx-rail::-webkit-scrollbar{display:none}
+.mx-card{scroll-snap-align:center;border:0;padding:0;background:#120b1e;border-radius:9px;cursor:pointer;overflow:hidden;aspect-ratio:210/360;
+  box-shadow:0 10px 24px rgba(0,0,0,.45),0 0 0 1px rgba(232,180,90,.28);transition:transform .25s ease,box-shadow .25s ease}
+.mx-card img{width:100%;height:100%;object-fit:cover;display:block}
+.mx-card:hover,.mx-card:focus-visible{transform:translateY(-4px);box-shadow:0 16px 30px rgba(0,0,0,.5),0 0 0 1px var(--g),0 0 30px var(--mx-glow)}
+
+/* Schritte und Phasen */
+.mx-steps{list-style:none;display:grid;gap:12px;margin:8px auto 18px;max-width:760px;text-align:left}
+.mx-steps li{display:grid;grid-template-columns:44px 1fr;column-gap:14px;align-items:start;padding:16px 18px;border:1px solid var(--line);border-radius:var(--mx-r);background:var(--card)}
+.mx-steps i{grid-row:span 2;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font:normal 600 1.15rem "Lora",serif;color:#1a1024;background:linear-gradient(180deg,var(--gold-1),var(--gold-3))}
+.mx-steps b{font:600 1.08rem "Lora",serif;color:var(--ink)}
+.mx-steps span{color:var(--mute);font-size:.94rem;line-height:1.55}
+@media (min-width:760px){.mx-steps{grid-template-columns:repeat(3,1fr)}}
+.mx-phases{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:760px;margin:0 auto}
+.mx-phases div{padding:14px 8px;border-radius:14px;background:linear-gradient(180deg,rgba(232,180,90,.12),rgba(232,180,90,.03));border:1px solid rgba(232,180,90,.25)}
+.mx-phases small{display:block;font-size:.72rem;letter-spacing:.12em;color:var(--g);text-transform:uppercase}
+.mx-phases b{display:block;font:500 1.05rem "Lora",serif;margin:4px 0 2px}
+.mx-phases span{font-size:.8rem;color:var(--mute);line-height:1.4;display:block}
+.mx-quote{font:italic 1.12rem "Lora",serif;color:var(--g);margin-top:22px}
+
+/* Tagebuch */
+.mx-book{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(170px,58vw,230px);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:6px 16px 16px;margin:0 -16px;scrollbar-width:none}
+.mx-book::-webkit-scrollbar{display:none}
+.mx-book figure{scroll-snap-align:center;margin:0}
+.mx-book img{width:100%;height:auto;border-radius:6px;box-shadow:0 12px 28px rgba(0,0,0,.45),0 0 0 1px rgba(232,180,90,.25);display:block}
+.mx-book figcaption{font-size:.8rem;color:var(--mute);margin-top:8px}
+@media (min-width:980px){.mx-book{justify-content:center}}
+.mx-ticks{list-style:none;display:inline-grid;gap:8px;text-align:left;margin-top:10px}
+.mx-ticks li{padding-left:28px;position:relative;color:var(--ink)}
+.mx-ticks li::before{content:"✦";position:absolute;left:4px;color:var(--g)}
+
+/* Angebot */
+.mx-offer{margin-top:10px}
+.mx-offer>*{position:relative}
+.mx-offer .mx-price{display:inline-flex;flex-direction:column;align-items:center;padding:18px 34px;margin:6px 0 18px;border-radius:var(--mx-r);
+  border:1px solid rgba(232,180,90,.5);background:radial-gradient(ellipse at 50% 0,rgba(232,180,90,.2),transparent 70%),var(--card);box-shadow:0 0 50px rgba(232,180,90,.12)}
+.mx-price b{font:500 2.4rem/1 "Lora",serif;color:var(--g)}
+.mx-price span{font-size:.84rem;color:var(--mute);margin-top:8px}
+.mx-incl{list-style:none;display:grid;gap:10px;max-width:760px;margin:0 auto 6px;text-align:left}
+.mx-incl li{padding:14px 16px 14px 48px;border:1px solid var(--line);border-radius:14px;background:var(--card);position:relative}
+.mx-incl li::before{content:"✓";position:absolute;left:16px;top:14px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:.8rem;font-weight:700;color:#1a1024;background:var(--g)}
+.mx-incl b{display:block;color:var(--ink)}
+.mx-incl span{font-size:.9rem;color:var(--mute)}
+@media (min-width:760px){.mx-incl{grid-template-columns:1fr 1fr}}
+.mx-link{background:none;border:0;color:var(--g);font:500 .98rem -apple-system,system-ui,sans-serif;text-decoration:underline;text-underline-offset:4px;cursor:pointer;min-height:44px;padding:8px 12px}
+.mx-small{font-size:.84rem;color:var(--mute);max-width:44ch;margin:6px auto 0}
+
+/* Über */
+.mx-trio{display:grid;gap:10px;max-width:760px;margin:0 auto}
+.mx-trio div{padding:16px 18px;border-radius:14px;border:1px solid var(--line);background:var(--card);text-align:left}
+.mx-trio b{display:block;font:600 1.02rem "Lora",serif;color:var(--g);margin-bottom:4px}
+.mx-trio span{font-size:.92rem;color:var(--mute);line-height:1.55}
+@media (min-width:760px){.mx-trio{grid-template-columns:repeat(3,1fr)}}
+
+/* Schluss */
+.mx-final{text-align:center;padding:40px 18px 34px;margin:26px 0 10px;border-radius:24px;border:1px solid rgba(232,180,90,.35);
+  background:radial-gradient(ellipse at 50% 0,rgba(232,180,90,.18),transparent 65%),var(--card)}
+.mx-final h2{font-size:clamp(1.5rem,6vw,2.1rem);font-weight:500;margin-bottom:8px}
+.mx-final p{color:var(--mute)}
+
+/* Großansicht */
+.mxl{border:0;padding:0;background:transparent;max-width:100vw;max-height:100dvh;width:100vw;height:100dvh;margin:0;color:var(--ink)}
+.mxl::backdrop{background:rgba(8,4,14,.92);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.mxl[open]{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:max(16px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom))}
+.mxl figure{margin:0;text-align:center;display:flex;flex-direction:column;align-items:center}
+.mxl img{max-height:min(72dvh,823px);max-width:min(88vw,480px);width:auto;height:auto;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 1px rgba(232,180,90,.4)}
+.mxl figcaption{margin-top:12px;display:flex;flex-direction:column;gap:2px}
+.mxl figcaption b{font:500 1.25rem "Lora",serif;color:var(--g)}
+.mxl figcaption span{font:italic 1rem "Lora",serif}
+.mxl figcaption small{font-size:.76rem;color:var(--mute);letter-spacing:.12em}
+.mxl-nav{display:flex;gap:14px}
+.mxl-nav button{width:52px;height:52px;border-radius:50%;border:1px solid rgba(232,180,90,.5);background:rgba(26,17,39,.85);color:var(--g);font-size:1.5rem;cursor:pointer}
+
+/* Lesbarkeit auf kleinen Bildschirmen */
+@media (max-width:520px){
+  .wrap{padding-left:16px;padding-right:16px}
+  .card{padding:24px 18px}
+  .faq summary{padding-top:14px;padding-bottom:14px}
+}
+
+/* ===== Teilen-Knöpfe: Markenfarben mit Symbol (WhatsApp, Telegram, Facebook, Instagram) ===== */
+.btn.wa,.btn.tgm,.btn.fb,.btn.ig{position:relative;gap:8px;letter-spacing:.01em;transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;box-shadow:0 2px 10px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.18)}
+.btn.wa::before,.btn.tgm::before,.btn.fb::before,.btn.ig::before{content:"";flex:none;width:1.2em;height:1.2em;background:currentColor;-webkit-mask:var(--ico) center/contain no-repeat;mask:var(--ico) center/contain no-repeat}
+.btn.wa{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2.2a9.8 9.8 0 0 0-8.4 14.9L2.2 21.8l4.8-1.3A9.8 9.8 0 1 0 12 2.2z' fill='none' stroke='%23000' stroke-width='2'/%3E%3Cpath d='M8.7 7.3c.3-.3.8-.3 1 .1l.9 1.9c.1.3 0 .6-.2.8l-.6.6c.5 1.2 1.6 2.3 2.8 2.9l.6-.6c.2-.2.5-.3.8-.2l1.9.8c.4.2.5.7.2 1l-.9 1c-.4.4-1 .5-1.5.4-3-.8-5.4-3.2-6.2-6.2-.1-.5 0-1.1.4-1.5z'/%3E%3C/svg%3E")}
+.btn.tgm{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M21.4 3.6 2.9 10.7c-1 .4-.9 1.7.1 2l4.5 1.4 1.8 5.5c.2.7 1.1.9 1.6.4l2.6-2.4 4.6 3.4c.6.5 1.5.1 1.7-.7L23 5c.2-1-.8-1.8-1.6-1.4zM9.6 14.1l8.6-7.4-6.9 8.6-.4 2.9-1.3-4.1z' fill-rule='evenodd'/%3E%3C/svg%3E")}
+.btn.fb{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M14.3 22v-8.4h2.8l.5-3.4h-3.3V8c0-1 .3-1.6 1.7-1.6h1.8V3.3c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v2.5H8v3.4h2.8V22z'/%3E%3C/svg%3E");background:linear-gradient(180deg,#1f7df5,#1466d8);border-color:#1466d8;color:#fff}
+.btn.ig{--ico:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2.6' y='2.6' width='18.8' height='18.8' rx='5.6' fill='none' stroke='%23000' stroke-width='2.1'/%3E%3Ccircle cx='12' cy='12' r='4.4' fill='none' stroke='%23000' stroke-width='2.1'/%3E%3Ccircle cx='17.4' cy='6.6' r='1.35'/%3E%3C/svg%3E");background:linear-gradient(100deg,#7a35c4 0%,#b52f98 38%,#d62b66 68%,#e8513c 100%);border-color:#b52f98;color:#fff;text-shadow:0 1px 1px rgba(0,0,0,.25)}
+@media (hover:hover){.btn.wa:hover,.btn.tgm:hover,.btn.fb:hover,.btn.ig:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 8px 22px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.2)}}
+.btn.wa:active,.btn.tgm:active,.btn.fb:active,.btn.ig:active{transform:translateY(0);filter:brightness(.96)}
+.btn.wa:focus-visible,.btn.tgm:focus-visible,.btn.fb:focus-visible,.btn.ig:focus-visible{outline:2px solid var(--g);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.btn.wa,.btn.tgm,.btn.fb,.btn.ig{transition:none}.btn.wa:hover,.btn.tgm:hover,.btn.fb:hover,.btn.ig:hover{transform:none}}
+/* Hinweis nach dem Teilen */
+.soct{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));z-index:2147483000;max-width:min(440px,calc(100vw - 32px));transform:translate(-50%,16px);opacity:0;pointer-events:none;padding:12px 18px;border-radius:14px;background:rgba(26,16,36,.96);color:#ece3f2;border:1px solid rgba(232,180,90,.55);box-shadow:0 12px 34px rgba(0,0,0,.45);font:500 .92rem/1.45 "Instrument Sans",system-ui,sans-serif;text-align:center;transition:opacity .25s ease,transform .25s ease}
+.soct.on{opacity:1;transform:translate(-50%,0)}
+/* Mond: mit der Maus drehbar */
+.moon canvas.mdrag{pointer-events:auto;cursor:grab;touch-action:none}
+.moon canvas.mdrag.grab{cursor:grabbing}
+.moon .mcap .mlib{display:block;margin-top:3px;opacity:.75;font-size:.9em;letter-spacing:.06em}
+
+/* App-Hinweis: schwebende Karte unten, schiebt die Seite nicht (kein Layout-Sprung) */
+.ib{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));z-index:60;width:min(560px,calc(100vw - 24px));margin:0;transform:translateX(-50%);background:rgba(26,16,36,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 14px 40px rgba(0,0,0,.5);animation:ibin .45s cubic-bezier(.2,.8,.2,1) both}
+@keyframes ibin{from{opacity:0;transform:translate(-50%,24px)}}
+@media (prefers-reduced-motion:reduce){.ib{animation:none}}
+
+/* Mond erst zeigen, wenn die feine Oberfläche fertig ist */
+.moon.on:not(.mready) canvas{opacity:0}
+
+/* Schneller Start: Bereiche unterhalb des ersten Bildschirms erst berechnen, wenn sie in Sicht kommen.
+   Die Schätzhöhen verhindern Sprünge der Bildlaufleiste; "auto" merkt sich danach die echte Höhe. */
+#ablauf,#arbeitsbuch,#angebot,#orloj,#urheberin,#faq,#tarot-lernen,.mx-final,.foot{content-visibility:auto}
+#ablauf{contain-intrinsic-size:auto 815px}
+#arbeitsbuch{contain-intrinsic-size:auto 830px}
+#angebot{contain-intrinsic-size:auto 1200px}
+#orloj{contain-intrinsic-size:auto 1120px}
+#urheberin{contain-intrinsic-size:auto 680px}
+#faq{contain-intrinsic-size:auto 650px}
+#tarot-lernen{contain-intrinsic-size:auto 600px}
+.mx-final{contain-intrinsic-size:auto 320px}
+.foot{contain-intrinsic-size:auto 470px}
+.bzg[hidden]{display:none!important}
+
+/* ===== Saubere Ränder: nichts wird abgeschnitten (Okt. 2026) ===== */
+/* Mond nur im freien Platz rechts neben dem Inhalt, nie über Text oder Bildern */
+@media (min-width:761px){
+  .moon{--G:calc((100vw - 920px)/2);--S:clamp(150px,calc(var(--G) - 40px),300px);
+    left:calc(100vw - var(--G)/2 - var(--S)/2 - 8px)}
+}
+@media (min-width:761px) and (max-width:1299px){
+  .moon{--S:120px;left:auto;right:-30px;top:96px;opacity:.38}
+  .moon .mcap{display:none}
+}
+/* Vollmond-Angabe ohne Kasten, im gleichen Stil wie die übrigen Zeilen */
+.moon .mcap .mfull{margin:8px auto 0;padding:0;max-width:none;border:0;border-radius:0;background:none;
+  -webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;letter-spacing:.08em}
+.moon .mcap .mfull i{display:none}
+.moon .mcap .mfull .mfl{font-size:11px;letter-spacing:.14em;opacity:.78;color:inherit}
+.moon .mcap .mfull b{font:600 11px/1.5 var(--sans,system-ui,sans-serif);letter-spacing:.14em;text-transform:uppercase;color:#f1e3b6;margin:0}
+.moon .mcap .mfull .mfd{font-size:11px;opacity:.75;letter-spacing:.1em}
+
+/* Kartengalerie: weich auslaufende Ränder statt harter Kante */
+.mx-rail{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent 100%);padding-top:10px}
+@media (min-width:761px){.mx-rail{margin:0;padding-left:28px;padding-right:28px;scroll-padding:0 28px}}
+
+/* Arbeitsbuch-Vorschau: am Computer alle vier Seiten vollständig nebeneinander */
+#arbeitsbuch{content-visibility:visible}
+@media (min-width:761px){
+  .mx-book{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-columns:auto;overflow:visible;
+    margin:0 auto;padding:6px 0 16px;max-width:880px;justify-content:stretch}
+}
+@media (max-width:760px){
+  .mx-book{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 16px),transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 16px,#000 calc(100% - 16px),transparent 100%);padding-top:10px}
+}
+/* Handy: Kartenfächer bleibt vollständig im Bild */
+@media (max-width:560px){
+  .mx-fan{height:clamp(230px,70vw,330px)}
+  .mx-fan img{width:min(31vw,150px)}
+  .mx-fan .c1{transform:translate(-50%,-50%) translateX(-40%) rotate(-10deg)}
+  .mx-fan .c3{transform:translate(-50%,-50%) translateX(40%) rotate(10deg)}
+  @keyframes mxl{50%{transform:translate(-50%,-50%) translateX(-42%) rotate(-11deg)}}
+  @keyframes mxr{50%{transform:translate(-50%,-50%) translateX(42%) rotate(11deg)}}
+}
+/* Handy: Mond klein und vollständig sichtbar statt am Rand angeschnitten */
+@media (max-width:760px){
+  .moon{--S:84px;left:auto;right:12px;top:64px;opacity:.55}
+}
+/* App-Hinweis: Text bricht sauber um, sitzt über dem Musik-Knopf */
+.ib>span{min-width:0;white-space:normal;text-align:center;line-height:1.4}
+@media (max-width:600px){
+  .ib{bottom:calc(78px + env(safe-area-inset-bottom))}
+  .ib>span{flex:1 1 100%}
+}
+/* Kleinere Bildschirme: Mond vollständig sichtbar oben rechts, scrollt mit der Seite weg und liegt nie über Text */
+@media (max-width:1299px){
+  .moon{position:absolute;left:auto;right:14px;top:78px;--S:110px;opacity:.55;animation:none}
+  .moon .mcap{display:none}
+}
+@media (max-width:760px){.moon{--S:72px;right:10px;top:62px;opacity:.5}}
+@media (max-width:600px){.ib{bottom:calc(150px + env(safe-area-inset-bottom))}}
+@media (max-width:900px){.ib{bottom:calc(84px + env(safe-area-inset-bottom))}}
+@media (max-width:600px){.ib{bottom:calc(150px + env(safe-area-inset-bottom))}}

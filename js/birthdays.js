@@ -24,17 +24,19 @@ function tel(p){let s=String(p||"").trim();if(!s)return"";const pl=s[0]==="+";s=
 const sender=()=>$("bsn").value.trim()||(typeof prof!=="undefined"&&prof?prof.name:"");
 function cardFor(b){let h=0;(b.n+b.d+todayStr()).split("").forEach(c=>h=(h*31+c.charCodeAt(0))>>>0);return CARDS[h%CARDS.length]}
 function msgFor(b,c,i){const s=sender(),u=/^https?:/.test(location.href)?location.href:"";
-return`🎂 Alles Liebe zum ${i.days===0?i.age+". ":""}Geburtstag, ${b.n}! ✨\n\nIch wünsche dir einen Tag voller Wärme, Freude und schöner Momente.\n\nDeine Orakelkarte für heute: ${c.name} – ${c.tip}\n\nUnd weil du mir wichtig bist, schenke ich dir einen Blick in mein kleines Kartenreich: „21 Tage Transformation – Karten legen Mindshift“ mit Tarot, Kartenlexikon und Sternzeichen.${u?"\n"+u:""}\n\nVon Herzen${s?", "+s:""} 💛`}
+return`🎂 Alles Liebe zum ${i.days===0?i.age+". ":""}Geburtstag, ${b.n}! ✨\n\nIch wünsche dir einen Tag voller Wärme, Freude und schöner Momente.\n\nDeine Orakelkarte für heute: ${c.name} – ${c.tip}\n\nUnd weil du mir wichtig bist, schenke ich dir einen Blick in mein kleines Kartenreich: „Kartenreich – 21 Tage Transformation“ mit Tarot, Kartenlexikon und Sternzeichen.${u?"\n"+u:""}\n\nVon Herzen${s?", "+s:""} 💛`}
 function openB(b){const i=info(b),c=cardFor(b);cur=b;
 $("bdb").innerHTML=`<div class="bdg">${i.days===0?"Heute hat "+esc(b.n)+" Geburtstag! 🎉":esc(b.n)+" hat in "+i.days+(i.days===1?" Tag":" Tagen")+" Geburtstag"}</div>
 <div class="bdc" style="--sc:${c.col}">${mc(c,"Orakelkarte des Tages")}<div class="ct bdt"><h3>${esc(c.name)}</h3><p class="kw">${esc(c.kw)}</p><p>${esc(c.up)}</p><p class="qs">${esc(c.tip)}</p></div></div>
 <label for="bdm">Dein Gruß (du kannst ihn frei ändern)</label><textarea id="bdm"></textarea>
-<div class="shr"><button class="btn wa" data-x="wa">WhatsApp</button><button class="btn tgm" data-x="tg">Telegram</button><button class="btn sms" data-x="sm">SMS</button>${navigator.share?'<button class="btn o" data-x="sh">Teilen …</button>':""}<button class="btn o" data-x="cp">Kopieren</button></div>
+<div class="shr"><button class="btn wa" data-x="wa">WhatsApp</button><button class="btn tgm" data-x="tg">Telegram</button><button class="btn fb" data-x="fb">Facebook</button><button class="btn ig" data-x="ig">Instagram</button><button class="btn sms" data-x="sm">SMS</button>${navigator.share?'<button class="btn o" data-x="sh">Teilen …</button>':""}<button class="btn o" data-x="cp">Kopieren</button></div>
 <p class="bhint">${tel(b.p)?"Der Gruß geht direkt an die gespeicherte Nummer.":"Du wählst den Empfänger beim Senden selbst aus."} SMS öffnet sich auf dem Smartphone in deiner Nachrichten-App.</p>`;
 $("bdm").value=msgFor(b,c,i);if(!dlg.open)dlg.showModal();$("bdb").scrollTop=0}
 $("bdb").addEventListener("click",e=>{const b=e.target.closest("[data-x]");if(!b||!cur)return;const t=$("bdm").value,ph=tel(cur.p),k=b.dataset.x,old=b.textContent;
 if(k==="wa")open("https://wa.me/"+ph+"?text="+encodeURIComponent(t),"_blank","noopener");
 else if(k==="tg")open("https://t.me/share/url?url="+encodeURIComponent(" ")+"&text="+encodeURIComponent(t),"_blank","noopener");
+else if(k==="fb")SOC.fb(t);
+else if(k==="ig")SOC.ig(t);
 else if(k==="sm")location.href="sms:"+(ph?"+"+ph:"")+"?&body="+encodeURIComponent(t);
 else if(k==="sh")navigator.share({text:t}).catch(()=>{});
 else(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{b.textContent="Kopiert ✓";setTimeout(()=>b.textContent=old,1800)},()=>{b.textContent="Nicht möglich"})});
