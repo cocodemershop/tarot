@@ -34,11 +34,22 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <title>Tarot lernen in 21 Tagen · 78 einmalige Karten | Kartenreich</title>
-<link rel="stylesheet" href="app.min.css?v=14">
+<link rel="stylesheet" href="app.min.css?v=18">
+<link rel="stylesheet" href="css/intro.css?v=18">
+<link rel="stylesheet" href="css/begegnung.css?v=18">
+<link rel="stylesheet" href="css/angebot.css?v=18">
+<noscript><style>#krIntro{display:none}</style></noscript>
 <link rel="preload" href="fonts/Lora-Variable.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="img/hero-back.webp" as="image" type="image/webp">
 </head>
 <body>
+<!-- ===== Opening: Karten fliegen aus dem Universum (css/intro.css, js/intro.js) ===== -->
+<div class="kri" id="krIntro">
+  <canvas class="kri-sky" aria-hidden="true"></canvas>
+  <div class="kri-stage" aria-hidden="true"></div>
+  <div class="kri-title" aria-hidden="true"><img src="img/logo.webp" width="54" height="58" alt="" decoding="async"><b>Kartenreich</b><span>Die Karten haben dich gefunden</span><small>78 Karten · 21 Tage</small></div>
+  <button class="kri-skip" type="button">Überspringen</button>
+</div>
 <noscript><p style="margin:0;padding:14px 16px;text-align:center;background:#1a1127;color:#ece3f2;font-family:system-ui,sans-serif">Kartenreich braucht JavaScript, um Karten zu ziehen und deinen Fortschritt zu speichern. Bitte aktiviere JavaScript in deinem Browser.</p></noscript>
 <!-- ===== Seite ===== -->
 <div class="wrap">
@@ -70,6 +81,21 @@
   </div>
   <div class="mx-rail" id="mxrail" tabindex="0" aria-label="Kartengalerie, seitlich wischen"></div>
   <p class="mx-hint">Wische durch die Karten · tippe für die große Ansicht</p>
+</section>
+
+<section class="mx-sec kr-out bg-sec" id="selbst-deuten" aria-labelledby="bgh">
+  <p class="mx-ey">Erst selbst deuten</p>
+  <h2 id="bgh">Schau zuerst hin. Dann lies nach.</h2>
+  <p class="mx-p">Ziehe eine Karte und entdecke, was <em>du</em> in ihr siehst. Erst danach öffnest du die traditionelle Bedeutung und vergleichst sie mit deinem eigenen Blick. So lernst du, Tarotbilder selbst zu lesen, statt nur nachzuschlagen.</p>
+  <ol class="bg-how" aria-label="Die fünf Schritte">
+    <li><i>1</i><b>Karte entdecken</b><span>Du wählst eine verdeckte Karte aus dem Fächer.</span></li>
+    <li><i>2</i><b>Erster Blick</b><span>Was fällt dir auf, was fühlst du, welches Detail zählt?</span></li>
+    <li><i>3</i><b>Bedeutung entdecken</b><span>Jetzt erst zeigt sich die traditionelle Sicht.</span></li>
+    <li><i>4</i><b>Vergleichen</b><span>Was passt zu dir, was war neu?</span></li>
+    <li><i>5</i><b>Festhalten</b><span>Deine Begegnung bleibt in deinem Journal.</span></li>
+  </ol>
+  <div class="mx-cta"><button class="btn lg" id="bgStart" type="button" aria-haspopup="dialog">✦ Meine Karte entdecken</button><button class="btn o lg" id="bgJour" type="button" aria-haspopup="dialog" hidden>Meine Begegnungen</button></div>
+  <p class="bg-meta" id="bgMeta">Kostenlos, ohne Anmeldung. Deine Gedanken bleiben in deinem Browser.</p>
 </section>
 
 <section class="mx-sec kr-out" id="ablauf" aria-labelledby="abh">
@@ -286,6 +312,11 @@
 <h3>Kann man Tarot selbst lernen?</h3><p>Ja, mit kleinen täglichen Schritten. Genau dafür ist der 21-Tage-Weg gemacht: vom ersten Blick bis zur eigenen Legung.</p></section></div></details>
 <!-- Fußzeile -->
 <section class="mx-final kr-out"><h2>Deine nächste Karte wartet</h2><p>Starte kostenlos oder öffne die ganze Transformation.</p><div class="mx-cta"><button class="btn lg" type="button" onclick="openDk()">✦ Kostenlos 3 Karten legen</button><a class="btn o lg" href="#angebot">Zur Transformation</a></div></section>
+<dialog id="bgd" class="dkd bgd" aria-labelledby="bgdt"><div class="dkw">
+<div class="dkh"><h3 id="bgdt">✦ Selbst deuten</h3><button class="btn o" id="bgx" type="button" aria-label="Übung beenden und Fenster schließen">✕</button></div>
+<ol class="bg-prog" id="bgProg" aria-label="Fortschritt"></ol>
+<div class="bg-body" id="bgBody"></div>
+</div></dialog>
 <dialog id="mxl" class="mxl" aria-label="Karte ansehen"><figure><img id="mxli" alt="" width="480" height="823" draggable="false"><figcaption><b id="mxln"></b><span id="mxlk"></span><small id="mxlc"></small></figcaption></figure><div class="mxl-nav"><button type="button" id="mxlp" aria-label="Vorherige Karte">‹</button><button type="button" id="mxlx" aria-label="Schließen">✕</button><button type="button" id="mxlnx" aria-label="Nächste Karte">›</button></div></dialog>
 <footer class="foot">
 <div class="q">„Du gibst nichts auf. Du gewinnst deinen Blick zurück.“</div>
@@ -345,6 +376,9 @@
 <!-- data-src="js/preview.js" -->
 <!-- data-src="js/buy-swirl.js" -->
 <!-- data-src="js/landing.js" -->
-<script defer src="app.min.js?v=14"></script>
+<script defer src="js/intro.js?v=18"></script>
+<script defer src="app.min.js?v=18"></script>
+<script defer src="js/begegnung.js?v=18"></script>
+<script defer src="js/angebot.js?v=18"></script>
 </body>
 </html>

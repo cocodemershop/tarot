@@ -1,0 +1,60 @@
+/* ===== Magisches Angebot (js/angebot.js) ===== */
+.ao-pr{white-space:nowrap}
+.ao-pr s,.ao-s{color:var(--mute);text-decoration-thickness:1.5px;text-decoration-color:rgba(255,122,138,.75);font-weight:400}
+.ao-pr b{color:var(--g)}
+
+/* Band ganz oben */
+.ao-rib{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 14px;margin:10px auto 8px;padding:10px 18px;
+  border-radius:14px;text-decoration:none;color:var(--ink);font:500 .92rem/1.35 system-ui,sans-serif;overflow:hidden;isolation:isolate;
+  background:linear-gradient(110deg,rgba(64,30,104,.92),rgba(30,14,52,.92) 45%,rgba(64,30,104,.92));border:1px solid rgba(232,180,90,.55);
+  box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 30px rgba(232,180,90,.12)}
+.ao-rib::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,transparent 30%,rgba(255,240,200,.16) 50%,transparent 70%);
+  background-size:250% 100%;animation:aoShine 5.5s ease-in-out infinite}
+@keyframes aoShine{0%,40%{background-position:120% 0}100%{background-position:-120% 0}}
+.ao-rib-k{font:600 .7rem/1 system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--g)}
+.ao-rib-t b{font:600 1.05rem "Lora",serif}
+.ao-rib-d{color:#e9dcf5;opacity:.85;font-size:.86rem}
+.ao-rib-c{font-weight:700;color:#1a1024;background:linear-gradient(180deg,#f6de9e,#e3b55f);padding:7px 14px;border-radius:99px;font-size:.86rem}
+.ao-rib:hover .ao-rib-c{background:linear-gradient(180deg,#fff0c4,#f0c46e)}
+.ao-rib:focus-visible{outline:2px solid var(--g);outline-offset:3px}
+@media (max-width:560px){.ao-rib{gap:4px 8px;padding:9px 12px;font-size:.84rem}.ao-rib-d{display:none}.ao-rib-c{width:100%;text-align:center;margin-top:4px}}
+
+/* Startbereich */
+.mx-hero .mx-cta a[href="#angebot"] s{opacity:.65;font-weight:400;margin-left:.3em}
+
+/* Angebotsbereich */
+.ao-badge{display:inline-block;padding:7px 16px;border-radius:99px;border:1px solid rgba(232,180,90,.6);background:rgba(232,180,90,.1);
+  color:var(--g);font:600 .72rem/1.2 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;box-shadow:0 0 24px rgba(232,180,90,.15)}
+.ao-badge.sm{font-size:.64rem;padding:6px 12px;margin-bottom:10px}
+.ao-sec h2{font-size:clamp(2rem,8vw,3rem)!important;max-width:none!important;
+  background:linear-gradient(180deg,var(--gold-1,#f6de9e),var(--gold-2,#e3c383) 55%,var(--gold-3,#b8873b));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ao-klar{max-width:640px;margin:0 auto 10px}
+.ao-lead{font:400 clamp(1.05rem,3.6vw,1.2rem)/1.6 "Lora",serif;color:var(--ink);margin:0 0 18px}
+.ao-facts{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0;margin:0 0 20px}
+.ao-facts li{display:flex;flex-direction:column;gap:2px;padding:12px 6px;border-radius:14px;border:1px solid rgba(232,180,90,.22);background:rgba(26,17,39,.5)}
+.ao-facts b{font:500 1.35rem/1.1 "Lora",serif;color:var(--g)}
+.ao-facts span{font-size:.78rem;color:var(--mute)}
+@media (max-width:520px){.ao-facts{grid-template-columns:repeat(2,1fr)}}
+.mx-offer .mx-price.ao-price{padding:20px 40px 18px;border:1px solid rgba(232,180,90,.65)!important;
+  background:radial-gradient(ellipse at 50% 0%,rgba(232,180,90,.16),transparent 70%),rgba(26,17,39,.75)!important;box-shadow:0 0 50px rgba(232,180,90,.16)}
+.ao-price .ao-was{font-size:.95rem;color:var(--mute);margin-bottom:6px}
+.ao-price .ao-was s{text-decoration-color:rgba(255,122,138,.8);text-decoration-thickness:2px}
+.ao-price b{font-size:clamp(2.8rem,11vw,3.6rem)!important;
+  background:linear-gradient(180deg,#fff4d2,#f6de9e 45%,#d9a54c);-webkit-background-clip:text;background-clip:text;color:transparent!important}
+.ao-price em{font-style:normal;font-weight:700;font-size:.9rem;color:#1a1024;background:linear-gradient(180deg,#f6de9e,#e3b55f);padding:4px 12px;border-radius:99px;margin-top:10px}
+.ao-cd{margin:0 auto 22px;max-width:440px}
+.ao-cd-t{font:600 .7rem/1 system-ui,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);margin:0 0 10px}
+.ao-cd-n{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.ao-cd-n div{padding:10px 4px 8px;border-radius:12px;border:1px solid rgba(232,180,90,.3);background:rgba(14,8,23,.6)}
+.ao-cd-n b{display:block;font:500 1.6rem/1 "Lora",serif;color:var(--ink);font-variant-numeric:tabular-nums}
+.ao-cd-n small{font-size:.7rem;color:var(--mute);letter-spacing:.08em}
+.ao-cd-f{font-size:.82rem;color:var(--mute);margin:10px 0 0}
+
+/* Kaufansicht */
+#shd .shpr .ao-pr.big s{font-size:1.1rem;margin-right:6px}
+#shd .shpr .ao-pr.big b{font-size:inherit}
+#shd .shpr{display:flex;flex-direction:column;align-items:center}
+
+@media (prefers-reduced-motion:reduce){.ao-rib::after{animation:none}}
+:root[data-theme="light"] .ao-rib{background:linear-gradient(110deg,#3b1d63,#24123d 45%,#3b1d63);color:#f4ecdf}
+:root[data-theme="light"] .ao-facts li,:root[data-theme="light"] .ao-cd-n div{background:rgba(255,255,255,.6)}
